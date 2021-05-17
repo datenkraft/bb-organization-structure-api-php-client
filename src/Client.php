@@ -24,5 +24,5 @@ class Client extends Generated\Client
         $endpointUrl = $endpointUrl ?? getenv('X_DATENKRAFT_ORGANIZATION_STRUCTURE_API_URL') ?: null;
         return $clientFactory->createClient(static::class, $endpointUrl);
     }
-
+    
 }
