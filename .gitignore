@@ -1,4 +1,4 @@
-# These are some examples of commonly ignored file patterns.
+.gitignore# These are some examples of commonly ignored file patterns.
 # You should customize this list as applicable to your project.
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
@@ -21,7 +21,6 @@ dist/
 
 # Maven
 target/
-dist/
 
 # JetBrains IDE
 .idea/
@@ -48,3 +47,16 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Vendor
+vendor/
+
+# Pacts
+pacts/
+
+# PHPUnit
+.phpunit.cache/
+.phpunit.result.cache
+
+.composer/
+.ash_history
+.php_cs.cache
