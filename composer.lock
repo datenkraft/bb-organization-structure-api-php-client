@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e92ccb88a208798bd2ba60f575794768",
+    "content-hash": "8395e3128af9bd35405b0d94d420a432",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -3811,16 +3811,16 @@
         },
         {
             "name": "jane-php/open-api-3",
-            "version": "v6.2.0",
+            "version": "v6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/janephp/open-api-3.git",
-                "reference": "193598c9c6b5b9fa065fe95dbce3ba47063f9f87"
+                "reference": "4f0b584a7734ce317a8a6f9236c573b796a0193c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/open-api-3/zipball/193598c9c6b5b9fa065fe95dbce3ba47063f9f87",
-                "reference": "193598c9c6b5b9fa065fe95dbce3ba47063f9f87",
+                "url": "https://api.github.com/repos/janephp/open-api-3/zipball/4f0b584a7734ce317a8a6f9236c573b796a0193c",
+                "reference": "4f0b584a7734ce317a8a6f9236c573b796a0193c",
                 "shasum": ""
             },
             "require": {
@@ -3845,7 +3845,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-next": "6-dev"
+                    "dev-master": "6-dev"
                 }
             },
             "autoload": {
@@ -3878,9 +3878,9 @@
             ],
             "support": {
                 "issues": "https://github.com/janephp/open-api-3/issues",
-                "source": "https://github.com/janephp/open-api-3/tree/next"
+                "source": "https://github.com/janephp/open-api-3/tree/v6.1.1"
             },
-            "time": "2020-09-06T14:09:07+00:00"
+            "time": "2020-09-15T09:54:27+00:00"
         },
         {
             "name": "jane-php/open-api-common",
