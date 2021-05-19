@@ -16,7 +16,7 @@ class Client extends Generated\Client
     /**
      * @param ClientFactory $clientFactory
      * @param string|null $endpointUrl
-     * @return static|\Jane\OpenApiRuntime\Client\Client
+     * @return static
      * @throws AuthException
      */
     public static function createWithFactory(ClientFactory $clientFactory, string $endpointUrl = null): self
