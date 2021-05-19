@@ -6,7 +6,7 @@ use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
 use Exception;
-use GuzzleHttp\Client;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -126,27 +126,15 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
      * @throws ConfigException
      * @throws AuthException
      */
-//    protected function doClientRequest(): ResponseInterface
-//    {
-//        $factory = new ClientFactory(
-//            ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
-//        );
-//        $factory->setToken($this->token);
-//        $client = Client::createWithFactory($factory, $this->config->getBaseUri());
-//
-//        return $client->getProject($this->projectId, Client::FETCH_RESPONSE);
-//    }
-
     protected function doClientRequest(): ResponseInterface
     {
-        $httpClient = new Client(['base_uri' => $this->config->getBaseUri(), 'http_errors' => false]);
-
-        return $httpClient->request(
-            'GET',
-            $this->path,
-            [
-                'headers' => $this->requestHeaders
-            ]
+        $factory = new ClientFactory(
+            ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
         );
+        $factory->setToken($this->token);
+        $client = Client::createWithFactory($factory, $this->config->getBaseUri());
+
+        return $client->getProject($this->projectId, Client::FETCH_RESPONSE);
     }
+
 }
