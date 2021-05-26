@@ -83,7 +83,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
     public function testDeleteCustomerForbidden(): void
     {
         // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_ADD');
+        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403
