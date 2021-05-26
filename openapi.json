@@ -105,6 +105,96 @@
                 }
             }
         },
+        "/organization/{organizationId}": {
+            "get": {
+                "tags": [
+                    "organization"
+                ],
+                "summary": "Get an Organization by organizationId",
+                "description": "Get an Organization by organizationId",
+                "operationId": "getOrganization",
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "Organization Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/organization"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "organization:get"
+                        ]
+                    }
+                ]
+            }
+        },
         "/project/{projectId}": {
             "get": {
                 "tags": [
@@ -227,6 +317,23 @@
                 },
                 "type": "object"
             },
+            "organization": {
+                "required": [
+                    "organizationId",
+                    "name"
+                ],
+                "properties": {
+                    "organizationId": {
+                        "description": "Organization Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "project": {
                 "required": [
                     "projectId",
@@ -254,7 +361,8 @@
                         "tokenUrl": "UNDEFINED",
                         "refreshUrl": "UNDEFINED",
                         "scopes": {
-                            "project:get": "Get Project from the organization structure"
+                            "project:get": "Get Project from the organization structure API",
+                            "organization:get": "Get Organization from the organization structure API"
                         }
                     }
                 }
