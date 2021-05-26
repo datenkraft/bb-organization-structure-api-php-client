@@ -81,7 +81,7 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
     public function testPostProjectForbidden(): void
     {
         // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_GROUP_GET');
+        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';
