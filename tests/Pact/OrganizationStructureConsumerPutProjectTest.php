@@ -5,19 +5,20 @@ namespace Pact;
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProject;
 use Exception;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class OrganizationStructureConsumerGetOrganizationTest
+ * Class OrganizationStructureConsumerPutProjectTest
  * @package Pact
  */
-class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStructureConsumerTest
+class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureConsumerTest
 {
-    protected string $organizationId;
-    protected string $organizationIdValid;
-    protected string $organizationIdInvalid;
+    protected string $projectId;
+    protected string $projectIdValid;
+    protected string $projectIdInvalid;
 
     /**
      * @throws Exception
@@ -26,46 +27,49 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
     {
         parent::setUp();
 
-        $this->method = 'GET';
+        $this->method = 'PUT';
 
-        $this->token = getenv('VALID_TOKEN_ORGANIZATION_GET');
+        $this->token = getenv('VALID_TOKEN_PROJECT_PUT');
 
         $this->requestHeaders = [
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . $this->token,
+            'Content-Type' => 'application/json'
         ];
         $this->responseHeaders = [
             'Content-Type' => 'application/json'
         ];
 
-        $this->organizationIdValid = 'organizationId_test';
-        $this->organizationIdInvalid = 'organizationId_test_invalid';
+        $this->projectIdValid = 'projectId_test';
+        $this->projectIdInvalid = 'projectId_test_invalid';
 
-        $this->organizationId = $this->organizationIdValid;
+        $this->projectId = $this->projectIdValid;
 
-        $this->requestData = [];
+        $this->requestData = [
+            'name' => 'Project Name'
+        ];
         $this->responseData = [
-            'organizationId' => $this->organizationId,
-            'name' => 'Organization Test'
+            'projectId' => $this->projectId,
+            'name' => $this->requestData['name'],
         ];
 
-        $this->path = '/organization/' . $this->organizationId;
+        $this->path = '/project/' . $this->projectId;
     }
 
-    public function testGetOrganizationSuccess(): void
+    public function testPutProjectSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
         $this->builder
             ->given(
-                'An Organization with OrganizationId exists, ' .
+                'A Project with projectId exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
-            ->uponReceiving('Successful GET request to /organization/{organizationId}');
+            ->uponReceiving('Successful PUT request to /project/{projectId}');
 
         $this->beginTest();
     }
 
-    public function testGetOrganizationUnauthorized(): void
+    public function testPutProjectUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -77,13 +81,13 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /organization/{organizationId}');
+            ->uponReceiving('Unauthorized PUT request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetOrganizationForbidden(): void
+    public function testPutProjectForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
@@ -95,17 +99,17 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         $this->builder
             ->given('The request is valid, the token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /organization/{organizationId}');
+            ->uponReceiving('Forbidden PUT request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetOrganizationNotFound(): void
+    public function testPutProjectNotFound(): void
     {
-        // Path with organizationId for non existent organization
-        $this->organizationId = $this->organizationIdInvalid;
-        $this->path = '/organization/' . $this->organizationId;
+        // Path with projectId for non existent project
+        $this->projectId = $this->projectIdInvalid;
+        $this->path = '/project/' . $this->projectId;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
@@ -113,13 +117,31 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         $this->builder
             ->given(
-                'An Organization with organizationId does not exist'
+                'A project with projectId does not exist'
             )
-            ->uponReceiving('Not Found GET request to /organization/{organizationId}');
+            ->uponReceiving('Not Found PUT request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
+
+    public function testPutProjectBadRequest(): void
+    {
+        // name is not defined
+        $this->requestData['name'] = '';
+
+        // Error code in response is 400
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The request body is invalid or missing')
+            ->uponReceiving('Bad PUT request to /project/{projectId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
 
     /**
      * @return ResponseInterface
@@ -134,7 +156,9 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getOrganization($this->organizationId, Client::FETCH_RESPONSE);
-    }
+        $project = (new NewProject())
+            ->setName($this->requestData['name']);
 
+        return $client->putProject($this->projectId, $project, Client::FETCH_RESPONSE);
+    }
 }

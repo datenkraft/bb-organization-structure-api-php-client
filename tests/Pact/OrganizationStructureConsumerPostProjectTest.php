@@ -5,19 +5,18 @@ namespace Pact;
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
-use Exception;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProject;
+use Exception;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class OrganizationStructureConsumerGetOrganizationTest
+ * Class OrganizationStructureConsumerPostProjectTest
  * @package Pact
  */
-class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStructureConsumerTest
+class OrganizationStructureConsumerPostProjectTest extends OrganizationStructureConsumerTest
 {
-    protected string $organizationId;
-    protected string $organizationIdValid;
-    protected string $organizationIdInvalid;
+    protected string $projectId;
 
     /**
      * @throws Exception
@@ -26,96 +25,88 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
     {
         parent::setUp();
 
-        $this->method = 'GET';
+        $this->method = 'POST';
 
-        $this->token = getenv('VALID_TOKEN_ORGANIZATION_GET');
+        $this->token = getenv('VALID_TOKEN_PROJECT_POST');
+
+        $this->projectId = 'projectId_test';
 
         $this->requestHeaders = [
-            'Authorization' => 'Bearer ' . $this->token
-        ];
-        $this->responseHeaders = [
+            'Authorization' => 'Bearer ' . $this->token,
             'Content-Type' => 'application/json'
         ];
+        $this->responseHeaders = ['Content-Type' => 'application/json'];
 
-        $this->organizationIdValid = 'organizationId_test';
-        $this->organizationIdInvalid = 'organizationId_test_invalid';
-
-        $this->organizationId = $this->organizationIdValid;
-
-        $this->requestData = [];
+        $this->requestData = [
+            'name' => 'Project Name'
+        ];
         $this->responseData = [
-            'organizationId' => $this->organizationId,
-            'name' => 'Organization Test'
+            'projectId' => $this->projectId,
+            'name' => $this->requestData['name'],
         ];
 
-        $this->path = '/organization/' . $this->organizationId;
+        $this->path = '/project';
     }
 
-    public function testGetOrganizationSuccess(): void
+    public function testPostProjectSuccess(): void
     {
-        $this->expectedStatusCode = '200';
+        $this->expectedStatusCode = '201';
 
         $this->builder
             ->given(
-                'An Organization with OrganizationId exists, ' .
-                'the request is valid, the token is valid and has a valid scope'
+                'The request is valid, the token is valid and has a valid scope'
             )
-            ->uponReceiving('Successful GET request to /organization/{organizationId}');
+            ->uponReceiving('Successful POST request to /project');
 
         $this->beginTest();
     }
 
-    public function testGetOrganizationUnauthorized(): void
+    public function testPostProjectUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /organization/{organizationId}');
+            ->uponReceiving('Unauthorized POST request to /project');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetOrganizationForbidden(): void
+    public function testPostProjectForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
             ->given('The request is valid, the token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /organization/{organizationId}');
+            ->uponReceiving('Forbidden POST request to /project');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetOrganizationNotFound(): void
+    public function testPostProjectBadRequest(): void
     {
-        // Path with organizationId for non existent organization
-        $this->organizationId = $this->organizationIdInvalid;
-        $this->path = '/organization/' . $this->organizationId;
+        // name is not defined
+        $this->requestData['name'] = '';
 
-        // Error code in response is 404
-        $this->expectedStatusCode = '404';
+        // Error code in response is 400
+        $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'An Organization with organizationId does not exist'
-            )
-            ->uponReceiving('Not Found GET request to /organization/{organizationId}');
+            ->given('The request body is invalid or missing')
+            ->uponReceiving('Bad POST request to /project');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -134,7 +125,9 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getOrganization($this->organizationId, Client::FETCH_RESPONSE);
-    }
+        $project = (new NewProject())
+            ->setName($this->requestData['name']);
 
+        return $client->postProject($project, Client::FETCH_RESPONSE);
+    }
 }

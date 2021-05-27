@@ -10,14 +10,14 @@ use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class OrganizationStructureConsumerGetOrganizationTest
+ * Class OrganizationStructureConsumerDeleteProjectTest
  * @package Pact
  */
-class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStructureConsumerTest
+class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructureConsumerTest
 {
-    protected string $organizationId;
-    protected string $organizationIdValid;
-    protected string $organizationIdInvalid;
+    protected string $projectId;
+    protected string $projectIdValid;
+    protected string $projectIdInvalid;
 
     /**
      * @throws Exception
@@ -26,9 +26,9 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
     {
         parent::setUp();
 
-        $this->method = 'GET';
+        $this->method = 'DELETE';
 
-        $this->token = getenv('VALID_TOKEN_ORGANIZATION_GET');
+        $this->token = getenv('VALID_TOKEN_PROJECT_DELETE');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
@@ -37,35 +37,32 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
             'Content-Type' => 'application/json'
         ];
 
-        $this->organizationIdValid = 'organizationId_test';
-        $this->organizationIdInvalid = 'organizationId_test_invalid';
+        $this->projectIdValid = 'projectId_test';
+        $this->projectIdInvalid = 'projectId_test_invalid';
 
-        $this->organizationId = $this->organizationIdValid;
+        $this->projectId = $this->projectIdValid;
 
         $this->requestData = [];
-        $this->responseData = [
-            'organizationId' => $this->organizationId,
-            'name' => 'Organization Test'
-        ];
+        $this->responseData = [];
 
-        $this->path = '/organization/' . $this->organizationId;
+        $this->path = '/project/' . $this->projectId;
     }
 
-    public function testGetOrganizationSuccess(): void
+    public function testDeleteProjectSuccess(): void
     {
-        $this->expectedStatusCode = '200';
+        $this->expectedStatusCode = '204';
 
         $this->builder
             ->given(
-                'An Organization with OrganizationId exists, ' .
+                'A Project with projectId exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
-            ->uponReceiving('Successful GET request to /organization/{organizationId}');
+            ->uponReceiving('Successful DELETE request to /project/{projectId}');
 
         $this->beginTest();
     }
 
-    public function testGetOrganizationUnauthorized(): void
+    public function testDeleteProjectUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -77,13 +74,13 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /organization/{organizationId}');
+            ->uponReceiving('Unauthorized DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetOrganizationForbidden(): void
+    public function testDeleteProjectForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
@@ -95,17 +92,17 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         $this->builder
             ->given('The request is valid, the token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /organization/{organizationId}');
+            ->uponReceiving('Forbidden DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetOrganizationNotFound(): void
+    public function testDeleteProjectNotFound(): void
     {
-        // Path with organizationId for non existent organization
-        $this->organizationId = $this->organizationIdInvalid;
-        $this->path = '/organization/' . $this->organizationId;
+        // Path with projectId for non existent project
+        $this->projectId = $this->projectIdInvalid;
+        $this->path = '/project/' . $this->projectId;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
@@ -113,9 +110,9 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         $this->builder
             ->given(
-                'An Organization with organizationId does not exist'
+                'A project with projectId does not exist'
             )
-            ->uponReceiving('Not Found GET request to /organization/{organizationId}');
+            ->uponReceiving('Not Found DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -134,7 +131,6 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getOrganization($this->organizationId, Client::FETCH_RESPONSE);
+        return $client->deleteProject($this->projectId, Client::FETCH_RESPONSE);
     }
-
 }
