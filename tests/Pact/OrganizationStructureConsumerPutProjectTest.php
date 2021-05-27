@@ -5,6 +5,7 @@ namespace Pact;
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProject;
 use Exception;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
 use Psr\Http\Message\ResponseInterface;
@@ -154,6 +155,9 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->putProject($this->projectId, Client::FETCH_RESPONSE);
+        $project = (new NewProject())
+            ->setName($this->requestData['name']);
+
+        return $client->putProject($this->projectId, $project, Client::FETCH_RESPONSE);
     }
 }

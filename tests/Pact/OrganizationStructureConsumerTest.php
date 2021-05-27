@@ -87,7 +87,9 @@ abstract class OrganizationStructureConsumerTest extends TestCase
         $response = $this->doClientRequest();
 
         $this->assertEquals($this->expectedStatusCode, $response->getStatusCode());
-        $this->assertJson($response->getBody());
+        if ($this->expectedStatusCode != 204) {
+            $this->assertJson($response->getBody());
+        }
     }
 
     protected function prepareTest(): void

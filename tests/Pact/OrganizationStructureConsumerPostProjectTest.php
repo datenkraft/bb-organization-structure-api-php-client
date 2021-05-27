@@ -6,7 +6,7 @@ use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
-use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProject;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 
@@ -125,9 +125,9 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        $sku = (new Project())
+        $project = (new NewProject())
             ->setName($this->requestData['name']);
 
-        return $client->postProject($sku, Client::FETCH_RESPONSE);
+        return $client->postProject($project, Client::FETCH_RESPONSE);
     }
 }
