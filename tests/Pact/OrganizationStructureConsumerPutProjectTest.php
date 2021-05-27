@@ -32,7 +32,8 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
         $this->token = getenv('VALID_TOKEN_PROJECT_PUT');
 
         $this->requestHeaders = [
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . $this->token,
+            'Content-Type' => 'application/json'
         ];
         $this->responseHeaders = [
             'Content-Type' => 'application/json'
