@@ -10,10 +10,10 @@ use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class OrganizationStructureConsumerGetProjectTest
+ * Class OrganizationStructureConsumerDeleteProjectTest
  * @package Pact
  */
-class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureConsumerTest
+class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructureConsumerTest
 {
     protected string $projectId;
     protected string $projectIdValid;
@@ -26,9 +26,9 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
     {
         parent::setUp();
 
-        $this->method = 'GET';
+        $this->method = 'DELETE';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_GET');
+        $this->token = getenv('VALID_TOKEN_PROJECT_DELETE');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
@@ -43,29 +43,26 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
         $this->projectId = $this->projectIdValid;
 
         $this->requestData = [];
-        $this->responseData = [
-            'projectId' => $this->projectId,
-            'name' => 'Project Test'
-        ];
+        $this->responseData = [];
 
         $this->path = '/project/' . $this->projectId;
     }
 
-    public function testGetProjectSuccess(): void
+    public function testDeleteProjectSuccess(): void
     {
-        $this->expectedStatusCode = '200';
+        $this->expectedStatusCode = '204';
 
         $this->builder
             ->given(
-                'A Project with ProjectId exists, ' .
+                'A Project with projectId exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
-            ->uponReceiving('Successful GET request to /project/{projectId}');
+            ->uponReceiving('Successful DELETE request to /project/{projectId}');
 
         $this->beginTest();
     }
 
-    public function testGetProjectUnauthorized(): void
+    public function testDeleteProjectUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -77,13 +74,13 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /project/{projectId}');
+            ->uponReceiving('Unauthorized DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetProjectForbidden(): void
+    public function testDeleteProjectForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
@@ -95,13 +92,13 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
 
         $this->builder
             ->given('The request is valid, the token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /project/{projectId}');
+            ->uponReceiving('Forbidden DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetProjectNotFound(): void
+    public function testDeleteProjectNotFound(): void
     {
         // Path with projectId for non existent project
         $this->projectId = $this->projectIdInvalid;
@@ -115,7 +112,7 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
             ->given(
                 'A project with projectId does not exist'
             )
-            ->uponReceiving('Not Found GET request to /project/{projectId}');
+            ->uponReceiving('Not Found DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -134,6 +131,6 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getProject($this->projectId, Client::FETCH_RESPONSE);
+        return $client->deleteProject($this->projectId, Client::FETCH_RESPONSE);
     }
 }
