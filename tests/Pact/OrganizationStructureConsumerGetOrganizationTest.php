@@ -10,14 +10,14 @@ use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class OrganizationStructureConsumerGetProjectTest
+ * Class OrganizationStructureConsumerGetOrganizationTest
  * @package Pact
  */
-class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureConsumerTest
+class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStructureConsumerTest
 {
-    protected string $projectId;
-    protected string $projectIdValid;
-    protected string $projectIdInvalid;
+    protected string $organizationId;
+    protected string $organizationIdValid;
+    protected string $organizationIdInvalid;
 
     /**
      * @throws Exception
@@ -28,7 +28,7 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_GET');
+        $this->token = getenv('VALID_TOKEN_ORGANIZATION_GET');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
@@ -37,35 +37,35 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test';
-        $this->projectIdInvalid = 'projectId_test_invalid';
+        $this->organizationIdValid = 'organizationId_test';
+        $this->organizationIdInvalid = 'organizationId_test_invalid';
 
-        $this->projectId = $this->projectIdValid;
+        $this->organizationId = $this->organizationIdValid;
 
         $this->requestData = [];
         $this->responseData = [
-            'projectId' => $this->projectId,
-            'name' => 'Project Test'
+            'organizationId' => $this->organizationId,
+            'name' => 'Organization Test'
         ];
 
-        $this->path = '/project/' . $this->projectId;
+        $this->path = '/organization/' . $this->organizationId;
     }
 
-    public function testGetProjectSuccess(): void
+    public function testGetOrganizationSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
         $this->builder
             ->given(
-                'A Project with ProjectId exists, ' .
+                'An Organization with OrganizationId exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
-            ->uponReceiving('Successful GET request to /project/{projectId}');
+            ->uponReceiving('Successful GET request to /organization/{organizationId}');
 
         $this->beginTest();
     }
 
-    public function testGetProjectUnauthorized(): void
+    public function testGetOrganizationUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -77,16 +77,16 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /project/{projectId}');
+            ->uponReceiving('Unauthorized GET request to /organization/{organizationId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetProjectForbidden(): void
+    public function testGetOrganizationForbidden(): void
     {
         // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('VALID_TOKEN_SKU_USAGE_ADD');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403
@@ -95,17 +95,17 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
 
         $this->builder
             ->given('The request is valid, the token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /project/{projectId}');
+            ->uponReceiving('Forbidden GET request to /organization/{organizationId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetProjectNotFound(): void
+    public function testGetOrganizationNotFound(): void
     {
-        // Path with projectId for non existent project
-        $this->projectId = $this->projectIdInvalid;
-        $this->path = '/project/' . $this->projectId;
+        // Path with organizationId for non existent organization
+        $this->organizationId = $this->organizationIdInvalid;
+        $this->path = '/organization/' . $this->organizationId;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
@@ -113,9 +113,9 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
 
         $this->builder
             ->given(
-                'A project with projectId does not exist'
+                'An Organization with organizationId does not exist'
             )
-            ->uponReceiving('Not Found GET request to /project/{projectId}');
+            ->uponReceiving('Not Found GET request to /organization/{organizationId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -134,6 +134,7 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getProject($this->projectId, Client::FETCH_RESPONSE);
+        return $client->getOrganization($this->organizationId, Client::FETCH_RESPONSE);
     }
+
 }
