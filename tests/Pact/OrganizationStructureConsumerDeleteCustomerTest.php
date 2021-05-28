@@ -28,7 +28,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
 
         $this->method = 'DELETE';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_DELETE');
+        $this->token = getenv('VALID_TOKEN_CUSTOMER_DELETE');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
