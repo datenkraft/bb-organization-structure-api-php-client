@@ -5,6 +5,7 @@ namespace Pact;
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewCustomer;
 use Exception;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Client;
 use Psr\Http\Message\ResponseInterface;
@@ -31,7 +32,8 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $this->token = getenv('VALID_TOKEN_CUSTOMER_PUT');
 
         $this->requestHeaders = [
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . $this->token,
+            'Content-Type' => 'application/json'
         ];
         $this->responseHeaders = [
             'Content-Type' => 'application/json'
@@ -140,6 +142,7 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $this->beginTest();
     }
 
+
     /**
      * @return ResponseInterface
      * @throws ConfigException
@@ -152,7 +155,10 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         );
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
-        // TODO ?
-        return $client->putCustomer($this->customerId, Client::FETCH_RESPONSE);
+
+        $customer = (new NewCustomer())
+            ->setName($this->requestData['name']);
+
+        return $client->putCustomer($this->customerId, $customer, Client::FETCH_RESPONSE);
     }
 }
