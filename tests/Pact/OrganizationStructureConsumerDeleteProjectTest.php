@@ -33,9 +33,7 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
         ];
-        $this->responseHeaders = [
-            'Content-Type' => 'application/json'
-        ];
+        $this->responseHeaders = [];
 
         $this->projectIdValid = 'projectId_test';
         $this->projectIdInvalid = 'projectId_test_invalid';
@@ -43,7 +41,7 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         $this->projectId = $this->projectIdValid;
 
         $this->requestData = [];
-        $this->responseData = [];
+        $this->responseData = null;
 
         $this->path = '/project/' . $this->projectId;
     }

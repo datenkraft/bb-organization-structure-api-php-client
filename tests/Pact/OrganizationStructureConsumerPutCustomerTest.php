@@ -39,7 +39,7 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
             'Content-Type' => 'application/json'
         ];
 
-        $this->customerIdValid = 'customerId_test';
+        $this->customerIdValid = 'customerId_test_put';
         $this->customerIdInvalid = 'customerId_test_invalid';
 
         $this->customerId = $this->customerIdValid;

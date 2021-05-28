@@ -33,9 +33,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
         ];
-        $this->responseHeaders = [
-            'Content-Type' => 'application/json'
-        ];
+        $this->responseHeaders = [];
 
         $this->customerIdValid = 'customerId_test';
         $this->customerIdInvalid = 'customerId_test_invalid';
@@ -43,7 +41,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         $this->customerId = $this->customerIdValid;
 
         $this->requestData = [];
-        $this->responseData = [];
+        $this->responseData = null;
 
         $this->path = '/customer/' . $this->customerId;
     }

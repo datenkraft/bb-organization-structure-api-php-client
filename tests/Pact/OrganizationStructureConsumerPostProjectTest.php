@@ -41,7 +41,7 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
             'name' => 'Project Name'
         ];
         $this->responseData = [
-            'projectId' => $this->projectId,
+            'projectId' => $this->matcher->uuid(),
             'name' => $this->requestData['name'],
         ];
 

@@ -41,7 +41,7 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
             'name' => 'Customer Name'
         ];
         $this->responseData = [
-            'customerId' => $this->customerId,
+            'customerId' => $this->matcher->uuid(),
             'name' => $this->requestData['name'],
         ];
 

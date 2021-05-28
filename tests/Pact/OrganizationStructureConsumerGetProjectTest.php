@@ -37,7 +37,7 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test';
+        $this->projectIdValid = 'projectId_test_get';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
         $this->projectId = $this->projectIdValid;

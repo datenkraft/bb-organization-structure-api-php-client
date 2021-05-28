@@ -37,7 +37,7 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
             'Content-Type' => 'application/json'
         ];
 
-        $this->organizationIdValid = 'organizationId_test';
+        $this->organizationIdValid = 'organizationId_test_get';
         $this->organizationIdInvalid = 'organizationId_test_invalid';
 
         $this->organizationId = $this->organizationIdValid;

@@ -29,7 +29,7 @@ abstract class OrganizationStructureConsumerTest extends TestCase
     protected int $expectedStatusCode;
 
     protected array $requestData;
-    protected array $responseData;
+    protected $responseData;
     protected array $errorResponse;
 
     protected Matcher $matcher;
@@ -136,20 +136,22 @@ abstract class OrganizationStructureConsumerTest extends TestCase
     /**
      * @param int $statusCode
      * @param array $responseHeaders
-     * @param array $responseBody
+     * @param array|null $responseBody
      * @return ProviderResponse
      */
     protected function createProviderResponse(
         int $statusCode,
         array $responseHeaders,
-        array $responseBody
+        array $responseBody = null
     ): ProviderResponse {
         $response = new ProviderResponse();
         $response->setStatus($statusCode);
         foreach ($responseHeaders as $header => $value) {
             $response->addHeader($header, $value);
         }
-        $response->setBody($responseBody);
+        if ($responseBody !== null) {
+            $response->setBody($responseBody);
+        }
         return $response;
     }
 
