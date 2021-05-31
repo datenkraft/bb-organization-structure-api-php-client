@@ -20,6 +20,8 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
     protected string $customerIdValid;
     protected string $customerIdInvalid;
 
+    protected string $organizationId;
+
     /**
      * @throws Exception
      */
@@ -44,11 +46,15 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
 
         $this->customerId = $this->customerIdValid;
 
+        $this->organizationId = 'organizationId_test';
+
         $this->requestData = [
+            'organizationId' => $this->organizationId,
             'name' => 'Customer Name'
         ];
         $this->responseData = [
             'customerId' => $this->customerId,
+            'organizationId' => $this->organizationId,
             'name' => $this->requestData['name'],
         ];
 
@@ -157,6 +163,7 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
         $customer = (new NewCustomer())
+            ->setOrganizationId($this->requestData['organizationId'])
             ->setName($this->requestData['name']);
 
         return $client->putCustomer($this->customerId, $customer, Client::FETCH_RESPONSE);

@@ -19,6 +19,8 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
     protected string $customerIdValid;
     protected string $customerIdInvalid;
 
+    protected string $organizationId;
+
     /**
      * @throws Exception
      */
@@ -42,9 +44,12 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
 
         $this->customerId = $this->customerIdValid;
 
+        $this->organizationId = 'organizationId_test';
+
         $this->requestData = [];
         $this->responseData = [
             'customerId' => $this->customerId,
+            'organizationId' => $this->organizationId,
             'name' => 'Customer Test'
         ];
 

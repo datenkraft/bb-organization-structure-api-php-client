@@ -886,11 +886,16 @@
       "customer": {
         "required": [
           "customerId",
+          "organizationId",
           "name"
         ],
         "properties": {
           "customerId": {
             "description": "Customer Id",
+            "type": "string"
+          },
+          "organizationId": {
+            "description": "Organization Id",
             "type": "string"
           },
           "name": {
@@ -903,9 +908,14 @@
       "newCustomer": {
         "description": "Class CustomerResource",
         "required": [
+          "organizationId",
           "name"
         ],
         "properties": {
+          "organizationId": {
+            "description": "Organization Id",
+            "type": "string"
+          },
           "name": {
             "description": "Name",
             "type": "string"

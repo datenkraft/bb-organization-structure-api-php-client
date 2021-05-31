@@ -11,6 +11,12 @@ class Customer
      */
     protected $customerId;
     /**
+     * Organization Id
+     *
+     * @var string
+     */
+    protected $organizationId;
+    /**
      * Name
      *
      * @var string
@@ -35,6 +41,27 @@ class Customer
     public function setCustomerId(string $customerId) : self
     {
         $this->customerId = $customerId;
+        return $this;
+    }
+    /**
+     * Organization Id
+     *
+     * @return string
+     */
+    public function getOrganizationId() : string
+    {
+        return $this->organizationId;
+    }
+    /**
+     * Organization Id
+     *
+     * @param string $organizationId
+     *
+     * @return self
+     */
+    public function setOrganizationId(string $organizationId) : self
+    {
+        $this->organizationId = $organizationId;
         return $this;
     }
     /**
