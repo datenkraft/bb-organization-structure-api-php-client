@@ -75,6 +75,20 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $this->beginTest();
     }
 
+    public function testPutCustomerUnprocessable(): void
+    {
+        $this->requestData['organizationId'] = 'thisOrganizationIdIsInvalid';
+
+        $this->expectedStatusCode = '422';
+        $this->errorResponse['errors'][0]['code'] = '422';
+        $this->builder->given(
+            'The request is valid, the token is valid and has a valid scope but the project is invalid'
+        )->uponReceiving('Unsuccessful PUT request to /customer - invalid project');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
     public function testPutCustomerUnauthorized(): void
     {
         // Invalid token
