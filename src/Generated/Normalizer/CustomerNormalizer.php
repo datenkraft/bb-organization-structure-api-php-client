@@ -39,6 +39,9 @@ class CustomerNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (\array_key_exists('customerId', $data)) {
             $object->setCustomerId($data['customerId']);
         }
+        if (\array_key_exists('organizationId', $data)) {
+            $object->setOrganizationId($data['organizationId']);
+        }
         if (\array_key_exists('name', $data)) {
             $object->setName($data['name']);
         }
@@ -48,6 +51,7 @@ class CustomerNormalizer implements DenormalizerInterface, NormalizerInterface, 
     {
         $data = array();
         $data['customerId'] = $object->getCustomerId();
+        $data['organizationId'] = $object->getOrganizationId();
         $data['name'] = $object->getName();
         return $data;
     }

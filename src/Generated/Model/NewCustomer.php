@@ -5,11 +5,38 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 class NewCustomer
 {
     /**
+     * Organization Id
+     *
+     * @var string
+     */
+    protected $organizationId;
+    /**
      * Name
      *
      * @var string
      */
     protected $name;
+    /**
+     * Organization Id
+     *
+     * @return string
+     */
+    public function getOrganizationId() : string
+    {
+        return $this->organizationId;
+    }
+    /**
+     * Organization Id
+     *
+     * @param string $organizationId
+     *
+     * @return self
+     */
+    public function setOrganizationId(string $organizationId) : self
+    {
+        $this->organizationId = $organizationId;
+        return $this;
+    }
     /**
      * Name
      *
