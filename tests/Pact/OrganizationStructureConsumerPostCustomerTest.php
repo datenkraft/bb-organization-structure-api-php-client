@@ -16,7 +16,9 @@ use Psr\Http\Message\ResponseInterface;
  */
 class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructureConsumerTest
 {
-    protected string $customerId;
+    protected array $customerId;
+
+    protected string $organizationId;
 
     /**
      * @throws Exception
@@ -29,7 +31,9 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
 
         $this->token = getenv('VALID_TOKEN_CUSTOMER_POST');
 
-        $this->customerId = 'customerId_test';
+        $this->customerId = $this->matcher->uuid();
+
+        $this->organizationId = 'organizationId_test';
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -38,10 +42,12 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
         $this->responseHeaders = ['Content-Type' => 'application/json'];
 
         $this->requestData = [
+            'organizationId' => $this->organizationId,
             'name' => 'Customer Name'
         ];
         $this->responseData = [
-            'customerId' => $this->matcher->uuid(),
+            'customerId' => $this->customerId,
+            'organizationId' => $this->organizationId,
             'name' => $this->requestData['name'],
         ];
 
@@ -126,6 +132,7 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
         $customer = (new newCustomer())
+            ->setOrganizationId($this->requestData['organizationId'])
             ->setName($this->requestData['name']);
 
         return $client->postCustomer($customer, Client::FETCH_RESPONSE);
