@@ -39,10 +39,10 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
         ];
         $this->responseHeaders = [];
 
-        $this->projectIdValid = 'projectId_test';
+        $this->projectIdValid = 'projectId_test_projectsku';
         $this->projectIdInvalid = 'projectId_test_delete_invalid';
 
-        $this->skuIdValid = 'skuId_test';
+        $this->skuIdValid = 'skuId_test_delete';
         $this->skuIdInvalid = 'skuId_test_delete_invalid';
 
         $this->projectId = $this->projectIdValid;

@@ -37,7 +37,7 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test';
+        $this->projectIdValid = 'projectId_test_projectsku_get';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
         $this->projectId = $this->projectIdValid;
@@ -46,11 +46,11 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
         $this->responseData = [
             [
                 'projectId' => $this->projectId,
-                'skuId' => 'skuId_test1',
+                'skuId' => 'skuId_test_get1',
             ],
             [
                 'projectId' => $this->projectId,
-                'skuId' => 'skuId_test2',
+                'skuId' => 'skuId_test_get2',
             ]
         ];
 
