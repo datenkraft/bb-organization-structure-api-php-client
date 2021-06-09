@@ -878,7 +878,7 @@
         ],
         "summary": "Get SKU Id’s from project with the projectId.",
         "description": "Get SKU Id’s from project with the projectId.",
-        "operationId": "getProjectSkus",
+        "operationId": "getProjectSkuCollection",
         "parameters": [
           {
             "name": "projectId",
@@ -896,7 +896,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/projectSkus"
+                  "$ref": "#/components/schemas/projectSkuCollection"
                 }
               }
             }
@@ -945,7 +945,7 @@
         "security": [
           {
             "oAuthAuthorization": [
-              "projectSku:get"
+              "project-sku:get"
             ]
           }
         ]
@@ -1033,7 +1033,7 @@
         "security": [
           {
             "oAuthAuthorization": [
-              "projectSku:post"
+              "project-sku:post"
             ]
           }
         ]
@@ -1122,7 +1122,7 @@
         "security": [
           {
             "oAuthAuthorization": [
-              "projectSku:get"
+              "project-sku:get"
             ]
           }
         ]
@@ -1202,7 +1202,7 @@
         "security": [
           {
             "oAuthAuthorization": [
-              "projectSku:delete"
+              "project-sku:delete"
             ]
           }
         ]
@@ -1345,7 +1345,7 @@
         },
         "type": "object"
       },
-      "projectSkus": {
+      "projectSkuCollection": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/projectSku"

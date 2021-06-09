@@ -140,6 +140,6 @@ class OrganizationStructureConsumerGetProjectSkusTest extends OrganizationStruct
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getProjectSkus($this->projectId, Client::FETCH_RESPONSE);
+        return $client->getProjectSkuCollection($this->projectId, Client::FETCH_RESPONSE);
     }
 }
