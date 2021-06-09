@@ -158,6 +158,16 @@
               }
             }
           },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -310,6 +320,16 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -850,6 +870,343 @@
           }
         ]
       }
+    },
+    "/project/{projectId}/sku": {
+      "get": {
+        "tags": [
+          "projectSku"
+        ],
+        "summary": "Get SKU Id’s from project with the projectId.",
+        "description": "Get SKU Id’s from project with the projectId.",
+        "operationId": "getProjectSkuCollection",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/projectSkuCollection"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "project-sku:get"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "projectSku"
+        ],
+        "summary": "Post a new ProjectSku relation",
+        "description": "Post a new ProjectSku relation",
+        "operationId": "postProjectSku",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createProjectSkuRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/project"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "project-sku:post"
+            ]
+          }
+        ]
+      }
+    },
+    "/project/{projectId}/sku/{skuId}": {
+      "get": {
+        "tags": [
+          "projectSku"
+        ],
+        "summary": "Get ProjectSku relation entity.",
+        "description": "Get ProjectSku relation entity.",
+        "operationId": "getProjectSku",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skuId",
+            "in": "path",
+            "description": "Sku Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/projectSku"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "project-sku:get"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "projectSku"
+        ],
+        "summary": "Delete ProjectSku relation",
+        "description": "Delete a ProjectSku relation",
+        "operationId": "deleteProjectSku",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skuId",
+            "in": "path",
+            "description": "Sku Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oAuthAuthorization": [
+              "project-sku:delete"
+            ]
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -970,6 +1327,48 @@
           }
         },
         "type": "object"
+      },
+      "projectSku": {
+        "required": [
+          "projectId",
+          "skuId"
+        ],
+        "properties": {
+          "projectId": {
+            "description": "Project Id",
+            "type": "string"
+          },
+          "skuId": {
+            "description": "Sku Id",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "projectSkuCollection": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/projectSku"
+        }
+      },
+      "newProjectSku": {
+        "required": [
+          "skuId"
+        ],
+        "properties": {
+          "skuId": {
+            "description": "Sku Id",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "createProjectSkuRequest": {
+        "description": "Class ProjectSkuResource",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/newProjectSku"
+        }
       }
     },
     "securitySchemes": {
