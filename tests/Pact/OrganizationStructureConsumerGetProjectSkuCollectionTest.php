@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class OrganizationStructureConsumerGetProjectTest
  * @package Pact
  */
-class OrganizationStructureConsumerGetProjectSkusTest extends OrganizationStructureConsumerTest
+class OrganizationStructureConsumerGetProjectSkuCollectionTest extends OrganizationStructureConsumerTest
 {
     protected string $projectId;
     protected string $projectIdValid;
@@ -37,7 +37,7 @@ class OrganizationStructureConsumerGetProjectSkusTest extends OrganizationStruct
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test_get';
+        $this->projectIdValid = 'projectId_test';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
         $this->projectId = $this->projectIdValid;
@@ -46,18 +46,18 @@ class OrganizationStructureConsumerGetProjectSkusTest extends OrganizationStruct
         $this->responseData = [
             [
                 'projectId' => $this->projectId,
-                'skuId' => 'skuId_test_get',
+                'skuId' => 'skuId_test1',
             ],
             [
                 'projectId' => $this->projectId,
-                'skuId' => 'skuId_test_get2',
+                'skuId' => 'skuId_test2',
             ]
         ];
 
         $this->path = '/project/' . $this->projectId . '/sku';
     }
 
-    public function testGetProjectSkusSuccess(): void
+    public function testGetProjectSkuCollectionSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
@@ -71,7 +71,7 @@ class OrganizationStructureConsumerGetProjectSkusTest extends OrganizationStruct
         $this->beginTest();
     }
 
-    public function testGetProjectSkusUnauthorized(): void
+    public function testGetProjectSkuCollectionUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -89,7 +89,7 @@ class OrganizationStructureConsumerGetProjectSkusTest extends OrganizationStruct
         $this->beginTest();
     }
 
-    public function testGetProjectSkusForbidden(): void
+    public function testGetProjectSkuCollectionForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
@@ -107,7 +107,7 @@ class OrganizationStructureConsumerGetProjectSkusTest extends OrganizationStruct
         $this->beginTest();
     }
 
-    public function testGetProjectSkusNotFound(): void
+    public function testGetProjectSkuCollectionNotFound(): void
     {
         // Path with projectId for non existent projectSku relations
         $this->projectId = $this->projectIdInvalid;

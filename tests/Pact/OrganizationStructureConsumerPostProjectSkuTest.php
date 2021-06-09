@@ -34,11 +34,11 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
 
         $this->token = getenv('VALID_TOKEN_PROJECT_SKU_POST');
 
-        $this->projectIdValid = 'projectId_test_post';
+        $this->projectIdValid = 'projectId_test';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
-        $this->skuId_1 = 'skuId_test_post1';
-        $this->skuId_2 = 'skuId_test_post2';
+        $this->skuId_1 = 'skuId_test1';
+        $this->skuId_2 = 'skuId_test2';
 
         $this->projectId = $this->projectIdValid;
 

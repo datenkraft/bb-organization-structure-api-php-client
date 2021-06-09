@@ -41,10 +41,10 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test_get';
+        $this->projectIdValid = 'projectId_test';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
-        $this->skuIdValid = 'skuId_test_get';
+        $this->skuIdValid = 'skuId_test1';
         $this->skuIdInvalid = 'skuId_test_invalid';
 
         $this->projectId = $this->projectIdValid;
