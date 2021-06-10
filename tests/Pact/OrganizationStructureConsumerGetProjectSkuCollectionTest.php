@@ -46,11 +46,11 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
         $this->responseData = [
             [
                 'projectId' => $this->projectId,
-                'skuId' => 'skuId_test_get1',
+                'skuId' => $this->matcher->like('skuId_test_get1'),
             ],
             [
                 'projectId' => $this->projectId,
-                'skuId' => 'skuId_test_get2',
+                'skuId' => $this->matcher->like('skuId_test_get2'),
             ]
         ];
 
