@@ -19,6 +19,7 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
     protected string $projectId;
     protected string $projectIdValid;
     protected string $projectIdInvalid;
+    protected string $customerId;
 
     /**
      * @throws Exception
@@ -44,11 +45,15 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
 
         $this->projectId = $this->projectIdValid;
 
+        $this->customerId = 'customerId_test';
+
         $this->requestData = [
+            'customerId' => $this->customerId,
             'name' => 'Project Name'
         ];
         $this->responseData = [
             'projectId' => $this->projectId,
+            'customerId' => $this->customerId,
             'name' => $this->requestData['name'],
         ];
 
@@ -66,6 +71,20 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
             )
             ->uponReceiving('Successful PUT request to /project/{projectId}');
 
+        $this->beginTest();
+    }
+
+    public function testPutProjectUnprocessable(): void
+    {
+        $this->requestData['customerId'] = 'thisCustomerIdIsInvalid';
+
+        $this->expectedStatusCode = '422';
+        $this->errorResponse['errors'][0]['code'] = '422';
+        $this->builder->given(
+            'The request is valid, the token is valid and has a valid scope but the customer is invalid'
+        )->uponReceiving('Unsuccessful PUT request to /project - invalid customer');
+
+        $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
@@ -157,6 +176,7 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
         $project = (new NewProject())
+            ->setCustomerId($this->requestData['customerId'])
             ->setName($this->requestData['name']);
 
         return $client->putProject($this->projectId, $project, Client::FETCH_RESPONSE);

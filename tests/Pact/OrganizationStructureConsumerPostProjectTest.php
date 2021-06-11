@@ -17,6 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 class OrganizationStructureConsumerPostProjectTest extends OrganizationStructureConsumerTest
 {
     protected string $projectId;
+    protected string $customerId;
 
     /**
      * @throws Exception
@@ -31,6 +32,8 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 
         $this->projectId = 'projectId_test';
 
+        $this->customerId='customerId_test';
+
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
             'Content-Type' => 'application/json'
@@ -38,10 +41,12 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
         $this->responseHeaders = ['Content-Type' => 'application/json'];
 
         $this->requestData = [
+            'customerId' => $this->customerId,
             'name' => 'Project Name'
         ];
         $this->responseData = [
             'projectId' => $this->matcher->uuid(),
+            'customerId' => $this->customerId,
             'name' => $this->requestData['name'],
         ];
 
@@ -58,6 +63,20 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
             )
             ->uponReceiving('Successful POST request to /project');
 
+        $this->beginTest();
+    }
+
+    public function testPostProjectUnprocessable(): void
+    {
+        $this->requestData['customerId'] = 'thisCustomerIdIsInvalid';
+
+        $this->expectedStatusCode = '422';
+        $this->errorResponse['errors'][0]['code'] = '422';
+        $this->builder->given(
+            'The request is valid, the token is valid and has a valid scope but the customer is invalid'
+        )->uponReceiving('Unsuccessful POST request to /project - invalid customer');
+
+        $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
@@ -126,6 +145,7 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
         $project = (new NewProject())
+            ->setCustomerId($this->requestData['customerId'])
             ->setName($this->requestData['name']);
 
         return $client->postProject($project, Client::FETCH_RESPONSE);
