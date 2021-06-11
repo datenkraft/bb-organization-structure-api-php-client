@@ -35,7 +35,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         ];
         $this->responseHeaders = [];
 
-        $this->customerIdValid = 'customerId_test';
+        $this->customerIdValid = 'customerId_test_delete';
         $this->customerIdInvalid = 'customerId_test_invalid';
 
         $this->customerId = $this->customerIdValid;
