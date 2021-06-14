@@ -18,6 +18,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
     protected string $customerId;
     protected string $customerIdValid;
     protected string $customerIdInvalid;
+    protected string $customerIdAssigned;
 
     /**
      * @throws Exception
@@ -37,6 +38,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
 
         $this->customerIdValid = 'customerId_test_delete';
         $this->customerIdInvalid = 'customerId_test_invalid';
+        $this->customerIdAssigned = 'customerId_test_assigned';
 
         $this->customerId = $this->customerIdValid;
 
@@ -111,6 +113,26 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
                 'A customer with customerId does not exist'
             )
             ->uponReceiving('Not Found DELETE request to /customer/{customerId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testDeleteCustomerConflict(): void
+    {
+        // Path with customerId assigned to project
+        $this->customerId = $this->customerIdAssigned;
+        $this->path = '/customer/' . $this->customerIdAssigned;
+
+        // Error code in response is 409
+        $this->expectedStatusCode = '409';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given(
+                'A customer with customerId is assigned to a project with projectId'
+            )
+            ->uponReceiving('Conflict DELETE request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

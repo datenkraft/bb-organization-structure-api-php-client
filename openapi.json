@@ -792,6 +792,16 @@
                             }
                         }
                     },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
                     "default": {
                         "description": "Unexpected error",
                         "content": {
@@ -1265,6 +1275,45 @@
                     },
                     "message": {
                         "description": "Message",
+                        "type": "string"
+                    },
+                    "extra": {
+                        "$ref": "#/components/schemas/errorExtra"
+                    }
+                },
+                "type": "object"
+            },
+            "errorExtra": {
+                "properties": {
+                    "projectsError": {
+                        "$ref": "#/components/schemas/projectsError"
+                    }
+                },
+                "type": "object"
+            },
+            "projectsError": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/projectCustomerRelation"
+                }
+            },
+            "projectCustomerRelation": {
+                "required": [
+                    "projectId",
+                    "customerId",
+                    "name"
+                ],
+                "properties": {
+                    "projectId": {
+                        "description": "Project Id",
+                        "type": "string"
+                    },
+                    "customerId": {
+                        "description": "Customer Id",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Customer name",
                         "type": "string"
                     }
                 },
