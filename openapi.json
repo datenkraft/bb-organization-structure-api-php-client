@@ -264,7 +264,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/conflictErrorResponse"
+                                    "$ref": "#/components/schemas/deleteCustomerErrorResponse"
                                 }
                             }
                         }
@@ -1263,18 +1263,6 @@
                 },
                 "type": "object"
             },
-            "conflictErrorResponse": {
-                "properties": {
-                    "conflictErrors": {
-                        "description": "conflictErrors",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/conflictError"
-                        }
-                    }
-                },
-                "type": "object"
-            },
             "error": {
                 "required": [
                     "code",
@@ -1292,7 +1280,19 @@
                 },
                 "type": "object"
             },
-            "conflictError": {
+            "deleteCustomerErrorResponse": {
+                "properties": {
+                    "deleteCustomerErrors": {
+                        "description": "deleteCustomerErrors",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/deleteCustomerError"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "deleteCustomerError": {
                 "required": [
                     "code",
                     "message"
@@ -1307,12 +1307,12 @@
                         "type": "string"
                     },
                     "extra": {
-                        "$ref": "#/components/schemas/errorExtra"
+                        "$ref": "#/components/schemas/customerConflictError"
                     }
                 },
                 "type": "object"
             },
-            "errorExtra": {
+            "customerConflictError": {
                 "properties": {
                     "projects": {
                         "$ref": "#/components/schemas/projects"

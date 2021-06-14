@@ -11,18 +11,18 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-class ErrorExtraNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class DeleteCustomerErrorResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorExtra';
+        return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerErrorResponse';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorExtra';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerErrorResponse';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
@@ -32,28 +32,28 @@ class ErrorExtraNormalizer implements DenormalizerInterface, NormalizerInterface
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorExtra();
+        $object = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerErrorResponse();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('projects', $data)) {
+        if (\array_key_exists('deleteCustomerErrors', $data)) {
             $values = array();
-            foreach ($data['projects'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ProjectCustomerRelation', 'json', $context);
+            foreach ($data['deleteCustomerErrors'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerError', 'json', $context);
             }
-            $object->setProjects($values);
+            $object->setDeleteCustomerErrors($values);
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getProjects()) {
+        if (null !== $object->getDeleteCustomerErrors()) {
             $values = array();
-            foreach ($object->getProjects() as $value) {
+            foreach ($object->getDeleteCustomerErrors() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data['projects'] = $values;
+            $data['deleteCustomerErrors'] = $values;
         }
         return $data;
     }

@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class ConflictError
+class DeleteCustomerError
 {
     /**
      * Code
@@ -19,7 +19,7 @@ class ConflictError
     /**
      * 
      *
-     * @var ErrorExtra
+     * @var CustomerConflictError
      */
     protected $extra;
     /**
@@ -67,20 +67,20 @@ class ConflictError
     /**
      * 
      *
-     * @return ErrorExtra
+     * @return CustomerConflictError
      */
-    public function getExtra() : ErrorExtra
+    public function getExtra() : CustomerConflictError
     {
         return $this->extra;
     }
     /**
      * 
      *
-     * @param ErrorExtra $extra
+     * @param CustomerConflictError $extra
      *
      * @return self
      */
-    public function setExtra(ErrorExtra $extra) : self
+    public function setExtra(CustomerConflictError $extra) : self
     {
         $this->extra = $extra;
         return $this;

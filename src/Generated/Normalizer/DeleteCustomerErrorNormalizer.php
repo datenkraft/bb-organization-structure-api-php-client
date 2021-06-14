@@ -11,18 +11,18 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-class ConflictErrorResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class DeleteCustomerErrorNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ConflictErrorResponse';
+        return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerError';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ConflictErrorResponse';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerError';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
@@ -32,28 +32,28 @@ class ConflictErrorResponseNormalizer implements DenormalizerInterface, Normaliz
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ConflictErrorResponse();
+        $object = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerError();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('conflictErrors', $data)) {
-            $values = array();
-            foreach ($data['conflictErrors'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ConflictError', 'json', $context);
-            }
-            $object->setConflictErrors($values);
+        if (\array_key_exists('code', $data)) {
+            $object->setCode($data['code']);
+        }
+        if (\array_key_exists('message', $data)) {
+            $object->setMessage($data['message']);
+        }
+        if (\array_key_exists('extra', $data)) {
+            $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\CustomerConflictError', 'json', $context));
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getConflictErrors()) {
-            $values = array();
-            foreach ($object->getConflictErrors() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['conflictErrors'] = $values;
+        $data['code'] = $object->getCode();
+        $data['message'] = $object->getMessage();
+        if (null !== $object->getExtra()) {
+            $data['extra'] = $this->normalizer->normalize($object->getExtra(), 'json', $context);
         }
         return $data;
     }

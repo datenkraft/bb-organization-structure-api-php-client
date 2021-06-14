@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class ErrorExtra
+class CustomerConflictError
 {
     /**
      * 
