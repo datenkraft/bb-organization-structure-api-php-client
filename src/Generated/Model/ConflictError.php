@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class Error
+class ConflictError
 {
     /**
      * Code
@@ -16,6 +16,12 @@ class Error
      * @var string
      */
     protected $message;
+    /**
+     * 
+     *
+     * @var ErrorExtra
+     */
+    protected $extra;
     /**
      * Code
      *
@@ -56,6 +62,27 @@ class Error
     public function setMessage(string $message) : self
     {
         $this->message = $message;
+        return $this;
+    }
+    /**
+     * 
+     *
+     * @return ErrorExtra
+     */
+    public function getExtra() : ErrorExtra
+    {
+        return $this->extra;
+    }
+    /**
+     * 
+     *
+     * @param ErrorExtra $extra
+     *
+     * @return self
+     */
+    public function setExtra(ErrorExtra $extra) : self
+    {
+        $this->extra = $extra;
         return $this;
     }
 }

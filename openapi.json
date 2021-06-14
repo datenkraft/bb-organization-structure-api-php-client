@@ -259,6 +259,16 @@
                             }
                         }
                     },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/conflictErrorResponse"
+                                }
+                            }
+                        }
+                    },
                     "500": {
                         "description": "Server error",
                         "content": {
@@ -792,16 +802,6 @@
                             }
                         }
                     },
-                    "409": {
-                        "description": "Conflict",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
                     "default": {
                         "description": "Unexpected error",
                         "content": {
@@ -1263,7 +1263,36 @@
                 },
                 "type": "object"
             },
+            "conflictErrorResponse": {
+                "properties": {
+                    "conflictErrors": {
+                        "description": "conflictErrors",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/conflictError"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "error": {
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "description": "Code",
+                        "type": "string"
+                    },
+                    "message": {
+                        "description": "Message",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "conflictError": {
                 "required": [
                     "code",
                     "message"
@@ -1285,13 +1314,13 @@
             },
             "errorExtra": {
                 "properties": {
-                    "projectsError": {
-                        "$ref": "#/components/schemas/projectsError"
+                    "projects": {
+                        "$ref": "#/components/schemas/projects"
                     }
                 },
                 "type": "object"
             },
-            "projectsError": {
+            "projects": {
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/projectCustomerRelation"

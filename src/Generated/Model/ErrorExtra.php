@@ -9,26 +9,26 @@ class ErrorExtra
      *
      * @var ProjectCustomerRelation[]
      */
-    protected $projectsError;
+    protected $projects;
     /**
      * 
      *
      * @return ProjectCustomerRelation[]
      */
-    public function getProjectsError() : array
+    public function getProjects() : array
     {
-        return $this->projectsError;
+        return $this->projects;
     }
     /**
      * 
      *
-     * @param ProjectCustomerRelation[] $projectsError
+     * @param ProjectCustomerRelation[] $projects
      *
      * @return self
      */
-    public function setProjectsError(array $projectsError) : self
+    public function setProjects(array $projects) : self
     {
-        $this->projectsError = $projectsError;
+        $this->projects = $projects;
         return $this;
     }
 }

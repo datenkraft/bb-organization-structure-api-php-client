@@ -42,9 +42,6 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (\array_key_exists('message', $data)) {
             $object->setMessage($data['message']);
         }
-        if (\array_key_exists('extra', $data)) {
-            $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorExtra', 'json', $context));
-        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -52,9 +49,6 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         $data = array();
         $data['code'] = $object->getCode();
         $data['message'] = $object->getMessage();
-        if (null !== $object->getExtra()) {
-            $data['extra'] = $this->normalizer->normalize($object->getExtra(), 'json', $context);
-        }
         return $data;
     }
 }
