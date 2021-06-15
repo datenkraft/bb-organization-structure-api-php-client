@@ -36,6 +36,9 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
+        if (\array_key_exists('customerId', $data)) {
+            $object->setCustomerId($data['customerId']);
+        }
         if (\array_key_exists('name', $data)) {
             $object->setName($data['name']);
         }
@@ -44,6 +47,7 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
+        $data['customerId'] = $object->getCustomerId();
         $data['name'] = $object->getName();
         return $data;
     }

@@ -11,6 +11,12 @@ class Project
      */
     protected $projectId;
     /**
+     * Customer Id
+     *
+     * @var string
+     */
+    protected $customerId;
+    /**
      * Name
      *
      * @var string
@@ -35,6 +41,27 @@ class Project
     public function setProjectId(string $projectId) : self
     {
         $this->projectId = $projectId;
+        return $this;
+    }
+    /**
+     * Customer Id
+     *
+     * @return string
+     */
+    public function getCustomerId() : string
+    {
+        return $this->customerId;
+    }
+    /**
+     * Customer Id
+     *
+     * @param string $customerId
+     *
+     * @return self
+     */
+    public function setCustomerId(string $customerId) : self
+    {
+        $this->customerId = $customerId;
         return $this;
     }
     /**

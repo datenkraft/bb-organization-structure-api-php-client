@@ -18,6 +18,7 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
     protected string $projectId;
     protected string $projectIdValid;
     protected string $projectIdInvalid;
+    protected string $customerId;
 
     /**
      * @throws Exception
@@ -40,11 +41,14 @@ class OrganizationStructureConsumerGetProjectTest extends OrganizationStructureC
         $this->projectIdValid = 'projectId_test_get';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
+        $this->customerId = 'customerId_test';
+
         $this->projectId = $this->projectIdValid;
 
         $this->requestData = [];
         $this->responseData = [
             'projectId' => $this->projectId,
+            'customerId' => $this->customerId,
             'name' => 'Project Test'
         ];
 
