@@ -264,7 +264,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/deleteCustomerErrorResponse"
+                                    "$ref": "#/components/schemas/deleteCustomerConflictErrorResponse"
                                 }
                             }
                         }
@@ -802,6 +802,16 @@
                             }
                         }
                     },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deleteProjectConflictErrorResponse"
+                                }
+                            }
+                        }
+                    },
                     "default": {
                         "description": "Unexpected error",
                         "content": {
@@ -1280,73 +1290,81 @@
                 },
                 "type": "object"
             },
-            "deleteCustomerErrorResponse": {
+            "deleteCustomerConflictErrorResponse": {
                 "properties": {
-                    "deleteCustomerErrors": {
-                        "description": "deleteCustomerErrors",
+                    "errors": {
+                        "description": "errors",
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/deleteCustomerError"
+                            "$ref": "#/components/schemas/deleteCustomerConflictError"
                         }
                     }
                 },
                 "type": "object"
             },
-            "deleteCustomerError": {
-                "required": [
-                    "code",
-                    "message"
-                ],
+            "deleteCustomerConflictError": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/error"
+                    },
+                    {
+                        "properties": {
+                            "extra": {
+                                "description": "Extra",
+                                "properties": {
+                                    "projects": {
+                                        "description": "Projects",
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/project"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "deleteProjectConflictErrorResponse": {
                 "properties": {
-                    "code": {
-                        "description": "Code",
-                        "type": "string"
-                    },
-                    "message": {
-                        "description": "Message",
-                        "type": "string"
-                    },
-                    "extra": {
-                        "$ref": "#/components/schemas/customerConflictError"
+                    "errors": {
+                        "description": "errors",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/deleteProjectConflictError"
+                        }
                     }
                 },
                 "type": "object"
             },
-            "customerConflictError": {
-                "properties": {
-                    "projects": {
-                        "$ref": "#/components/schemas/projects"
-                    }
-                },
-                "type": "object"
-            },
-            "projects": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/projectCustomerRelation"
-                }
-            },
-            "projectCustomerRelation": {
-                "required": [
-                    "projectId",
-                    "customerId",
-                    "name"
-                ],
-                "properties": {
-                    "projectId": {
-                        "description": "Project Id",
-                        "type": "string"
+            "deleteProjectConflictError": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/error"
                     },
-                    "customerId": {
-                        "description": "Customer Id",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Customer name",
-                        "type": "string"
+                    {
+                        "properties": {
+                            "extra": {
+                                "description": "Extra",
+                                "properties": {
+                                    "projectSkus": {
+                                        "description": "ProjectSkus",
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/projectSku"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
                     }
-                },
-                "type": "object"
+                ]
             },
             "customer": {
                 "required": [

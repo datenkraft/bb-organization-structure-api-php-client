@@ -18,6 +18,7 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
     protected string $projectId;
     protected string $projectIdValid;
     protected string $projectIdInvalid;
+    protected string $projectIdAssigned;
 
     /**
      * @throws Exception
@@ -37,6 +38,7 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
 
         $this->projectIdValid = 'projectId_test';
         $this->projectIdInvalid = 'projectId_test_invalid';
+        $this->projectIdAssigned = 'projectId_test_assigned';
 
         $this->projectId = $this->projectIdValid;
 
@@ -111,6 +113,26 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
                 'A project with projectId does not exist'
             )
             ->uponReceiving('Not Found DELETE request to /project/{projectId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testDeleteProjectConflict(): void
+    {
+        // Path with projectId assigned to a sku
+        $this->projectId = $this->projectIdAssigned;
+        $this->path = '/project/' . $this->projectIdAssigned;
+
+        // Error code in response is 409
+        $this->expectedStatusCode = '409';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given(
+                'A project with projectId is assigned to a sku with skuId'
+            )
+            ->uponReceiving('Conflict DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
