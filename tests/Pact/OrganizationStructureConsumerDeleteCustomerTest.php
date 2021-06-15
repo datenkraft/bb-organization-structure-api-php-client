@@ -126,7 +126,19 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
 
         // Error code in response is 409
         $this->expectedStatusCode = '409';
-        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+        $this->errorResponse['errors'][0] = [
+            'code' => strval($this->expectedStatusCode),
+            'message' => $this->matcher->like('Example error message'),
+            'extra' => [
+                'projects' => [
+                    [
+                        'projectId' => $this->matcher->like('Example projectId'),
+                        'customerId' => $this->customerIdAssigned,
+                        'name' => $this->matcher->like('Example name'),
+                    ]
+                ],
+            ]
+        ];
 
         $this->builder
             ->given(
