@@ -6,7 +6,7 @@ class GetProjectSkuCollection extends \Datenkraft\Backbone\Client\OrganizationSt
 {
     protected $projectId;
     /**
-     * Get SKU Id’s from project with the projectId.
+     * Get Sku Code’s from project with the projectId.
      *
      * @param string $projectId Project Id
      */

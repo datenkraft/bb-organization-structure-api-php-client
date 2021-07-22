@@ -11,11 +11,11 @@ class ProjectSku
      */
     protected $projectId;
     /**
-     * Sku Id
+     * Sku Code
      *
      * @var string
      */
-    protected $skuId;
+    protected $skuCode;
     /**
      * Project Id
      *
@@ -38,24 +38,24 @@ class ProjectSku
         return $this;
     }
     /**
-     * Sku Id
+     * Sku Code
      *
      * @return string
      */
-    public function getSkuId() : string
+    public function getSkuCode() : string
     {
-        return $this->skuId;
+        return $this->skuCode;
     }
     /**
-     * Sku Id
+     * Sku Code
      *
-     * @param string $skuId
+     * @param string $skuCode
      *
      * @return self
      */
-    public function setSkuId(string $skuId) : self
+    public function setSkuCode(string $skuCode) : self
     {
-        $this->skuId = $skuId;
+        $this->skuCode = $skuCode;
         return $this;
     }
 }

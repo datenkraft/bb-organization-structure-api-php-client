@@ -94,7 +94,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "customer:get"
+                            "bb-organization-structure-api/customer:get"
                         ]
                     }
                 ]
@@ -202,7 +202,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "customer:put"
+                            "bb-organization-structure-api/customer:put"
                         ]
                     }
                 ]
@@ -283,7 +283,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "customer:delete"
+                            "bb-organization-structure-api/customer:delete"
                         ]
                     }
                 ]
@@ -372,7 +372,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "customer:post"
+                            "bb-organization-structure-api/customer:post"
                         ]
                     }
                 ]
@@ -547,7 +547,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "organization:get"
+                            "bb-organization-structure-api/organization:get"
                         ]
                     }
                 ]
@@ -637,7 +637,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project:get"
+                            "bb-organization-structure-api/project:get"
                         ]
                     }
                 ]
@@ -745,7 +745,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project:put"
+                            "bb-organization-structure-api/project:put"
                         ]
                     }
                 ]
@@ -826,7 +826,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project:delete"
+                            "bb-organization-structure-api/project:delete"
                         ]
                     }
                 ]
@@ -915,7 +915,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project:post"
+                            "bb-organization-structure-api/project:post"
                         ]
                     }
                 ]
@@ -926,8 +926,8 @@
                 "tags": [
                     "projectSku"
                 ],
-                "summary": "Get SKU Id’s from project with the projectId.",
-                "description": "Get SKU Id’s from project with the projectId.",
+                "summary": "Get Sku Code’s from project with the projectId.",
+                "description": "Get Sku Code’s from project with the projectId.",
                 "operationId": "getProjectSkuCollection",
                 "parameters": [
                     {
@@ -995,7 +995,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project-sku:get"
+                            "bb-organization-structure-api/project-sku:get"
                         ]
                     }
                 ]
@@ -1083,13 +1083,13 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project-sku:post"
+                            "bb-organization-structure-api/project-sku:post"
                         ]
                     }
                 ]
             }
         },
-        "/project/{projectId}/sku/{skuId}": {
+        "/project/{projectId}/sku/{skuCode}": {
             "get": {
                 "tags": [
                     "projectSku"
@@ -1108,9 +1108,9 @@
                         }
                     },
                     {
-                        "name": "skuId",
+                        "name": "skuCode",
                         "in": "path",
-                        "description": "Sku Id",
+                        "description": "Sku Code",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1172,7 +1172,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project-sku:get"
+                            "bb-organization-structure-api/project-sku:get"
                         ]
                     }
                 ]
@@ -1195,9 +1195,9 @@
                         }
                     },
                     {
-                        "name": "skuId",
+                        "name": "skuCode",
                         "in": "path",
-                        "description": "Sku Id",
+                        "description": "Sku Code",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1252,7 +1252,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "project-sku:delete"
+                            "bb-organization-structure-api/project-sku:delete"
                         ]
                     }
                 ]
@@ -1424,48 +1424,6 @@
                 },
                 "type": "object"
             },
-            "projectSku": {
-                "required": [
-                    "projectId",
-                    "skuId"
-                ],
-                "properties": {
-                    "projectId": {
-                        "description": "Project Id",
-                        "type": "string"
-                    },
-                    "skuId": {
-                        "description": "Sku Id",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "projectSkuCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/projectSku"
-                }
-            },
-            "newProjectSku": {
-                "required": [
-                    "skuId"
-                ],
-                "properties": {
-                    "skuId": {
-                        "description": "Sku Id",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "createProjectSkuRequest": {
-                "description": "Class ProjectSkuResource",
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/newProjectSku"
-                }
-            },
             "project": {
                 "required": [
                     "projectId",
@@ -1505,6 +1463,48 @@
                     }
                 },
                 "type": "object"
+            },
+            "projectSku": {
+                "required": [
+                    "projectId",
+                    "skuCode"
+                ],
+                "properties": {
+                    "projectId": {
+                        "description": "Project Id",
+                        "type": "string"
+                    },
+                    "skuCode": {
+                        "description": "Sku Code",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "projectSkuCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/projectSku"
+                }
+            },
+            "newProjectSku": {
+                "required": [
+                    "skuCode"
+                ],
+                "properties": {
+                    "skuCode": {
+                        "description": "Sku Code",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "createProjectSkuRequest": {
+                "description": "Class ProjectSkuResource",
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/newProjectSku"
+                }
             }
         },
         "securitySchemes": {
@@ -1516,8 +1516,18 @@
                         "tokenUrl": "UNDEFINED",
                         "refreshUrl": "UNDEFINED",
                         "scopes": {
-                            "project:get": "Get Project from the organization structure API",
-                            "organization:get": "Get Organization from the organization structure API"
+                            "bb-organization-structure-api/organization:get": "Get Organizations from the Organization Structure API",
+                            "bb-organization-structure-api/project:get": "Get Projects from the Organization Structure API",
+                            "bb-organization-structure-api/project:post": "Add Projects to the Organization Structure API",
+                            "bb-organization-structure-api/project:put": "Update Projects in the Organization Structure API",
+                            "bb-organization-structure-api/project:delete": "Delete Projects in the Organization Structure API",
+                            "bb-organization-structure-api/customer:get": "Get Customers from the Organization Structure API",
+                            "bb-organization-structure-api/customer:post": "Add Customers to the Organization Structure API",
+                            "bb-organization-structure-api/customer:put": "Update Customers in the Organization Structure API",
+                            "bb-organization-structure-api/customer:delete": "Delete Customers in the Organization Structure API",
+                            "bb-organization-structure-api/project-sku:get": "Get Project-SKU relation from the Organization Structure API",
+                            "bb-organization-structure-api/project-sku:post": "Add Project-SKU relation to the Organization Structure API",
+                            "bb-organization-structure-api/project-sku:delete": "Delete Project-SKU relation in the Organization Structure API"
                         }
                     }
                 }

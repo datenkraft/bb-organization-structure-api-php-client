@@ -109,15 +109,16 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A project with projectId does not exist'
-            )
+            ->given('A project with projectId does not exist')
             ->uponReceiving('Not Found DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
+    /**
+     * @throws Exception
+     */
     public function testDeleteProjectConflict(): void
     {
         // Path with projectId assigned to a sku
@@ -133,16 +134,14 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
                 'projectSkus' => [
                     [
                         'projectId' => $this->projectIdAssigned,
-                        'skuId' => $this->matcher->like('Example skuId')
+                        'skuCode' => $this->matcher->like('Example skuCode')
                     ]
                 ],
             ]
         ];
 
         $this->builder
-            ->given(
-                'A project with projectId is assigned to a sku with skuId'
-            )
+            ->given('A project with projectId is assigned to a sku with skuCode')
             ->uponReceiving('Conflict DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;

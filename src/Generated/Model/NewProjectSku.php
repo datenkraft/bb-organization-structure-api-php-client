@@ -5,30 +5,30 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 class NewProjectSku
 {
     /**
-     * Sku Id
+     * Sku Code
      *
      * @var string
      */
-    protected $skuId;
+    protected $skuCode;
     /**
-     * Sku Id
+     * Sku Code
      *
      * @return string
      */
-    public function getSkuId() : string
+    public function getSkuCode() : string
     {
-        return $this->skuId;
+        return $this->skuCode;
     }
     /**
-     * Sku Id
+     * Sku Code
      *
-     * @param string $skuId
+     * @param string $skuCode
      *
      * @return self
      */
-    public function setSkuId(string $skuId) : self
+    public function setSkuCode(string $skuCode) : self
     {
-        $this->skuId = $skuId;
+        $this->skuCode = $skuCode;
         return $this;
     }
 }
