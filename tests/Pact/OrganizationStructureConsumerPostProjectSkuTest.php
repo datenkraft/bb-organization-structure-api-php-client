@@ -20,8 +20,8 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
     protected string $projectIdValid;
     protected string $projectIdInvalid;
 
-    protected string $skuId_1;
-    protected string $skuId_2;
+    protected string $skuCode_1;
+    protected string $skuCode_2;
 
     /**
      * @throws Exception
@@ -37,8 +37,8 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
         $this->projectIdValid = 'projectId_test_projectsku';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
-        $this->skuId_1 = 'skuId_test1';
-        $this->skuId_2 = 'skuId_test2';
+        $this->skuCode_1 = 'skuCode_test1';
+        $this->skuCode_2 = 'skuCode_test2';
 
         $this->projectId = $this->projectIdValid;
 
@@ -52,20 +52,20 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
 
         $this->requestData = [
             [
-                'skuId' => $this->skuId_1,
+                'skuCode' => $this->skuCode_1,
             ],
             [
-                'skuId' => $this->skuId_2,
+                'skuCode' => $this->skuCode_2,
             ],
         ];
         $this->responseData = [
             [
                 'projectId' => $this->projectId,
-                'skuId' => $this->skuId_1,
+                'skuCode' => $this->skuCode_1,
             ],
             [
                 'projectId' => $this->projectId,
-                'skuId' => $this->skuId_2,
+                'skuCode' => $this->skuCode_2,
             ]
         ];
 
@@ -90,7 +90,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
     {
         // Invalid token
         $this->token = 'invalid_token';
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
@@ -107,7 +107,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
@@ -123,7 +123,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
     public function testPostProjectSkuBadRequest(): void
     {
         $this->requestData[] = [
-            'skuId' => '',
+            'skuCode' => '',
         ];
 
         $this->expectedStatusCode = '400';
@@ -148,9 +148,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A Project with projectId does not exist'
-            )
+            ->given('A Project with projectId does not exist')
             ->uponReceiving('Not Found GET request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;
@@ -172,9 +170,9 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
 
         $arrProjectSku = [];
         foreach ($this->requestData as $data) {
-            if (isset($data['skuId'])) {
+            if (isset($data['skuCode'])) {
                 $projectSku = new newProjectSku();
-                $projectSku->setSkuId($data['skuId']);
+                $projectSku->setSkuCode($data['skuCode']);
 
                 $arrProjectSku[] = $projectSku;
             }

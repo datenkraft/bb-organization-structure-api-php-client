@@ -36,15 +36,15 @@ class NewProjectSkuNormalizer implements DenormalizerInterface, NormalizerInterf
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('skuId', $data)) {
-            $object->setSkuId($data['skuId']);
+        if (\array_key_exists('skuCode', $data)) {
+            $object->setSkuCode($data['skuCode']);
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        $data['skuId'] = $object->getSkuId();
+        $data['skuCode'] = $object->getSkuCode();
         return $data;
     }
 }

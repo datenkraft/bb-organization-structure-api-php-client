@@ -190,7 +190,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PostProject($requestBody), $fetch);
     }
     /**
-     * Get SKU Id’s from project with the projectId.
+     * Get Sku Code’s from project with the projectId.
      *
      * @param string $projectId Project Id
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -227,7 +227,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * Delete a ProjectSku relation
      *
      * @param string $projectId Project Id
-     * @param string $skuId Sku Id
+     * @param string $skuCode Sku Code
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteProjectSkuUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteProjectSkuForbiddenException
@@ -236,15 +236,15 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      *
      * @return null|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function deleteProjectSku(string $projectId, string $skuId, string $fetch = self::FETCH_OBJECT)
+    public function deleteProjectSku(string $projectId, string $skuCode, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\DeleteProjectSku($projectId, $skuId), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\DeleteProjectSku($projectId, $skuCode), $fetch);
     }
     /**
      * Get ProjectSku relation entity.
      *
      * @param string $projectId Project Id
-     * @param string $skuId Sku Id
+     * @param string $skuCode Sku Code
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuForbiddenException
@@ -253,9 +253,9 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      *
      * @return null|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSku|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function getProjectSku(string $projectId, string $skuId, string $fetch = self::FETCH_OBJECT)
+    public function getProjectSku(string $projectId, string $skuCode, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetProjectSku($projectId, $skuId), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetProjectSku($projectId, $skuCode), $fetch);
     }
     public static function create($httpClient = null, array $additionalPlugins = array())
     {

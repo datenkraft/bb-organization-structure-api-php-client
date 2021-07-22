@@ -5,17 +5,17 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint
 class DeleteProjectSku extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\Endpoint
 {
     protected $projectId;
-    protected $skuId;
+    protected $skuCode;
     /**
      * Delete a ProjectSku relation
      *
      * @param string $projectId Project Id
-     * @param string $skuId Sku Id
+     * @param string $skuCode Sku Code
      */
-    public function __construct(string $projectId, string $skuId)
+    public function __construct(string $projectId, string $skuCode)
     {
         $this->projectId = $projectId;
-        $this->skuId = $skuId;
+        $this->skuCode = $skuCode;
     }
     use \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\EndpointTrait;
     public function getMethod() : string
@@ -24,7 +24,7 @@ class DeleteProjectSku extends \Datenkraft\Backbone\Client\OrganizationStructure
     }
     public function getUri() : string
     {
-        return str_replace(array('{projectId}', '{skuId}'), array($this->projectId, $this->skuId), '/project/{projectId}/sku/{skuId}');
+        return str_replace(array('{projectId}', '{skuCode}'), array($this->projectId, $this->skuCode), '/project/{projectId}/sku/{skuCode}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {

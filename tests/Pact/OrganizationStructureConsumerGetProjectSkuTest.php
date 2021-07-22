@@ -19,9 +19,9 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
     protected string $projectIdValid;
     protected string $projectIdInvalid;
 
-    protected string $skuId;
-    protected string $skuIdValid;
-    protected string $skuIdInvalid;
+    protected string $skuCode;
+    protected string $skuCodeValid;
+    protected string $skuCodeInvalid;
 
     /**
      * @throws Exception
@@ -44,19 +44,19 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
         $this->projectIdValid = 'projectId_test_projectsku_get';
         $this->projectIdInvalid = 'projectId_test_invalid';
 
-        $this->skuIdValid = 'skuId_test_get1';
-        $this->skuIdInvalid = 'skuId_test_invalid';
+        $this->skuCodeValid = 'skuCode_test_get1';
+        $this->skuCodeInvalid = 'skuCode_test_invalid';
 
         $this->projectId = $this->projectIdValid;
-        $this->skuId = $this->skuIdValid;
+        $this->skuCode = $this->skuCodeValid;
 
         $this->requestData = [];
         $this->responseData = [
             'projectId' => $this->projectId,
-            'skuId' => $this->skuId,
+            'skuCode' => $this->skuCode,
         ];
 
-        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuId;
+        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuCode;
     }
 
     public function testGetProjectSkuSuccess(): void
@@ -65,10 +65,10 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
         $this->builder
             ->given(
-                'A Project-SKU relation with ProjectId and SkuId exists, ' .
+                'A Project-SKU relation with ProjectId and SkuCode exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
-            ->uponReceiving('Successful GET request to /project/{projectId}/sku/{skuId}');
+            ->uponReceiving('Successful GET request to /project/{projectId}/sku/{skuCode}');
 
         $this->beginTest();
     }
@@ -85,7 +85,7 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /project/{projectId}/sku/{skuId}');
+            ->uponReceiving('Unauthorized GET request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -103,7 +103,7 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
         $this->builder
             ->given('The request is valid, the token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /project/{projectId}/sku/{skuId}');
+            ->uponReceiving('Forbidden GET request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -111,20 +111,18 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
     public function testGetProjectSkuNotFound(): void
     {
-        // Path with projectId and skuId for non existent projectSku relation
+        // Path with projectId and skuCode for non existent projectSku relation
         $this->projectId = $this->projectIdInvalid;
-        $this->skuId = $this->skuIdInvalid;
-        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuId;
+        $this->skuCode = $this->skuCodeInvalid;
+        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuCode;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A Project-SKU relation with projectId and skuId does not exist'
-            )
-            ->uponReceiving('Not Found GET request to /project/{projectId}/sku/{skuId}');
+            ->given('A Project-SKU relation with projectId and skuCode does not exist')
+            ->uponReceiving('Not Found GET request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -143,6 +141,6 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getProjectSku($this->projectId, $this->skuId, Client::FETCH_RESPONSE);
+        return $client->getProjectSku($this->projectId, $this->skuCode, Client::FETCH_RESPONSE);
     }
 }

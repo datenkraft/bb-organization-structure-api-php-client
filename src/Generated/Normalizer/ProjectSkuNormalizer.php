@@ -39,8 +39,8 @@ class ProjectSkuNormalizer implements DenormalizerInterface, NormalizerInterface
         if (\array_key_exists('projectId', $data)) {
             $object->setProjectId($data['projectId']);
         }
-        if (\array_key_exists('skuId', $data)) {
-            $object->setSkuId($data['skuId']);
+        if (\array_key_exists('skuCode', $data)) {
+            $object->setSkuCode($data['skuCode']);
         }
         return $object;
     }
@@ -48,7 +48,7 @@ class ProjectSkuNormalizer implements DenormalizerInterface, NormalizerInterface
     {
         $data = array();
         $data['projectId'] = $object->getProjectId();
-        $data['skuId'] = $object->getSkuId();
+        $data['skuCode'] = $object->getSkuCode();
         return $data;
     }
 }

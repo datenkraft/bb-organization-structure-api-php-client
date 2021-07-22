@@ -46,11 +46,11 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
         $this->responseData = [
             [
                 'projectId' => $this->projectId,
-                'skuId' => $this->matcher->like('skuId_test_get1'),
+                'skuCode' => $this->matcher->like('skuCode_test_get1'),
             ],
             [
                 'projectId' => $this->projectId,
-                'skuId' => $this->matcher->like('skuId_test_get2'),
+                'skuCode' => $this->matcher->like('skuCode_test_get2'),
             ]
         ];
 
@@ -118,9 +118,7 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'No Project-SKU relation with projectId exists'
-            )
+            ->given('No Project-SKU relation with projectId exists')
             ->uponReceiving('Not Found GET request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;

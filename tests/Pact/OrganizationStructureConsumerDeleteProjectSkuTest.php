@@ -19,9 +19,9 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
     protected string $projectIdValid;
     protected string $projectIdInvalid;
 
-    protected string $skuId;
-    protected string $skuIdValid;
-    protected string $skuIdInvalid;
+    protected string $skuCode;
+    protected string $skuCodeValid;
+    protected string $skuCodeInvalid;
 
     /**
      * @throws Exception
@@ -42,16 +42,16 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
         $this->projectIdValid = 'projectId_test_projectsku';
         $this->projectIdInvalid = 'projectId_test_delete_invalid';
 
-        $this->skuIdValid = 'skuId_test_delete';
-        $this->skuIdInvalid = 'skuId_test_delete_invalid';
+        $this->skuCodeValid = 'skuCode_test_delete';
+        $this->skuCodeInvalid = 'skuCode_test_delete_invalid';
 
         $this->projectId = $this->projectIdValid;
-        $this->skuId = $this->skuIdValid;
+        $this->skuCode = $this->skuCodeValid;
 
         $this->requestData = [];
         $this->responseData = null;
 
-        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuId;
+        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuCode;
     }
 
     public function testDeleteProjectSkuSuccess(): void
@@ -60,10 +60,10 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
 
         $this->builder
             ->given(
-                'A Project-SKU relation with projectId and skuId exists, ' .
+                'A Project-SKU relation with projectId and skuCode exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
-            ->uponReceiving('Successful DELETE request to /project/{projectId}/sku/{skuId}');
+            ->uponReceiving('Successful DELETE request to /project/{projectId}/sku/{skuCode}');
 
         $this->beginTest();
     }
@@ -80,7 +80,7 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized DELETE request to /project/{projectId}/sku/{skuId}');
+            ->uponReceiving('Unauthorized DELETE request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -98,7 +98,7 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
 
         $this->builder
             ->given('The request is valid, the token is valid with an invalid scope')
-            ->uponReceiving('Forbidden DELETE request to /project/{projectId}/sku/{skuId}');
+            ->uponReceiving('Forbidden DELETE request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -106,20 +106,18 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
 
     public function testDeleteProjectSkuNotFound(): void
     {
-        // Path with projectId and skuId for non existent projectSku relation
+        // Path with projectId and skuCode for non existent projectSku relation
         $this->projectId = $this->projectIdInvalid;
-        $this->skuId = $this->skuIdInvalid;
-        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuId;
+        $this->skuCode = $this->skuCodeInvalid;
+        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuCode;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A customer with customerId does not exist'
-            )
-            ->uponReceiving('Not Found DELETE request to /project/{projectId}/sku/{skuId}');
+            ->given('A customer with customerId does not exist')
+            ->uponReceiving('Not Found DELETE request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -138,6 +136,6 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->deleteProjectSku($this->projectId, $this->skuId, Client::FETCH_RESPONSE);
+        return $client->deleteProjectSku($this->projectId, $this->skuCode, Client::FETCH_RESPONSE);
     }
 }
