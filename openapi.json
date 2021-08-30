@@ -926,8 +926,8 @@
                 "tags": [
                     "projectSku"
                 ],
-                "summary": "Get Sku Code’s from project with the projectId.",
-                "description": "Get Sku Code’s from project with the projectId.",
+                "summary": "Get ProjectSku relations for a Project.",
+                "description": "Get ProjectSku relations for a Project.",
                 "operationId": "getProjectSkuCollection",
                 "parameters": [
                     {
@@ -1004,9 +1004,9 @@
                 "tags": [
                     "projectSku"
                 ],
-                "summary": "Post a new ProjectSku relation",
-                "description": "Post a new ProjectSku relation",
-                "operationId": "postProjectSku",
+                "summary": "Post new ProjectSku relations",
+                "description": "Post new ProjectSku relations",
+                "operationId": "postProjectSkuCollection",
                 "parameters": [
                     {
                         "name": "projectId",
