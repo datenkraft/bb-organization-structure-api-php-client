@@ -11,10 +11,10 @@ use Exception;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class OrganizationStructureConsumerPostProjectSkuTest
+ * Class OrganizationStructureConsumerPostProjectSkuCollectionTest
  * @package Pact
  */
-class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStructureConsumerTest
+class OrganizationStructureConsumerPostProjectSkuCollectionTest extends OrganizationStructureConsumerTest
 {
     protected string $projectId;
     protected string $projectIdValid;
@@ -72,7 +72,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
         $this->path = '/project/' . $this->projectId . '/sku';
     }
 
-    public function testPostProjectSkuSuccess(): void
+    public function testPostProjectSkuCollectionSuccess(): void
     {
         $this->expectedStatusCode = '201';
 
@@ -86,7 +86,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
     }
 
 
-    public function testPostProjectSkuUnauthorized(): void
+    public function testPostProjectSkuCollectionUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -103,7 +103,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
         $this->beginTest();
     }
 
-    public function testPostProjectSkuForbidden(): void
+    public function testPostProjectSkuCollectionForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
@@ -120,7 +120,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
         $this->beginTest();
     }
 
-    public function testPostProjectSkuBadRequest(): void
+    public function testPostProjectSkuCollectionBadRequest(): void
     {
         $this->requestData[] = [
             'skuCode' => '',
@@ -137,7 +137,7 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
         $this->beginTest();
     }
 
-    public function testPostProjectSkusNotFound(): void
+    public function testPostProjectSkuCollectionsNotFound(): void
     {
         // Path with projectId for non existent project
         $this->projectId = $this->projectIdInvalid;
@@ -178,6 +178,6 @@ class OrganizationStructureConsumerPostProjectSkuTest extends OrganizationStruct
             }
         }
 
-        return $client->PostProjectSku($this->projectId, $arrProjectSku, Client::FETCH_RESPONSE);
+        return $client->postProjectSkuCollection($this->projectId, $arrProjectSku, Client::FETCH_RESPONSE);
     }
 }

@@ -190,7 +190,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PostProject($requestBody), $fetch);
     }
     /**
-     * Get Sku Code’s from project with the projectId.
+     * Get ProjectSku relations for a Project.
      *
      * @param string $projectId Project Id
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -206,22 +206,22 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetProjectSkuCollection($projectId), $fetch);
     }
     /**
-     * Post a new ProjectSku relation
+     * Post new ProjectSku relations
      *
      * @param string $projectId Project Id
      * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProjectSku[] $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuBadRequestException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuNotFoundException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuCollectionUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuCollectionForbiddenException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuCollectionBadRequestException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostProjectSkuCollectionNotFoundException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
      * @return null|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project|\Psr\Http\Message\ResponseInterface
      */
-    public function postProjectSku(string $projectId, array $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postProjectSkuCollection(string $projectId, array $requestBody, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PostProjectSku($projectId, $requestBody), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PostProjectSkuCollection($projectId, $requestBody), $fetch);
     }
     /**
      * Delete a ProjectSku relation
