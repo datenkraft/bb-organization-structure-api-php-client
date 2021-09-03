@@ -36,9 +36,9 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         ];
         $this->responseHeaders = [];
 
-        $this->projectIdValid = 'projectId_test';
-        $this->projectIdInvalid = 'projectId_test_invalid';
-        $this->projectIdAssigned = 'projectId_test_assigned';
+        $this->projectIdValid = '21274cd6-7628-417f-b74d-9945f508e384';
+        $this->projectIdInvalid = '4cca914e-4b4b-4706-bd7a-2bf2470387e8';
+        $this->projectIdAssigned = '98bfa51b-a9e3-4b5c-8d54-104026fd824a';
 
         $this->projectId = $this->projectIdValid;
 
@@ -53,10 +53,7 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         $this->expectedStatusCode = '204';
 
         $this->builder
-            ->given(
-                'A Project with projectId exists, ' .
-                'the request is valid, the token is valid and has a valid scope'
-            )
+            ->given('A Project with projectId exists, the request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful DELETE request to /project/{projectId}');
 
         $this->beginTest();
@@ -68,7 +65,6 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -86,12 +82,11 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
@@ -100,16 +95,15 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
 
     public function testDeleteProjectNotFound(): void
     {
-        // Path with projectId for non existent project
+        // Project with projectId does not exist
         $this->projectId = $this->projectIdInvalid;
         $this->path = '/project/' . $this->projectId;
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('A project with projectId does not exist')
+            ->given('A Project with projectId does not exist')
             ->uponReceiving('Not Found DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
@@ -121,11 +115,10 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
      */
     public function testDeleteProjectConflict(): void
     {
-        // Path with projectId assigned to a sku
+        // Project with projectId is assigned to a Sku
         $this->projectId = $this->projectIdAssigned;
         $this->path = '/project/' . $this->projectIdAssigned;
 
-        // Error code in response is 409
         $this->expectedStatusCode = '409';
         $this->errorResponse['errors'][0] = [
             'code' => strval($this->expectedStatusCode),
@@ -141,8 +134,25 @@ class OrganizationStructureConsumerDeleteProjectTest extends OrganizationStructu
         ];
 
         $this->builder
-            ->given('A project with projectId is assigned to a sku with skuCode')
-            ->uponReceiving('Conflict DELETE request to /project/{projectId}');
+            ->given('A Project with projectId is assigned to at least one Sku')
+            ->uponReceiving('Conflicted DELETE request to /project/{projectId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testDeleteProjectBadRequest(): void
+    {
+        // ProjectId is not a valid uuid
+        $this->projectId = 'non_uuid';
+        $this->path = '/project/' . $this->projectId;
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The projectId in the request is invalid')
+            ->uponReceiving('Bad DELETE request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

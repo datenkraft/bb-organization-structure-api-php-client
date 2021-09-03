@@ -37,15 +37,15 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
             'Content-Type' => 'application/json'
         ];
 
-        $this->organizationIdValid = 'organizationId_test_get';
-        $this->organizationIdInvalid = 'organizationId_test_invalid';
+        $this->organizationIdValid = '93baab15-3803-4da2-b33c-ff4663a470f1';
+        $this->organizationIdInvalid = '88b6dee1-63b9-479c-baab-4dc7056e62ce';
 
         $this->organizationId = $this->organizationIdValid;
 
         $this->requestData = [];
         $this->responseData = [
             'organizationId' => $this->organizationId,
-            'name' => 'Organization Test'
+            'name' => 'Organization Test Get'
         ];
 
         $this->path = '/organization/' . $this->organizationId;
@@ -57,7 +57,7 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         $this->builder
             ->given(
-                'An Organization with OrganizationId exists, ' .
+                'An Organization with organizationId exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
             ->uponReceiving('Successful GET request to /organization/{organizationId}');
@@ -71,7 +71,6 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -89,12 +88,11 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden GET request to /organization/{organizationId}');
 
         $this->responseData = $this->errorResponse;
@@ -103,19 +101,33 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
     public function testGetOrganizationNotFound(): void
     {
-        // Path with organizationId for non existent organization
+        // Organization with organizationId does not exist
         $this->organizationId = $this->organizationIdInvalid;
         $this->path = '/organization/' . $this->organizationId;
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'An Organization with organizationId does not exist'
-            )
+            ->given('An Organization with organizationId does not exist')
             ->uponReceiving('Not Found GET request to /organization/{organizationId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetOrganizationBadRequest(): void
+    {
+        // OrganizationId is not a valid uuid
+        $this->organizationId = 'non_uuid';
+        $this->path = '/organization/' . $this->organizationId;
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The organizationId in the request is invalid')
+            ->uponReceiving('Bad GET request to /organization/{organizationId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -136,5 +148,4 @@ class OrganizationStructureConsumerGetOrganizationTest extends OrganizationStruc
 
         return $client->getOrganization($this->organizationId, Client::FETCH_RESPONSE);
     }
-
 }

@@ -37,6 +37,7 @@ class GetCustomer extends \Datenkraft\Backbone\Client\OrganizationStructureApi\G
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerForbiddenException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerNotFoundException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerBadRequestException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -55,6 +56,9 @@ class GetCustomer extends \Datenkraft\Backbone\Client\OrganizationStructureApi\G
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerNotFoundException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'));
+        }
+        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'));

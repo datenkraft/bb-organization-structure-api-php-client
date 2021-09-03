@@ -41,8 +41,8 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test_projectsku_get';
-        $this->projectIdInvalid = 'projectId_test_invalid';
+        $this->projectIdValid = '8161831e-3a75-4aa8-ab80-31f94fe79c96';
+        $this->projectIdInvalid = '4cca914e-4b4b-4706-bd7a-2bf2470387e8';
 
         $this->skuCodeValid = 'skuCode_test_get1';
         $this->skuCodeInvalid = 'skuCode_test_invalid';
@@ -65,7 +65,7 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
         $this->builder
             ->given(
-                'A Project-SKU relation with ProjectId and SkuCode exists, ' .
+                'A Project SKU relation with projectId and skuCode exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
             ->uponReceiving('Successful GET request to /project/{projectId}/sku/{skuCode}');
@@ -79,7 +79,6 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -97,12 +96,11 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden GET request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
@@ -111,18 +109,34 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
     public function testGetProjectSkuNotFound(): void
     {
-        // Path with projectId and skuCode for non existent projectSku relation
+        // Project SKU relation with projectId and skuCode does not exist
         $this->projectId = $this->projectIdInvalid;
         $this->skuCode = $this->skuCodeInvalid;
         $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuCode;
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('A Project-SKU relation with projectId and skuCode does not exist')
+            ->given('A Project SKU relation with projectId and skuCode does not exist')
             ->uponReceiving('Not Found GET request to /project/{projectId}/sku/{skuCode}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetProjectSkuBadRequest(): void
+    {
+        // ProjectId is not a valid uuid
+        $this->projectId = 'non_uuid';
+        $this->path = '/project/' . $this->projectId . '/sku/' . $this->skuCode;
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The projectId in the request is invalid')
+            ->uponReceiving('Bad GET request to /project/{projectId}/sku/{skuCode}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

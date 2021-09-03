@@ -33,7 +33,7 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
 
         $this->customerId = $this->matcher->uuid();
 
-        $this->organizationId = 'organizationId_test';
+        $this->organizationId = 'cc5f684f-1a11-4d28-b226-09ef42f91ab8';
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -59,9 +59,7 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
         $this->expectedStatusCode = '201';
 
         $this->builder
-            ->given(
-                'The request is valid, the token is valid and has a valid scope'
-            )
+            ->given('The request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful POST request to /customer');
 
         $this->beginTest();
@@ -69,13 +67,15 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
 
     public function testPostCustomerUnprocessable(): void
     {
-        $this->requestData['organizationId'] = 'thisOrganizationIdIsInvalid';
+        // Organization with organizationId does not exist
+        $this->organizationId = 'dc141a33-2a29-4468-80a1-6f021022f93f';
+        $this->requestData['organizationId'] = $this->organizationId;
 
         $this->expectedStatusCode = '422';
         $this->errorResponse['errors'][0]['code'] = '422';
-        $this->builder->given(
-            'The request is valid, the token is valid and has a valid scope but the project is invalid'
-        )->uponReceiving('Unsuccessful POST request to /customer - invalid project');
+        $this->builder
+            ->given('An Organization with organizationId does not exist')
+            ->uponReceiving('Unprocessable POST request to /customer');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -108,7 +108,7 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden POST request to /customer');
 
         $this->responseData = $this->errorResponse;
@@ -117,10 +117,9 @@ class OrganizationStructureConsumerPostCustomerTest extends OrganizationStructur
 
     public function testPostCustomerBadRequest(): void
     {
-        // name is not defined
+        // Name is not defined
         $this->requestData['name'] = '';
 
-        // Error code in response is 400
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 

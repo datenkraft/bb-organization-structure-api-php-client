@@ -20,6 +20,7 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
     protected string $projectIdValid;
     protected string $projectIdInvalid;
     protected string $customerId;
+    protected string $accountingProfileId;
 
     /**
      * @throws Exception
@@ -40,21 +41,24 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test_put';
-        $this->projectIdInvalid = 'projectId_test_invalid';
+        $this->projectIdValid = 'd20c60a6-dffa-482c-8f40-0125636e6550';
+        $this->projectIdInvalid = '4cca914e-4b4b-4706-bd7a-2bf2470387e8';
 
         $this->projectId = $this->projectIdValid;
 
-        $this->customerId = 'customerId_test';
+        $this->customerId = 'fb73d11a-3bc7-40b8-86e0-c8c60f89741f';
+        $this->accountingProfileId = 'c4f96d2a-eee7-437f-bf78-622d8a1ae820';
 
         $this->requestData = [
             'customerId' => $this->customerId,
-            'name' => 'Project Name'
+            'name' => 'Project Name',
+            'accountingProfileId' => $this->accountingProfileId,
         ];
         $this->responseData = [
             'projectId' => $this->projectId,
             'customerId' => $this->customerId,
             'name' => $this->requestData['name'],
+            'accountingProfileId' => $this->accountingProfileId,
         ];
 
         $this->path = '/project/' . $this->projectId;
@@ -65,24 +69,39 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
         $this->expectedStatusCode = '200';
 
         $this->builder
-            ->given(
-                'A Project with projectId exists, ' .
-                'the request is valid, the token is valid and has a valid scope'
-            )
+            ->given('A Project with projectId exists, the request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful PUT request to /project/{projectId}');
 
         $this->beginTest();
     }
 
-    public function testPutProjectUnprocessable(): void
+    public function testPutProjectUnprocessableCustomerId(): void
     {
-        $this->requestData['customerId'] = 'thisCustomerIdIsInvalid';
+        // A Customer with customerId does not exist
+        $this->customerId = 'da2808e2-06f9-49c2-877b-b5361074a639';
+        $this->requestData['customerId'] = $this->customerId;
 
         $this->expectedStatusCode = '422';
         $this->errorResponse['errors'][0]['code'] = '422';
-        $this->builder->given(
-            'The request is valid, the token is valid and has a valid scope but the customer is invalid'
-        )->uponReceiving('Unsuccessful PUT request to /project - invalid customer');
+        $this->builder
+            ->given('A Customer with the customerId in the request does not exist')
+            ->uponReceiving('Unprocessable PUT request to /project with invalid customerId');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testPutProjectUnprocessableAccountingProfileId(): void
+    {
+        // An Accounting Profile with accountingProfileId does not exist
+        $this->accountingProfileId = '43360eca-68ec-4c19-8103-83d275587ff6';
+        $this->requestData['accountingProfileId'] = $this->accountingProfileId;
+
+        $this->expectedStatusCode = '422';
+        $this->errorResponse['errors'][0]['code'] = '422';
+        $this->builder
+            ->given('An Accounting Profile with the accountingProfileId in the request does not exist')
+            ->uponReceiving('Unprocessable PUT request to /project with invalid accountingProfileId');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -94,7 +113,6 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -112,12 +130,11 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden PUT request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
@@ -126,18 +143,15 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
 
     public function testPutProjectNotFound(): void
     {
-        // Path with projectId for non existent project
+        // Project with projectId does not exist
         $this->projectId = $this->projectIdInvalid;
         $this->path = '/project/' . $this->projectId;
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A project with projectId does not exist'
-            )
+            ->given('A Project with projectId does not exist')
             ->uponReceiving('Not Found PUT request to /project/{projectId}');
 
         $this->responseData = $this->errorResponse;
@@ -146,10 +160,9 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
 
     public function testPutProjectBadRequest(): void
     {
-        // name is not defined
+        // Name is not defined
         $this->requestData['name'] = '';
 
-        // Error code in response is 400
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -177,7 +190,8 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
 
         $project = (new NewProject())
             ->setCustomerId($this->requestData['customerId'])
-            ->setName($this->requestData['name']);
+            ->setName($this->requestData['name'])
+            ->setAccountingProfileId($this->requestData['accountingProfileId']);
 
         return $client->putProject($this->projectId, $project, Client::FETCH_RESPONSE);
     }

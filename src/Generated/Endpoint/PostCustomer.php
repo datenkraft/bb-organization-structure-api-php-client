@@ -43,7 +43,7 @@ class PostCustomer extends \Datenkraft\Backbone\Client\OrganizationStructureApi\
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostCustomerInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return null|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Customer
+     * @return null|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Customer|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
@@ -64,6 +64,9 @@ class PostCustomer extends \Datenkraft\Backbone\Client\OrganizationStructureApi\
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostCustomerInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'));
+        }
+        if (mb_strpos($contentType, 'application/json') !== false) {
+            return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json');
         }
         throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException($status, $body);
     }

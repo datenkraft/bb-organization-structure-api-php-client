@@ -36,9 +36,9 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         ];
         $this->responseHeaders = [];
 
-        $this->customerIdValid = 'customerId_test_delete';
-        $this->customerIdInvalid = 'customerId_test_invalid';
-        $this->customerIdAssigned = 'customerId_test_assigned';
+        $this->customerIdValid = 'a4a6af86-089d-45cd-b801-040585c798ef';
+        $this->customerIdInvalid = '846d7258-345f-4223-b048-55e7c6390432';
+        $this->customerIdAssigned = 'ba5aa020-ae76-4d45-96a1-ef1654506ae7';
 
         $this->customerId = $this->customerIdValid;
 
@@ -53,10 +53,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         $this->expectedStatusCode = '204';
 
         $this->builder
-            ->given(
-                'A Customer with customerId exists, ' .
-                'the request is valid, the token is valid and has a valid scope'
-            )
+            ->given('A Customer with customerId exists, the request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful DELETE request to /customer/{customerId}');
 
         $this->beginTest();
@@ -68,7 +65,6 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -86,12 +82,11 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden DELETE request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
@@ -100,31 +95,30 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
 
     public function testDeleteCustomerNotFound(): void
     {
-        // Path with customerId for non existent customer
+        // Customer with customerId does not exist
         $this->customerId = $this->customerIdInvalid;
         $this->path = '/customer/' . $this->customerId;
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A customer with customerId does not exist'
-            )
+            ->given('A Customer with customerId does not exist')
             ->uponReceiving('Not Found DELETE request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
+    /**
+     * @throws Exception
+     */
     public function testDeleteCustomerConflict(): void
     {
-        // Path with customerId assigned to project
+        // Customer with customerId is assigned to a Project
         $this->customerId = $this->customerIdAssigned;
         $this->path = '/customer/' . $this->customerIdAssigned;
 
-        // Error code in response is 409
         $this->expectedStatusCode = '409';
         $this->errorResponse['errors'][0] = [
             'code' => strval($this->expectedStatusCode),
@@ -141,10 +135,25 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
         ];
 
         $this->builder
-            ->given(
-                'A customer with customerId is assigned to a project with projectId'
-            )
-            ->uponReceiving('Conflict DELETE request to /customer/{customerId}');
+            ->given('A Customer with customerId is assigned to at least one Project')
+            ->uponReceiving('Conflicted DELETE request to /customer/{customerId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testDeleteCustomerBadRequest(): void
+    {
+        // CustomerId is not a valid uuid
+        $this->customerId = 'non_uuid';
+        $this->path = '/customer/' . $this->customerId;
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The customerId in the request is invalid')
+            ->uponReceiving('Bad DELETE request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

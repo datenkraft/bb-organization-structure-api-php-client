@@ -37,22 +37,18 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
             'Content-Type' => 'application/json'
         ];
 
-        $this->projectIdValid = 'projectId_test_projectsku_get';
-        $this->projectIdInvalid = 'projectId_test_invalid';
+        $this->projectIdValid = '8161831e-3a75-4aa8-ab80-31f94fe79c96';
+        $this->projectIdInvalid = '4cca914e-4b4b-4706-bd7a-2bf2470387e8';
 
         $this->projectId = $this->projectIdValid;
 
         $this->requestData = [];
-        $this->responseData = [
+        $this->responseData = $this->matcher->eachLike(
             [
                 'projectId' => $this->projectId,
                 'skuCode' => $this->matcher->like('skuCode_test_get1'),
-            ],
-            [
-                'projectId' => $this->projectId,
-                'skuCode' => $this->matcher->like('skuCode_test_get2'),
             ]
-        ];
+        );
 
         $this->path = '/project/' . $this->projectId . '/sku';
     }
@@ -63,7 +59,7 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
 
         $this->builder
             ->given(
-                'At least one Project-SKU relation with ProjectId exists, ' .
+                'At least one Project SKU relation with projectId exists, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
             ->uponReceiving('Successful GET request to /project/{projectId}/sku');
@@ -77,7 +73,6 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -95,12 +90,11 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden GET request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;
@@ -109,17 +103,33 @@ class OrganizationStructureConsumerGetProjectSkuCollectionTest extends Organizat
 
     public function testGetProjectSkuCollectionNotFound(): void
     {
-        // Path with projectId for non existent projectSku relations
+        // Project with projectId does not exist
         $this->projectId = $this->projectIdInvalid;
         $this->path = '/project/' . $this->projectId . '/sku';
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('No Project-SKU relation with projectId exists')
+            ->given('A Project with projectId does not exist')
             ->uponReceiving('Not Found GET request to /project/{projectId}/sku');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetProjectSkuCollectionBadRequest(): void
+    {
+        // ProjectId is not a valid uuid
+        $this->projectId = 'non_uuid';
+        $this->path = '/project/' . $this->projectId . '/sku';
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The projectId in the request is invalid')
+            ->uponReceiving('Bad GET request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

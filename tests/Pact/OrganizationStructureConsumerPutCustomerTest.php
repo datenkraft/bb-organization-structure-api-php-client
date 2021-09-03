@@ -41,12 +41,12 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
             'Content-Type' => 'application/json'
         ];
 
-        $this->customerIdValid = 'customerId_test_put';
-        $this->customerIdInvalid = 'customerId_test_invalid';
+        $this->customerIdValid = 'cf80dd9e-bdac-4868-a516-794eff41d395';
+        $this->customerIdInvalid = '846d7258-345f-4223-b048-55e7c6390432';
 
         $this->customerId = $this->customerIdValid;
 
-        $this->organizationId = 'organizationId_test';
+        $this->organizationId = 'cc5f684f-1a11-4d28-b226-09ef42f91ab8';
 
         $this->requestData = [
             'organizationId' => $this->organizationId,
@@ -66,10 +66,7 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $this->expectedStatusCode = '200';
 
         $this->builder
-            ->given(
-                'A Customer with customerId exists, ' .
-                'the request is valid, the token is valid and has a valid scope'
-            )
+            ->given('A Customer with customerId exists, the request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful PUT request to /customer/{customerId}');
 
         $this->beginTest();
@@ -77,13 +74,15 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
 
     public function testPutCustomerUnprocessable(): void
     {
-        $this->requestData['organizationId'] = 'thisOrganizationIdIsInvalid';
+        // Organization with organizationId does not exist
+        $this->organizationId = 'dc141a33-2a29-4468-80a1-6f021022f93f';
+        $this->requestData['organizationId'] = $this->organizationId;
 
         $this->expectedStatusCode = '422';
         $this->errorResponse['errors'][0]['code'] = '422';
-        $this->builder->given(
-            'The request is valid, the token is valid and has a valid scope but the project is invalid'
-        )->uponReceiving('Unsuccessful PUT request to /customer - invalid project');
+        $this->builder
+            ->given('An Organization with organizationId does not exist')
+            ->uponReceiving('Unprocessable PUT request to /customer');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -95,7 +94,6 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -113,12 +111,11 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden PUT request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
@@ -127,18 +124,15 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
 
     public function testPutCustomerNotFound(): void
     {
-        // Path with customerId for non existent customer
+        // Customer with customerId does not exist
         $this->customerId = $this->customerIdInvalid;
         $this->path = '/customer/' . $this->customerId;
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A customer with customerId does not exist'
-            )
+            ->given('A Customer with customerId does not exist')
             ->uponReceiving('Not Found PUT request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
@@ -147,10 +141,9 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
 
     public function testPutCustomerBadRequest(): void
     {
-        // name is not defined
+        // Name is not defined
         $this->requestData['name'] = '';
 
-        // Error code in response is 400
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -161,7 +154,6 @@ class OrganizationStructureConsumerPutCustomerTest extends OrganizationStructure
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
-
 
     /**
      * @return ResponseInterface
