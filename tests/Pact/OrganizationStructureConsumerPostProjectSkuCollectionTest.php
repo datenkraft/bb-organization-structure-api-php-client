@@ -140,7 +140,7 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
 
     public function testPostProjectSkuCollectionBadRequestSkuCodesNotUnique(): void
     {
-        // SkuCodes are nto unique in request body
+        // SkuCodes are not unique in request body
         $this->requestData = [['skuCode' => $this->skuCodeDuplicate], ['skuCode' => $this->skuCodeDuplicate]];
 
         $this->expectedStatusCode = '400';
