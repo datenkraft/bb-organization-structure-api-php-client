@@ -957,7 +957,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/project"
+                                    "$ref": "#/components/schemas/getProjectCollectionResponse"
                                 }
                             }
                         }
@@ -1761,7 +1761,6 @@
                 ]
             },
             "newProject": {
-                "description": "Class ProjectResource",
                 "required": [
                     "customerId",
                     "name",
@@ -1782,6 +1781,13 @@
                     }
                 },
                 "type": "object"
+            },
+            "getProjectCollectionResponse": {
+                "description": "Class ProjectResource",
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/project"
+                }
             },
             "projectSku": {
                 "required": [
