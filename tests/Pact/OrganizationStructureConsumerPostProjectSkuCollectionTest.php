@@ -22,6 +22,8 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
 
     protected string $skuCode_1;
     protected string $skuCode_2;
+    protected string $skuCodeExistingProjectSku;
+    protected string $skuCodeDuplicate;
 
     /**
      * @throws Exception
@@ -34,11 +36,13 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
 
         $this->token = getenv('VALID_TOKEN_PROJECT_SKU_POST');
 
-        $this->projectIdValid = 'projectId_test_projectsku';
-        $this->projectIdInvalid = 'projectId_test_invalid';
+        $this->projectIdValid = 'be7eabd8-5b8c-46d7-ace8-d0e0a8c6ca3f';
+        $this->projectIdInvalid = '4cca914e-4b4b-4706-bd7a-2bf2470387e8';
 
         $this->skuCode_1 = 'skuCode_test1';
         $this->skuCode_2 = 'skuCode_test2';
+        $this->skuCodeExistingProjectSku = 'skuCode_test_project_sku_exists';
+        $this->skuCodeDuplicate = 'skuCode_test_duplicate';
 
         $this->projectId = $this->projectIdValid;
 
@@ -77,9 +81,7 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
         $this->expectedStatusCode = '201';
 
         $this->builder
-            ->given(
-                'The request is valid, the token is valid and has a valid scope'
-            )
+            ->given('The request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful POST request to /project/{projectId}/sku');
 
         $this->beginTest();
@@ -113,7 +115,7 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden POST request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;
@@ -122,9 +124,8 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
 
     public function testPostProjectSkuCollectionBadRequest(): void
     {
-        $this->requestData[] = [
-            'skuCode' => '',
-        ];
+        // Empty skuCode in request body
+        $this->requestData = [['skuCode' => '']];
 
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
@@ -137,19 +138,64 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
         $this->beginTest();
     }
 
-    public function testPostProjectSkuCollectionsNotFound(): void
+    public function testPostProjectSkuCollectionUnprocessableEntity(): void
     {
-        // Path with projectId for non existent project
+        // SkuCodes are not unique in request body
+        $this->requestData = [['skuCode' => $this->skuCodeDuplicate], ['skuCode' => $this->skuCodeDuplicate]];
+
+        $this->expectedStatusCode = '422';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The skuCodes are not unique in the request body')
+            ->uponReceiving('Unprocessable POST request to /project/{projectId}/sku');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testPostProjectSkuCollectionNotFound(): void
+    {
+        // Project with projectId does not exist
         $this->projectId = $this->projectIdInvalid;
         $this->path = '/project/' . $this->projectId . '/sku';
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
             ->given('A Project with projectId does not exist')
-            ->uponReceiving('Not Found GET request to /project/{projectId}/sku');
+            ->uponReceiving('Not Found POST request to /project/{projectId}/sku');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testPostProjectSkuCollectionConflict(): void
+    {
+        // A Project SKU relation with projectId and skuCode already exists
+        $this->requestData = [['skuCode' => $this->skuCodeExistingProjectSku]];
+
+        $this->expectedStatusCode = '409';
+        $this->errorResponse['errors'][0] = [
+            'code' => strval($this->expectedStatusCode),
+            'message' => $this->matcher->like('Example error message'),
+            'extra' => [
+                'projectSkus' => [
+                    [
+                        'projectId' => $this->projectId,
+                        'skuCode' => $this->skuCodeExistingProjectSku
+                    ]
+                ],
+            ]
+        ];
+
+        $this->builder
+            ->given('A Project SKU relation with projectId and skuCode already exists')
+            ->uponReceiving('Conflicted POST request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

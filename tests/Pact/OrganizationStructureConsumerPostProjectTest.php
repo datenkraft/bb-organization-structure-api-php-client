@@ -18,6 +18,7 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 {
     protected string $projectId;
     protected string $customerId;
+    protected string $accountingProfileId;
 
     /**
      * @throws Exception
@@ -30,9 +31,10 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 
         $this->token = getenv('VALID_TOKEN_PROJECT_POST');
 
-        $this->projectId = 'projectId_test';
+        $this->projectId = 'b9c8d37b-04b8-4be6-9c77-e960ee8f32b6';
 
-        $this->customerId='customerId_test';
+        $this->customerId = 'fb73d11a-3bc7-40b8-86e0-c8c60f89741f';
+        $this->accountingProfileId = 'c4f96d2a-eee7-437f-bf78-622d8a1ae820';
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -42,12 +44,14 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 
         $this->requestData = [
             'customerId' => $this->customerId,
-            'name' => 'Project Name'
+            'name' => 'Project Name',
+            'accountingProfileId' => $this->accountingProfileId,
         ];
         $this->responseData = [
             'projectId' => $this->matcher->uuid(),
             'customerId' => $this->customerId,
             'name' => $this->requestData['name'],
+            'accountingProfileId' => $this->accountingProfileId,
         ];
 
         $this->path = '/project';
@@ -58,23 +62,39 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
         $this->expectedStatusCode = '201';
 
         $this->builder
-            ->given(
-                'The request is valid, the token is valid and has a valid scope'
-            )
+            ->given('The request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful POST request to /project');
 
         $this->beginTest();
     }
 
-    public function testPostProjectUnprocessable(): void
+    public function testPostProjectUnprocessableCustomerId(): void
     {
-        $this->requestData['customerId'] = 'thisCustomerIdIsInvalid';
+        // A Customer with customerId does not exist
+        $this->customerId = 'da2808e2-06f9-49c2-877b-b5361074a639';
+        $this->requestData['customerId'] = $this->customerId;
 
         $this->expectedStatusCode = '422';
         $this->errorResponse['errors'][0]['code'] = '422';
-        $this->builder->given(
-            'The request is valid, the token is valid and has a valid scope but the customer is invalid'
-        )->uponReceiving('Unsuccessful POST request to /project - invalid customer');
+        $this->builder
+            ->given('A Customer with the customerId in the request does not exist')
+            ->uponReceiving('Unprocessable POST request to /project with invalid customerId');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testPostProjectUnprocessableAccountingProfileId(): void
+    {
+        // An Accounting Profile with accountingProfileId does not exist
+        $this->accountingProfileId = '43360eca-68ec-4c19-8103-83d275587ff6';
+        $this->requestData['accountingProfileId'] = $this->accountingProfileId;
+
+        $this->expectedStatusCode = '422';
+        $this->errorResponse['errors'][0]['code'] = '422';
+        $this->builder
+            ->given('An Accounting Profile with the accountingProfileId in the request does not exist')
+            ->uponReceiving('Unprocessable POST request to /project with invalid accountingProfileId');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -107,7 +127,7 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden POST request to /project');
 
         $this->responseData = $this->errorResponse;
@@ -116,10 +136,9 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 
     public function testPostProjectBadRequest(): void
     {
-        // name is not defined
+        // Name is not defined
         $this->requestData['name'] = '';
 
-        // Error code in response is 400
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -146,7 +165,8 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 
         $project = (new NewProject())
             ->setCustomerId($this->requestData['customerId'])
-            ->setName($this->requestData['name']);
+            ->setName($this->requestData['name'])
+            ->setAccountingProfileId($this->requestData['accountingProfileId']);
 
         return $client->postProject($project, Client::FETCH_RESPONSE);
     }

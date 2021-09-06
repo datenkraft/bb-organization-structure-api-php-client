@@ -17,6 +17,12 @@ class NewProject
      */
     protected $name;
     /**
+     * Accounting Profile Id
+     *
+     * @var string
+     */
+    protected $accountingProfileId;
+    /**
      * Customer Id
      *
      * @return string
@@ -56,6 +62,27 @@ class NewProject
     public function setName(string $name) : self
     {
         $this->name = $name;
+        return $this;
+    }
+    /**
+     * Accounting Profile Id
+     *
+     * @return string
+     */
+    public function getAccountingProfileId() : string
+    {
+        return $this->accountingProfileId;
+    }
+    /**
+     * Accounting Profile Id
+     *
+     * @param string $accountingProfileId
+     *
+     * @return self
+     */
+    public function setAccountingProfileId(string $accountingProfileId) : self
+    {
+        $this->accountingProfileId = $accountingProfileId;
         return $this;
     }
 }

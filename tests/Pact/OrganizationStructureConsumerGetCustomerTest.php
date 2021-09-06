@@ -39,18 +39,18 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
             'Content-Type' => 'application/json'
         ];
 
-        $this->customerIdValid = 'customerId_test_get';
-        $this->customerIdInvalid = 'customerId_test_invalid';
+        $this->customerIdValid = 'df663fea-ebf1-45eb-b896-d124713f220e';
+        $this->customerIdInvalid = '846d7258-345f-4223-b048-55e7c6390432';
 
         $this->customerId = $this->customerIdValid;
 
-        $this->organizationId = 'organizationId_test';
+        $this->organizationId = 'cc5f684f-1a11-4d28-b226-09ef42f91ab8';
 
         $this->requestData = [];
         $this->responseData = [
             'customerId' => $this->customerId,
             'organizationId' => $this->organizationId,
-            'name' => 'Customer Test'
+            'name' => 'Customer Test Get'
         ];
 
         $this->path = '/customer/' . $this->customerId;
@@ -61,10 +61,7 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
         $this->expectedStatusCode = '200';
 
         $this->builder
-            ->given(
-                'A Customer with customerId exists, ' .
-                'the request is valid, the token is valid and has a valid scope'
-            )
+            ->given('A Customer with customerId exists, the request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful GET request to /customer/{customerId}');
 
         $this->beginTest();
@@ -76,7 +73,6 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
@@ -94,12 +90,11 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
-        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The request is valid, the token is valid with an invalid scope')
+            ->given('The token has an invalid scope')
             ->uponReceiving('Forbidden GET request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
@@ -108,19 +103,33 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
 
     public function testGetCustomerNotFound(): void
     {
-        // Path with customerId for non existent customer
+        // Customer with customerId does not exist
         $this->customerId = $this->customerIdInvalid;
         $this->path = '/customer/' . $this->customerId;
 
-        // Error code in response is 404
         $this->expectedStatusCode = '404';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A Customer with customerId does not exist'
-            )
+            ->given('A Customer with customerId does not exist')
             ->uponReceiving('Not Found GET request to /customer/{customerId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetCustomerBadRequest(): void
+    {
+        // CustomerId is not a valid uuid
+        $this->customerId = 'non_uuid';
+        $this->path = '/customer/' . $this->customerId;
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The customerId in the request is invalid')
+            ->uponReceiving('Bad GET request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -141,5 +150,4 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
 
         return $client->getCustomer($this->customerId, Client::FETCH_RESPONSE);
     }
-
 }

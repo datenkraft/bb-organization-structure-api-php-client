@@ -23,13 +23,14 @@ abstract class OrganizationStructureConsumerTest extends TestCase
 
     protected string $method;
     protected string $path;
+    protected array $queryParams;
 
     protected array $requestHeaders;
     protected array $responseHeaders;
     protected int $expectedStatusCode;
 
     protected array $requestData;
-    protected $responseData;
+    protected ?array $responseData;
     protected array $errorResponse;
 
     protected Matcher $matcher;
@@ -70,6 +71,8 @@ abstract class OrganizationStructureConsumerTest extends TestCase
                 ]
             ]
         ];
+        
+        $this->queryParams = [];
     }
 
     protected function tearDown(): void
@@ -124,6 +127,14 @@ abstract class OrganizationStructureConsumerTest extends TestCase
     ): ConsumerRequest {
         $request = new ConsumerRequest();
         $request->setMethod($method)->setPath($path);
+        if (is_array($this->queryParams)) {
+            foreach ($this->queryParams as $queryParam => $value) {
+                if (is_array($value)) {
+                    $value = implode(',', $value);
+                }
+                $request->addQueryParameter($queryParam, $value);
+            }
+        }
         foreach ($requestHeaders as $header => $value) {
             $request->addHeader($header, $value);
         }

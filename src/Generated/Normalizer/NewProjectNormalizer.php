@@ -42,6 +42,9 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
         if (\array_key_exists('name', $data)) {
             $object->setName($data['name']);
         }
+        if (\array_key_exists('accountingProfileId', $data)) {
+            $object->setAccountingProfileId($data['accountingProfileId']);
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -49,6 +52,7 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
         $data = array();
         $data['customerId'] = $object->getCustomerId();
         $data['name'] = $object->getName();
+        $data['accountingProfileId'] = $object->getAccountingProfileId();
         return $data;
     }
 }
