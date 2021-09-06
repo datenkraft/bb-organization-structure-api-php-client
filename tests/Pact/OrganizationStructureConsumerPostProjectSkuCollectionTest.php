@@ -122,7 +122,7 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
         $this->beginTest();
     }
 
-    public function testPostProjectSkuCollectionBadRequestEmptySkuCode(): void
+    public function testPostProjectSkuCollectionBadRequest(): void
     {
         // Empty skuCode in request body
         $this->requestData = [['skuCode' => '']];
@@ -132,23 +132,23 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
 
         $this->builder
             ->given('The request body is invalid or missing')
-            ->uponReceiving('Bad POST request to /project/{projectId}/sku with empty skuCode');
+            ->uponReceiving('Bad POST request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testPostProjectSkuCollectionBadRequestSkuCodesNotUnique(): void
+    public function testPostProjectSkuCollectionUnprocessableEntity(): void
     {
         // SkuCodes are not unique in request body
         $this->requestData = [['skuCode' => $this->skuCodeDuplicate], ['skuCode' => $this->skuCodeDuplicate]];
 
-        $this->expectedStatusCode = '400';
+        $this->expectedStatusCode = '422';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
             ->given('The skuCodes are not unique in the request body')
-            ->uponReceiving('Bad POST request to /project/{projectId}/sku with duplicated skuCodes');
+            ->uponReceiving('Unprocessable POST request to /project/{projectId}/sku');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
