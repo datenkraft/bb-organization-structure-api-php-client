@@ -11,18 +11,18 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class IdentityConflictErrorextraNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorextra';
+        return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\IdentityConflictErrorextra';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorextra';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\IdentityConflictErrorextra';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
@@ -32,42 +32,28 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra();
+        $object = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityConflictErrorextra();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('projects', $data)) {
-            $values = array();
-            foreach ($data['projects'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Project', 'json', $context);
-            }
-            $object->setProjects($values);
-        }
         if (\array_key_exists('identites', $data)) {
-            $values_1 = array();
-            foreach ($data['identites'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity', 'json', $context);
+            $values = array();
+            foreach ($data['identites'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity', 'json', $context);
             }
-            $object->setIdentites($values_1);
+            $object->setIdentites($values);
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getProjects()) {
+        if (null !== $object->getIdentites()) {
             $values = array();
-            foreach ($object->getProjects() as $value) {
+            foreach ($object->getIdentites() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data['projects'] = $values;
-        }
-        if (null !== $object->getIdentites()) {
-            $values_1 = array();
-            foreach ($object->getIdentites() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['identites'] = $values_1;
+            $data['identites'] = $values;
         }
         return $data;
     }

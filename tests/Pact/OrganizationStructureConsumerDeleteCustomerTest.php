@@ -115,7 +115,7 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
      */
     public function testDeleteCustomerConflict(): void
     {
-        // Customer with customerId is assigned to a Project
+        // Customer with customerId is assigned to a Project and an Identity
         $this->customerId = $this->customerIdAssigned;
         $this->path = '/customer/' . $this->customerIdAssigned;
 
@@ -126,16 +126,30 @@ class OrganizationStructureConsumerDeleteCustomerTest extends OrganizationStruct
             'extra' => [
                 'projects' => [
                     [
-                        'projectId' => $this->matcher->like('Example projectId'),
+                        'projectId' => $this->matcher->uuid(),
                         'customerId' => $this->customerIdAssigned,
-                        'name' => $this->matcher->like('Example name'),
+                        'name' => 'Project Test CustomerAssigned',
+                    ]
+                ],
+            ]
+        ];
+
+        $this->errorResponse['errors'][1] = [
+            'code' => strval($this->expectedStatusCode),
+            'message' => $this->matcher->like('Example error message'),
+            'extra' => [
+                'identities' => [
+                    [
+                        'identityId' => $this->matcher->uuid(),
+                        'email' => 'identity@test_customer_assigned.com',
+                        'customerId' => $this->customerIdAssigned,
                     ]
                 ],
             ]
         ];
 
         $this->builder
-            ->given('A Customer with customerId is assigned to at least one Project')
+            ->given('A Customer with customerId is assigned to a Project and an Identity')
             ->uponReceiving('Conflicted DELETE request to /customer/{customerId}');
 
         $this->responseData = $this->errorResponse;
