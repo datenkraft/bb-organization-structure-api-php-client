@@ -15,6 +15,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class OrganizationStructureConsumerGetIdentityCollectionTest extends OrganizationStructureConsumerTest
 {
+    protected string $email;
+
     /**
      * @throws Exception
      */
@@ -33,6 +35,8 @@ class OrganizationStructureConsumerGetIdentityCollectionTest extends Organizatio
             'Content-Type' => 'application/json'
         ];
 
+        $this->email = 'identity@test.com';
+
         $this->requestData = [];
         $this->responseData = $this->matcher->eachLike(
             [
@@ -50,6 +54,9 @@ class OrganizationStructureConsumerGetIdentityCollectionTest extends Organizatio
      */
     public function testGetIdentityCollectionSuccess(): void
     {
+        // Filter email is set to a valid email
+        $this->queryParams['filter[email]'] = $this->email;
+
         $this->expectedStatusCode = '200';
 
         $this->builder
@@ -96,6 +103,34 @@ class OrganizationStructureConsumerGetIdentityCollectionTest extends Organizatio
         $this->beginTest();
     }
 
+    public function testGetIdentityCollectionBadRequest(): void
+    {
+        // Filter email is not a valid email
+        $this->email = 'not_an_email';
+        $this->queryParams['filter[email]'] = $this->email;
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The email in the filter is invalid')
+            ->uponReceiving('Bad GET request to /identity');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetIdentityCollectionSuccessWithoutFilter(): void
+    {
+        $this->expectedStatusCode = '200';
+
+        $this->builder
+            ->given('At least one Identity exists, the request is valid, the token is valid and has a valid scope')
+            ->uponReceiving('Successful GET request to /identity without filter');
+
+        $this->beginTest();
+    }
+
     /**
      * @return ResponseInterface
      * @throws ConfigException
@@ -109,6 +144,6 @@ class OrganizationStructureConsumerGetIdentityCollectionTest extends Organizatio
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getIdentityCollection(Client::FETCH_RESPONSE);
+        return $client->getIdentityCollection($this->queryParams, Client::FETCH_RESPONSE);
     }
 }

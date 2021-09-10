@@ -840,6 +840,17 @@
                 "summary": "Get a list of Identities",
                 "description": "Get a list of Identities",
                 "operationId": "getIdentityCollection",
+                "parameters": [
+                    {
+                        "name": "filter[email]",
+                        "in": "query",
+                        "description": "Email filter",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -863,6 +874,16 @@
                     },
                     "403": {
                         "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
                         "content": {
                             "application/json": {
                                 "schema": {
