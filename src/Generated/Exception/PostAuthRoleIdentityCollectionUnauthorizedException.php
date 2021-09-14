@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception;
 
-class GetAuthRoleIdentityCollectionEndpointUnauthorizedException extends UnauthorizedException
+class PostAuthRoleIdentityCollectionUnauthorizedException extends UnauthorizedException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse)

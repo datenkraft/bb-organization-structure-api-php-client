@@ -2,12 +2,12 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception;
 
-class PostAuthRoleIdentityCollectionEndpointConflictException extends ConflictException
+class GetAuthRoleIdentityCollectionUnauthorizedException extends UnauthorizedException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Conflict', 409);
+        parent::__construct('Unauthorized', 401);
         $this->errorResponse = $errorResponse;
     }
     public function getErrorResponse()
