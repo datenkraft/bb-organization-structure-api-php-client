@@ -1283,6 +1283,75 @@
                 ]
             }
         },
+        "/identity-project": {
+            "get": {
+                "tags": [
+                    "identity-project"
+                ],
+                "summary": "Get a list of Identities and the Projects they are related to",
+                "description": "Get a list of Identities and the Projects they are related to",
+                "operationId": "getIdentityProjectCollection",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getIdentityProjectCollectionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "bb-organization-structure-api/identity-projectd:get"
+                        ]
+                    }
+                ]
+            }
+        },
         "/organization/{organizationId}": {
             "get": {
                 "tags": [
@@ -2530,29 +2599,6 @@
                     "$ref": "#/components/schemas/authPermissionResource"
                 }
             },
-            "authRoleIdentityResource": {
-                "required": [
-                    "roleCode",
-                    "identityId"
-                ],
-                "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
-                        "type": "string"
-                    },
-                    "identityId": {
-                        "description": "Identity ID",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "authRoleIdentityCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleIdentityResource"
-                }
-            },
             "authRoleResource": {
                 "required": [
                     "roleCode",
@@ -2574,6 +2620,29 @@
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/authRoleResource"
+                }
+            },
+            "authRoleIdentityResource": {
+                "required": [
+                    "roleCode",
+                    "identityId"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "identityId": {
+                        "description": "Identity ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "authRoleIdentityCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleIdentityResource"
                 }
             },
             "customer": {
@@ -2660,6 +2729,34 @@
                     "$ref": "#/components/schemas/identity"
                 }
             },
+            "identityProject": {
+                "description": "Class IdentityProjectResource",
+                "required": [
+                    "identityId",
+                    "projectIds"
+                ],
+                "properties": {
+                    "identityId": {
+                        "description": "Identity ID",
+                        "type": "string"
+                    },
+                    "projectIds": {
+                        "description": "Related Project IDs",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "getIdentityProjectCollectionResponse": {
+                "description": "Class IdentityProjectResourceCollection",
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/identityProject"
+                }
+            },
             "organization": {
                 "description": "Class OrganizationResource",
                 "required": [
@@ -2677,48 +2774,6 @@
                     }
                 },
                 "type": "object"
-            },
-            "projectSku": {
-                "required": [
-                    "projectId",
-                    "skuCode"
-                ],
-                "properties": {
-                    "projectId": {
-                        "description": "Project Id",
-                        "type": "string"
-                    },
-                    "skuCode": {
-                        "description": "Sku Code",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "projectSkuCollection": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/projectSku"
-                }
-            },
-            "newProjectSku": {
-                "required": [
-                    "skuCode"
-                ],
-                "properties": {
-                    "skuCode": {
-                        "description": "Sku Code",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "createProjectSkuRequest": {
-                "description": "Class ProjectSkuResource",
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/newProjectSku"
-                }
             },
             "project": {
                 "required": [
@@ -2767,6 +2822,48 @@
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/project"
+                }
+            },
+            "projectSku": {
+                "required": [
+                    "projectId",
+                    "skuCode"
+                ],
+                "properties": {
+                    "projectId": {
+                        "description": "Project Id",
+                        "type": "string"
+                    },
+                    "skuCode": {
+                        "description": "Sku Code",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "projectSkuCollection": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/projectSku"
+                }
+            },
+            "newProjectSku": {
+                "required": [
+                    "skuCode"
+                ],
+                "properties": {
+                    "skuCode": {
+                        "description": "Sku Code",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "createProjectSkuRequest": {
+                "description": "Class ProjectSkuResource",
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/newProjectSku"
                 }
             }
         },
