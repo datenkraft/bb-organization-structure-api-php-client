@@ -48,9 +48,7 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
     {
         $data = array();
         $data['identityId'] = $object->getIdentityId();
-        if (null !== $object->getProjectId()) {
-            $data['projectId'] = $object->getProjectId();
-        }
+        $data['projectId'] = $object->getProjectId();
         return $data;
     }
 }

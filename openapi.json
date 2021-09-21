@@ -2733,7 +2733,7 @@
                 "description": "Class IdentityProjectResource",
                 "required": [
                     "identityId",
-                    "projectIds"
+                    "projectId"
                 ],
                 "properties": {
                     "identityId": {
