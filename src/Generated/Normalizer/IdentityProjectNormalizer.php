@@ -39,12 +39,8 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
         if (\array_key_exists('identityId', $data)) {
             $object->setIdentityId($data['identityId']);
         }
-        if (\array_key_exists('projectIds', $data)) {
-            $values = array();
-            foreach ($data['projectIds'] as $value) {
-                $values[] = $value;
-            }
-            $object->setProjectIds($values);
+        if (\array_key_exists('projectId', $data)) {
+            $object->setProjectId($data['projectId']);
         }
         return $object;
     }
@@ -52,11 +48,9 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
     {
         $data = array();
         $data['identityId'] = $object->getIdentityId();
-        $values = array();
-        foreach ($object->getProjectIds() as $value) {
-            $values[] = $value;
+        if (null !== $object->getProjectId()) {
+            $data['projectId'] = $object->getProjectId();
         }
-        $data['projectIds'] = $values;
         return $data;
     }
 }

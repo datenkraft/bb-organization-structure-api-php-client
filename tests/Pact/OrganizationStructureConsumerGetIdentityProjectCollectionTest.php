@@ -35,9 +35,7 @@ class OrganizationStructureConsumerGetIdentityProjectCollectionTest extends Orga
         $this->responseData = $this->matcher->eachLike(
             [
                 'identityId' => $this->matcher->uuid(),
-                'projectIds' => $this->matcher->eachLike(
-                    $this->matcher->uuid()
-                ),
+                'projectId' => $this->matcher->uuid(),
             ]
         );
 

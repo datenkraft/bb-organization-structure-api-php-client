@@ -11,11 +11,11 @@ class IdentityProject
      */
     protected $identityId;
     /**
-     * Related Project IDs
+     * Related Project ID
      *
-     * @var string[]
+     * @var string
      */
-    protected $projectIds;
+    protected $projectId;
     /**
      * Identity ID
      *
@@ -38,24 +38,24 @@ class IdentityProject
         return $this;
     }
     /**
-     * Related Project IDs
+     * Related Project ID
      *
-     * @return string[]
+     * @return string
      */
-    public function getProjectIds() : array
+    public function getProjectId() : string
     {
-        return $this->projectIds;
+        return $this->projectId;
     }
     /**
-     * Related Project IDs
+     * Related Project ID
      *
-     * @param string[] $projectIds
+     * @param string $projectId
      *
      * @return self
      */
-    public function setProjectIds(array $projectIds) : self
+    public function setProjectId(string $projectId) : self
     {
-        $this->projectIds = $projectIds;
+        $this->projectId = $projectId;
         return $this;
     }
 }

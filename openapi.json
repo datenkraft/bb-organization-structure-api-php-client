@@ -1346,7 +1346,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "bb-organization-structure-api/identity-projectd:get"
+                            "bb-organization-structure-api/identity-project:get"
                         ]
                     }
                 ]
@@ -2740,12 +2740,9 @@
                         "description": "Identity ID",
                         "type": "string"
                     },
-                    "projectIds": {
-                        "description": "Related Project IDs",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
+                    "projectId": {
+                        "description": "Related Project ID",
+                        "type": "string"
                     }
                 },
                 "type": "object"
