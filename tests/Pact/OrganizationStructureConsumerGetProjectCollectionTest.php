@@ -43,7 +43,7 @@ class OrganizationStructureConsumerGetProjectCollectionTest extends Organization
                 'projectId' => $this->matcher->uuid(),
                 'customerId' => $this->matcher->uuid(),
                 'name' => $this->matcher->like('Project Test'),
-                'accountingProfileId' => $this->matcher->uuid(),
+                'accountingProfileId' => $this->matcher->like('uuid-or-empty'),
             ]
         );
 
