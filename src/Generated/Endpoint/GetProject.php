@@ -70,6 +70,6 @@ class GetProject extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Ge
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

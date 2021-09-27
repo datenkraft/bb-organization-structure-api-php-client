@@ -83,6 +83,6 @@ class PostProjectSkuCollection extends \Datenkraft\Backbone\Client\OrganizationS
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

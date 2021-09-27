@@ -43,6 +43,8 @@ abstract class OrganizationStructureConsumerTest extends TestCase
     {
         parent::setUp();
 
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
+
         // Matcher for interactions with the mock server
         $this->matcher = new Matcher();
 

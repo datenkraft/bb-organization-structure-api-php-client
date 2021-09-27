@@ -32,7 +32,7 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
 
         $this->method = 'DELETE';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_SKU_DELETE');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
@@ -87,8 +87,7 @@ class OrganizationStructureConsumerDeleteProjectSkuTest extends OrganizationStru
 
     public function testDeleteProjectSkuForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

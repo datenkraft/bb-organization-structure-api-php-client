@@ -32,8 +32,6 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_SKU_GET');
-
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
         ];
@@ -92,8 +90,7 @@ class OrganizationStructureConsumerGetProjectSkuTest extends OrganizationStructu
 
     public function testGetProjectSkuForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

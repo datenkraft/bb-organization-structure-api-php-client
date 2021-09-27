@@ -76,6 +76,6 @@ class GetProjectCollection extends \Datenkraft\Backbone\Client\OrganizationStruc
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

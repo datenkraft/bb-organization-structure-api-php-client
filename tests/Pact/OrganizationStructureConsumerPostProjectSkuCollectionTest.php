@@ -34,8 +34,6 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
 
         $this->method = 'POST';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_SKU_POST');
-
         $this->projectIdValid = 'be7eabd8-5b8c-46d7-ace8-d0e0a8c6ca3f';
         $this->projectIdInvalid = '4cca914e-4b4b-4706-bd7a-2bf2470387e8';
 
@@ -107,8 +105,7 @@ class OrganizationStructureConsumerPostProjectSkuCollectionTest extends Organiza
 
     public function testPostProjectSkuCollectionForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';
