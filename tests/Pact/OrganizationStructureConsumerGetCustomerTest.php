@@ -30,7 +30,7 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_CUSTOMER_GET');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
@@ -86,8 +86,7 @@ class OrganizationStructureConsumerGetCustomerTest extends OrganizationStructure
 
     public function testGetCustomerForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

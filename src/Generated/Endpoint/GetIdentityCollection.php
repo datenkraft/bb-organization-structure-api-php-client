@@ -76,6 +76,6 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

@@ -26,7 +26,7 @@ class OrganizationStructureConsumerGetIdentityCollectionTest extends Organizatio
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_IDENTITY_GET');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token
@@ -88,8 +88,7 @@ class OrganizationStructureConsumerGetIdentityCollectionTest extends Organizatio
 
     public function testGetIdentityCollectionForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

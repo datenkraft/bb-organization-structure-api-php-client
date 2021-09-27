@@ -427,14 +427,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/customer:get"
-                        ]
-                    }
-                ]
+                }
             },
             "put": {
                 "tags": [
@@ -545,14 +538,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/customer:put"
-                        ]
-                    }
-                ]
+                }
             },
             "delete": {
                 "tags": [
@@ -646,14 +632,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/customer:delete"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/customer": {
@@ -745,14 +724,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/customer:post"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/docs": {
@@ -930,14 +902,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/identity:get"
-                        ]
-                    }
-                ]
+                }
             },
             "put": {
                 "tags": [
@@ -1058,14 +1023,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/identity:put"
-                        ]
-                    }
-                ]
+                }
             },
             "delete": {
                 "tags": [
@@ -1149,14 +1107,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/identity:delete"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/identity": {
@@ -1239,14 +1190,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/identity:get"
-                        ]
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
@@ -1346,14 +1290,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/identity:post"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/identity-project": {
@@ -1415,14 +1352,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/identity-project:get"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/organization/{organizationId}": {
@@ -1515,14 +1445,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/organization:get"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/project/{projectId}": {
@@ -1615,14 +1538,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project:get"
-                        ]
-                    }
-                ]
+                }
             },
             "put": {
                 "tags": [
@@ -1733,14 +1649,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project:put"
-                        ]
-                    }
-                ]
+                }
             },
             "delete": {
                 "tags": [
@@ -1834,14 +1743,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project:delete"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/project": {
@@ -1924,14 +1826,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project:get"
-                        ]
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
@@ -2021,14 +1916,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project:post"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/project/{projectId}/sku": {
@@ -2121,14 +2009,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project-sku:get"
-                        ]
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
@@ -2249,14 +2130,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project-sku:post"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/project/{projectId}/sku/{skuCode}": {
@@ -2348,14 +2222,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project-sku:get"
-                        ]
-                    }
-                ]
+                }
             },
             "delete": {
                 "tags": [
@@ -2448,14 +2315,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-organization-structure-api/project-sku:delete"
-                        ]
-                    }
-                ]
+                }
             }
         }
     },
@@ -2945,20 +2805,7 @@
                     "clientCredentials": {
                         "tokenUrl": "UNDEFINED",
                         "refreshUrl": "UNDEFINED",
-                        "scopes": {
-                            "bb-organization-structure-api/organization:get": "Get Organizations from the Organization Structure API",
-                            "bb-organization-structure-api/project:get": "Get Projects from the Organization Structure API",
-                            "bb-organization-structure-api/project:post": "Add Projects to the Organization Structure API",
-                            "bb-organization-structure-api/project:put": "Update Projects in the Organization Structure API",
-                            "bb-organization-structure-api/project:delete": "Delete Projects in the Organization Structure API",
-                            "bb-organization-structure-api/customer:get": "Get Customers from the Organization Structure API",
-                            "bb-organization-structure-api/customer:post": "Add Customers to the Organization Structure API",
-                            "bb-organization-structure-api/customer:put": "Update Customers in the Organization Structure API",
-                            "bb-organization-structure-api/customer:delete": "Delete Customers in the Organization Structure API",
-                            "bb-organization-structure-api/project-sku:get": "Get Project-SKU relation from the Organization Structure API",
-                            "bb-organization-structure-api/project-sku:post": "Add Project-SKU relation to the Organization Structure API",
-                            "bb-organization-structure-api/project-sku:delete": "Delete Project-SKU relation in the Organization Structure API"
-                        }
+                        "scopes": {}
                     }
                 }
             }

@@ -29,8 +29,6 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 
         $this->method = 'POST';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_POST');
-
         $this->projectId = 'b9c8d37b-04b8-4be6-9c77-e960ee8f32b6';
 
         $this->customerId = 'fb73d11a-3bc7-40b8-86e0-c8c60f89741f';
@@ -119,8 +117,7 @@ class OrganizationStructureConsumerPostProjectTest extends OrganizationStructure
 
     public function testPostProjectForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

@@ -31,8 +31,6 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
 
         $this->method = 'PUT';
 
-        $this->token = getenv('VALID_TOKEN_PROJECT_PUT');
-
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
             'Content-Type' => 'application/json'
@@ -126,8 +124,7 @@ class OrganizationStructureConsumerPutProjectTest extends OrganizationStructureC
 
     public function testPutProjectForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

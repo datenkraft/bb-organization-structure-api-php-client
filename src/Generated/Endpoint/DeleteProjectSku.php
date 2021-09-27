@@ -73,6 +73,6 @@ class DeleteProjectSku extends \Datenkraft\Backbone\Client\OrganizationStructure
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

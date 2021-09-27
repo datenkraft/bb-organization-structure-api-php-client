@@ -70,6 +70,6 @@ class DeleteIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureAp
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

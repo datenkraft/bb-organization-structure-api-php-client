@@ -69,6 +69,6 @@ class GetProjectSku extends \Datenkraft\Backbone\Client\OrganizationStructureApi
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

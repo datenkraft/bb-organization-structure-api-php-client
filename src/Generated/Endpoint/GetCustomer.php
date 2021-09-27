@@ -67,6 +67,6 @@ class GetCustomer extends \Datenkraft\Backbone\Client\OrganizationStructureApi\G
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }

@@ -70,6 +70,6 @@ class GetOrganization extends \Datenkraft\Backbone\Client\OrganizationStructureA
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }
