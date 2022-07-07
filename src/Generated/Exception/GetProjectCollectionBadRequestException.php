@@ -4,13 +4,16 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exceptio
 
 class GetProjectCollectionBadRequestException extends BadRequestException
 {
+    /**
+     * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
+     */
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Bad Request', 400);
+        parent::__construct('Bad Request');
         $this->errorResponse = $errorResponse;
     }
-    public function getErrorResponse()
+    public function getErrorResponse() : \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
     {
         return $this->errorResponse;
     }

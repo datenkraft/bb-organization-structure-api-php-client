@@ -4,13 +4,16 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exceptio
 
 class DeleteCustomerConflictException extends ConflictException
 {
+    /**
+     * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse
+     */
     private $deleteCustomerConflictErrorResponse;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse $deleteCustomerConflictErrorResponse)
     {
-        parent::__construct('Conflict', 409);
+        parent::__construct('Conflict');
         $this->deleteCustomerConflictErrorResponse = $deleteCustomerConflictErrorResponse;
     }
-    public function getDeleteCustomerConflictErrorResponse()
+    public function getDeleteCustomerConflictErrorResponse() : \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse
     {
         return $this->deleteCustomerConflictErrorResponse;
     }
