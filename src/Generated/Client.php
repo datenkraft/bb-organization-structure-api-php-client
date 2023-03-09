@@ -46,6 +46,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleCollectionForbiddenException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleCollectionNotFoundException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -78,6 +79,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleIdentityCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleIdentityCollectionForbiddenException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleIdentityCollectionNotFoundException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetAuthRoleIdentityCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
