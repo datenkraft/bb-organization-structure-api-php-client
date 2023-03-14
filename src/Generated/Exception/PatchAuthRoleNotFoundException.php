@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception;
 
-class GetAuthRoleCollectionNotFoundException extends NotFoundException
+class PatchAuthRoleNotFoundException extends NotFoundException
 {
     /**
      * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
