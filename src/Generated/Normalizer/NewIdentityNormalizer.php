@@ -53,8 +53,12 @@ class NewIdentityNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        $data['email'] = $object->getEmail();
-        $data['customerId'] = $object->getCustomerId();
+        if (null !== $object->getEmail()) {
+            $data['email'] = $object->getEmail();
+        }
+        if (null !== $object->getCustomerId()) {
+            $data['customerId'] = $object->getCustomerId();
+        }
         return $data;
     }
 }
