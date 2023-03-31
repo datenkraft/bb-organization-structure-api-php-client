@@ -4,13 +4,18 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint
 
 class PostIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\Endpoint
 {
+    protected $identityId;
     /**
-     * Post a new Identity
-     *
-     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody 
-     */
-    public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody)
+    * Post a new Identity
+    *
+    * @param string $identityId Identity Id
+    
+    The identityId has to match to a OAuth client id from the Authentication API.
+    * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody 
+    */
+    public function __construct(string $identityId, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody)
     {
+        $this->identityId = $identityId;
         $this->body = $requestBody;
     }
     use \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\EndpointTrait;
@@ -20,7 +25,7 @@ class PostIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureApi\
     }
     public function getUri() : string
     {
-        return '/identity';
+        return str_replace(array('{identityId}'), array($this->identityId), '/identity/{identityId}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
