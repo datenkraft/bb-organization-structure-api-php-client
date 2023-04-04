@@ -59,8 +59,12 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null !== $object->getIdentityId()) {
             $data['identityId'] = $object->getIdentityId();
         }
-        $data['email'] = $object->getEmail();
-        $data['customerId'] = $object->getCustomerId();
+        if (null !== $object->getEmail()) {
+            $data['email'] = $object->getEmail();
+        }
+        if (null !== $object->getCustomerId()) {
+            $data['customerId'] = $object->getCustomerId();
+        }
         return $data;
     }
 }
