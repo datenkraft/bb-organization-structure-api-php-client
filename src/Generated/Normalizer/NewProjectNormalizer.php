@@ -56,9 +56,15 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        $data['customerId'] = $object->getCustomerId();
-        $data['name'] = $object->getName();
-        $data['accountingProfileId'] = $object->getAccountingProfileId();
+        if (null !== $object->getCustomerId()) {
+            $data['customerId'] = $object->getCustomerId();
+        }
+        if (null !== $object->getName()) {
+            $data['name'] = $object->getName();
+        }
+        if (null !== $object->getAccountingProfileId()) {
+            $data['accountingProfileId'] = $object->getAccountingProfileId();
+        }
         return $data;
     }
 }
