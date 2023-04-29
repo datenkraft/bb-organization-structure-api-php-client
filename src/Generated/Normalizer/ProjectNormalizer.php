@@ -62,9 +62,15 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
         if (null !== $object->getProjectId()) {
             $data['projectId'] = $object->getProjectId();
         }
-        $data['customerId'] = $object->getCustomerId();
-        $data['name'] = $object->getName();
-        $data['accountingProfileId'] = $object->getAccountingProfileId();
+        if (null !== $object->getCustomerId()) {
+            $data['customerId'] = $object->getCustomerId();
+        }
+        if (null !== $object->getName()) {
+            $data['name'] = $object->getName();
+        }
+        if (null !== $object->getAccountingProfileId()) {
+            $data['accountingProfileId'] = $object->getAccountingProfileId();
+        }
         return $data;
     }
 }
