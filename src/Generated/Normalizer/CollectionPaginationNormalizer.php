@@ -45,6 +45,12 @@ class CollectionPaginationNormalizer implements DenormalizerInterface, Normalize
         if (\array_key_exists('pageSize', $data)) {
             $object->setPageSize($data['pageSize']);
         }
+        if (\array_key_exists('totalCount', $data) && $data['totalCount'] !== null) {
+            $object->setTotalCount($data['totalCount']);
+        }
+        elseif (\array_key_exists('totalCount', $data) && $data['totalCount'] === null) {
+            $object->setTotalCount(null);
+        }
         return $object;
     }
     /**
@@ -58,6 +64,9 @@ class CollectionPaginationNormalizer implements DenormalizerInterface, Normalize
         }
         if (null !== $object->getPageSize()) {
             $data['pageSize'] = $object->getPageSize();
+        }
+        if (null !== $object->getTotalCount()) {
+            $data['totalCount'] = $object->getTotalCount();
         }
         return $data;
     }
