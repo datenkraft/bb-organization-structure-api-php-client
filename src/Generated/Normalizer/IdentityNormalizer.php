@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normaliz
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity';
     }
@@ -41,12 +43,20 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         }
         if (\array_key_exists('identityId', $data)) {
             $object->setIdentityId($data['identityId']);
+            unset($data['identityId']);
         }
         if (\array_key_exists('email', $data)) {
             $object->setEmail($data['email']);
+            unset($data['email']);
         }
         if (\array_key_exists('customerId', $data)) {
             $object->setCustomerId($data['customerId']);
+            unset($data['customerId']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -56,11 +66,20 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getIdentityId()) {
+        if ($object->isInitialized('identityId') && null !== $object->getIdentityId()) {
             $data['identityId'] = $object->getIdentityId();
         }
-        $data['email'] = $object->getEmail();
-        $data['customerId'] = $object->getCustomerId();
+        if ($object->isInitialized('email') && null !== $object->getEmail()) {
+            $data['email'] = $object->getEmail();
+        }
+        if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+            $data['customerId'] = $object->getCustomerId();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
         return $data;
     }
 }

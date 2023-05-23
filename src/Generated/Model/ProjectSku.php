@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class ProjectSku
+class ProjectSku extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Project Id
      *
@@ -34,6 +42,7 @@ class ProjectSku
      */
     public function setProjectId(string $projectId) : self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
         return $this;
     }
@@ -55,6 +64,7 @@ class ProjectSku
      */
     public function setSkuCode(string $skuCode) : self
     {
+        $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
         return $this;
     }

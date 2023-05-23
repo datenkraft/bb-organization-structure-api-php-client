@@ -2,18 +2,26 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class DeleteProjectConflictErrorResponse
+class DeleteProjectConflictErrorResponse extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * errors
      *
-     * @var DeleteProjectConflictError[]
+     * @var mixed[][]
      */
     protected $errors;
     /**
      * errors
      *
-     * @return DeleteProjectConflictError[]
+     * @return mixed[][]
      */
     public function getErrors() : array
     {
@@ -22,12 +30,13 @@ class DeleteProjectConflictErrorResponse
     /**
      * errors
      *
-     * @param DeleteProjectConflictError[] $errors
+     * @param mixed[][] $errors
      *
      * @return self
      */
     public function setErrors(array $errors) : self
     {
+        $this->initialized['errors'] = true;
         $this->errors = $errors;
         return $this;
     }

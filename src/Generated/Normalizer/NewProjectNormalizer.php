@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normaliz
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\NewProject';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\NewProject';
     }
@@ -41,12 +43,20 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
         }
         if (\array_key_exists('customerId', $data)) {
             $object->setCustomerId($data['customerId']);
+            unset($data['customerId']);
         }
         if (\array_key_exists('name', $data)) {
             $object->setName($data['name']);
+            unset($data['name']);
         }
         if (\array_key_exists('accountingProfileId', $data)) {
             $object->setAccountingProfileId($data['accountingProfileId']);
+            unset($data['accountingProfileId']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -56,9 +66,20 @@ class NewProjectNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        $data['customerId'] = $object->getCustomerId();
-        $data['name'] = $object->getName();
-        $data['accountingProfileId'] = $object->getAccountingProfileId();
+        if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+            $data['customerId'] = $object->getCustomerId();
+        }
+        if ($object->isInitialized('name') && null !== $object->getName()) {
+            $data['name'] = $object->getName();
+        }
+        if ($object->isInitialized('accountingProfileId') && null !== $object->getAccountingProfileId()) {
+            $data['accountingProfileId'] = $object->getAccountingProfileId();
+        }
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
         return $data;
     }
 }
