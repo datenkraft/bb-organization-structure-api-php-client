@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class NewProject
+class NewProject extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Customer Id
      *
@@ -40,6 +48,7 @@ class NewProject
      */
     public function setCustomerId(string $customerId) : self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
         return $this;
     }
@@ -61,6 +70,7 @@ class NewProject
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
         return $this;
     }
@@ -82,6 +92,7 @@ class NewProject
      */
     public function setAccountingProfileId(string $accountingProfileId) : self
     {
+        $this->initialized['accountingProfileId'] = true;
         $this->accountingProfileId = $accountingProfileId;
         return $this;
     }

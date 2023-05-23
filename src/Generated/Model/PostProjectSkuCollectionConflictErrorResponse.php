@@ -2,18 +2,26 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class PostProjectSkuCollectionConflictErrorResponse
+class PostProjectSkuCollectionConflictErrorResponse extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * errors
      *
-     * @var PostProjectSkuCollectionConflictError[]
+     * @var mixed[][]
      */
     protected $errors;
     /**
      * errors
      *
-     * @return PostProjectSkuCollectionConflictError[]
+     * @return mixed[][]
      */
     public function getErrors() : array
     {
@@ -22,12 +30,13 @@ class PostProjectSkuCollectionConflictErrorResponse
     /**
      * errors
      *
-     * @param PostProjectSkuCollectionConflictError[] $errors
+     * @param mixed[][] $errors
      *
      * @return self
      */
     public function setErrors(array $errors) : self
     {
+        $this->initialized['errors'] = true;
         $this->errors = $errors;
         return $this;
     }

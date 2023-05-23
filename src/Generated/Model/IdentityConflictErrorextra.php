@@ -2,18 +2,26 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class IdentityConflictErrorextra
+class IdentityConflictErrorextra extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Identites
      *
-     * @var Identity[]
+     * @var mixed[][]
      */
     protected $identites;
     /**
      * Identites
      *
-     * @return Identity[]
+     * @return mixed[][]
      */
     public function getIdentites() : array
     {
@@ -22,12 +30,13 @@ class IdentityConflictErrorextra
     /**
      * Identites
      *
-     * @param Identity[] $identites
+     * @param mixed[][] $identites
      *
      * @return self
      */
     public function setIdentites(array $identites) : self
     {
+        $this->initialized['identites'] = true;
         $this->identites = $identites;
         return $this;
     }

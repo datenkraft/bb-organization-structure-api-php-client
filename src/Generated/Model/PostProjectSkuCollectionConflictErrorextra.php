@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class PostProjectSkuCollectionConflictErrorextra
+class PostProjectSkuCollectionConflictErrorextra extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * ProjectSkus
      *
@@ -28,6 +36,7 @@ class PostProjectSkuCollectionConflictErrorextra
      */
     public function setProjectSkus(array $projectSkus) : self
     {
+        $this->initialized['projectSkus'] = true;
         $this->projectSkus = $projectSkus;
         return $this;
     }
