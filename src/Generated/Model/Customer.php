@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class Customer
+class Customer extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Customer Id
      *
@@ -11,17 +19,17 @@ class Customer
      */
     protected $customerId;
     /**
-     * Organization Id
-     *
-     * @var string
-     */
-    protected $organizationId;
-    /**
      * Name
      *
      * @var string
      */
     protected $name;
+    /**
+     * Organization Id
+     *
+     * @var string
+     */
+    protected $organizationId;
     /**
      * Customer Id
      *
@@ -40,28 +48,8 @@ class Customer
      */
     public function setCustomerId(string $customerId) : self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
-        return $this;
-    }
-    /**
-     * Organization Id
-     *
-     * @return string
-     */
-    public function getOrganizationId() : string
-    {
-        return $this->organizationId;
-    }
-    /**
-     * Organization Id
-     *
-     * @param string $organizationId
-     *
-     * @return self
-     */
-    public function setOrganizationId(string $organizationId) : self
-    {
-        $this->organizationId = $organizationId;
         return $this;
     }
     /**
@@ -82,7 +70,30 @@ class Customer
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
+        return $this;
+    }
+    /**
+     * Organization Id
+     *
+     * @return string
+     */
+    public function getOrganizationId() : string
+    {
+        return $this->organizationId;
+    }
+    /**
+     * Organization Id
+     *
+     * @param string $organizationId
+     *
+     * @return self
+     */
+    public function setOrganizationId(string $organizationId) : self
+    {
+        $this->initialized['organizationId'] = true;
+        $this->organizationId = $organizationId;
         return $this;
     }
 }

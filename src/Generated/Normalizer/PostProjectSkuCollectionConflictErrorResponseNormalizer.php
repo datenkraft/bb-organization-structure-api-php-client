@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normaliz
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class PostProjectSkuCollectionConflictErrorResponseNormalizer implements Denorma
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PostProjectSkuCollectionConflictErrorResponse';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PostProjectSkuCollectionConflictErrorResponse';
     }
@@ -42,9 +44,19 @@ class PostProjectSkuCollectionConflictErrorResponseNormalizer implements Denorma
         if (\array_key_exists('errors', $data)) {
             $values = array();
             foreach ($data['errors'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PostProjectSkuCollectionConflictError', 'json', $context);
+                $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
+                }
+                $values[] = $values_1;
             }
             $object->setErrors($values);
+            unset($data['errors']);
+        }
+        foreach ($data as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_2;
+            }
         }
         return $object;
     }
@@ -54,12 +66,21 @@ class PostProjectSkuCollectionConflictErrorResponseNormalizer implements Denorma
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getErrors()) {
+        if ($object->isInitialized('errors') && null !== $object->getErrors()) {
             $values = array();
             foreach ($object->getErrors() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+                $values_1 = array();
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
+                }
+                $values[] = $values_1;
             }
             $data['errors'] = $values;
+        }
+        foreach ($object as $key_1 => $value_2) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $data[$key_1] = $value_2;
+            }
         }
         return $data;
     }

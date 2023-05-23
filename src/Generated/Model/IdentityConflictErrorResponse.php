@@ -2,18 +2,26 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class IdentityConflictErrorResponse
+class IdentityConflictErrorResponse extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * errors
      *
-     * @var IdentityConflictError[]
+     * @var mixed[][]
      */
     protected $errors;
     /**
      * errors
      *
-     * @return IdentityConflictError[]
+     * @return mixed[][]
      */
     public function getErrors() : array
     {
@@ -22,12 +30,13 @@ class IdentityConflictErrorResponse
     /**
      * errors
      *
-     * @param IdentityConflictError[] $errors
+     * @param mixed[][] $errors
      *
      * @return self
      */
     public function setErrors(array $errors) : self
     {
+        $this->initialized['errors'] = true;
         $this->errors = $errors;
         return $this;
     }

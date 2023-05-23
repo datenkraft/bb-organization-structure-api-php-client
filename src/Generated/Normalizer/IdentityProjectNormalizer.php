@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normaliz
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\IdentityProject';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\IdentityProject';
     }
@@ -41,9 +43,16 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
         }
         if (\array_key_exists('identityId', $data)) {
             $object->setIdentityId($data['identityId']);
+            unset($data['identityId']);
         }
         if (\array_key_exists('projectId', $data)) {
             $object->setProjectId($data['projectId']);
+            unset($data['projectId']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -55,6 +64,11 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
         $data = array();
         $data['identityId'] = $object->getIdentityId();
         $data['projectId'] = $object->getProjectId();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
         return $data;
     }
 }
