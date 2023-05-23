@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class IdentityProject
+class IdentityProject extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Identity ID
      *
@@ -34,6 +42,7 @@ class IdentityProject
      */
     public function setIdentityId(string $identityId) : self
     {
+        $this->initialized['identityId'] = true;
         $this->identityId = $identityId;
         return $this;
     }
@@ -55,6 +64,7 @@ class IdentityProject
      */
     public function setProjectId(string $projectId) : self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
         return $this;
     }

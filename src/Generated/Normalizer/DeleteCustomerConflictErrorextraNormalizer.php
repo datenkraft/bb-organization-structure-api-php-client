@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normaliz
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorextra';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorextra';
     }
@@ -42,16 +44,31 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
         if (\array_key_exists('projects', $data)) {
             $values = array();
             foreach ($data['projects'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Project', 'json', $context);
+                $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
+                }
+                $values[] = $values_1;
             }
             $object->setProjects($values);
+            unset($data['projects']);
         }
         if (\array_key_exists('identites', $data)) {
-            $values_1 = array();
-            foreach ($data['identites'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity', 'json', $context);
+            $values_2 = array();
+            foreach ($data['identites'] as $value_2) {
+                $values_3 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+                foreach ($value_2 as $key_1 => $value_3) {
+                    $values_3[$key_1] = $value_3;
+                }
+                $values_2[] = $values_3;
             }
-            $object->setIdentites($values_1);
+            $object->setIdentites($values_2);
+            unset($data['identites']);
+        }
+        foreach ($data as $key_2 => $value_4) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $object[$key_2] = $value_4;
+            }
         }
         return $object;
     }
@@ -61,19 +78,32 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getProjects()) {
+        if ($object->isInitialized('projects') && null !== $object->getProjects()) {
             $values = array();
             foreach ($object->getProjects() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+                $values_1 = array();
+                foreach ($value as $key => $value_1) {
+                    $values_1[$key] = $value_1;
+                }
+                $values[] = $values_1;
             }
             $data['projects'] = $values;
         }
-        if (null !== $object->getIdentites()) {
-            $values_1 = array();
-            foreach ($object->getIdentites() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+        if ($object->isInitialized('identites') && null !== $object->getIdentites()) {
+            $values_2 = array();
+            foreach ($object->getIdentites() as $value_2) {
+                $values_3 = array();
+                foreach ($value_2 as $key_1 => $value_3) {
+                    $values_3[$key_1] = $value_3;
+                }
+                $values_2[] = $values_3;
             }
-            $data['identites'] = $values_1;
+            $data['identites'] = $values_2;
+        }
+        foreach ($object as $key_2 => $value_4) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $data[$key_2] = $value_4;
+            }
         }
         return $data;
     }

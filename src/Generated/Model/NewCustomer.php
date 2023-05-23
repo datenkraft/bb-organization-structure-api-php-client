@@ -2,14 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class NewCustomer
+class NewCustomer extends \ArrayObject
 {
     /**
-     * Organization Id
-     *
-     * @var string
+     * @var array
      */
-    protected $organizationId;
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Name
      *
@@ -19,24 +21,9 @@ class NewCustomer
     /**
      * Organization Id
      *
-     * @return string
+     * @var string
      */
-    public function getOrganizationId() : string
-    {
-        return $this->organizationId;
-    }
-    /**
-     * Organization Id
-     *
-     * @param string $organizationId
-     *
-     * @return self
-     */
-    public function setOrganizationId(string $organizationId) : self
-    {
-        $this->organizationId = $organizationId;
-        return $this;
-    }
+    protected $organizationId;
     /**
      * Name
      *
@@ -55,7 +42,30 @@ class NewCustomer
      */
     public function setName(string $name) : self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
+        return $this;
+    }
+    /**
+     * Organization Id
+     *
+     * @return string
+     */
+    public function getOrganizationId() : string
+    {
+        return $this->organizationId;
+    }
+    /**
+     * Organization Id
+     *
+     * @param string $organizationId
+     *
+     * @return self
+     */
+    public function setOrganizationId(string $organizationId) : self
+    {
+        $this->initialized['organizationId'] = true;
+        $this->organizationId = $organizationId;
         return $this;
     }
 }
