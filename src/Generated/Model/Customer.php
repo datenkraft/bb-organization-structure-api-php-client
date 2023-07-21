@@ -11,17 +11,17 @@ class Customer
      */
     protected $customerId;
     /**
-     * Organization Id
-     *
-     * @var string
-     */
-    protected $organizationId;
-    /**
      * Name
      *
      * @var string
      */
     protected $name;
+    /**
+     * Organization Id
+     *
+     * @var string
+     */
+    protected $organizationId;
     /**
      * Customer Id
      *
@@ -44,27 +44,6 @@ class Customer
         return $this;
     }
     /**
-     * Organization Id
-     *
-     * @return string
-     */
-    public function getOrganizationId() : string
-    {
-        return $this->organizationId;
-    }
-    /**
-     * Organization Id
-     *
-     * @param string $organizationId
-     *
-     * @return self
-     */
-    public function setOrganizationId(string $organizationId) : self
-    {
-        $this->organizationId = $organizationId;
-        return $this;
-    }
-    /**
      * Name
      *
      * @return string
@@ -83,6 +62,27 @@ class Customer
     public function setName(string $name) : self
     {
         $this->name = $name;
+        return $this;
+    }
+    /**
+     * Organization Id
+     *
+     * @return string
+     */
+    public function getOrganizationId() : string
+    {
+        return $this->organizationId;
+    }
+    /**
+     * Organization Id
+     *
+     * @param string $organizationId
+     *
+     * @return self
+     */
+    public function setOrganizationId(string $organizationId) : self
+    {
+        $this->organizationId = $organizationId;
         return $this;
     }
 }
