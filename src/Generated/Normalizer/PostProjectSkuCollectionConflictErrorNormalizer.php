@@ -45,6 +45,13 @@ class PostProjectSkuCollectionConflictErrorNormalizer implements DenormalizerInt
         if (\array_key_exists('message', $data)) {
             $object->setMessage($data['message']);
         }
+        if (\array_key_exists('references', $data)) {
+            $values = array();
+            foreach ($data['references'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorReferencesItem', 'json', $context);
+            }
+            $object->setReferences($values);
+        }
         if (\array_key_exists('extra', $data)) {
             $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PostProjectSkuCollectionConflictErrorextra', 'json', $context));
         }
@@ -58,6 +65,13 @@ class PostProjectSkuCollectionConflictErrorNormalizer implements DenormalizerInt
         $data = array();
         $data['code'] = $object->getCode();
         $data['message'] = $object->getMessage();
+        if (null !== $object->getReferences()) {
+            $values = array();
+            foreach ($object->getReferences() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['references'] = $values;
+        }
         if (null !== $object->getExtra()) {
             $data['extra'] = $this->normalizer->normalize($object->getExtra(), 'json', $context);
         }
