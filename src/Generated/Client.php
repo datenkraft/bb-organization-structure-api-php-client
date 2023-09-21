@@ -266,20 +266,25 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PostAuthRole($roleCode, $requestBody), $fetch);
     }
     /**
-     * Get a list of customers
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[organizationId] Organization Id
-     * }
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionBadRequestException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Customer[]|\Psr\Http\Message\ResponseInterface
-     */
+    * Get a list of customers
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    *     @var string $filter[organizationId] Organization Id
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionBadRequestException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetCustomerCollectionResponse|\Psr\Http\Message\ResponseInterface
+    */
     public function getCustomerCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetCustomerCollection($queryParameters), $fetch);
@@ -398,33 +403,47 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetOpenApiInFormat($format), $fetch);
     }
     /**
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityProjectCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityProjectCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityProjectCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject[]|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function getIdentityProjectCollection(string $fetch = self::FETCH_OBJECT)
+    * Get a list of Identities and the Projects they are related to
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityProjectCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityProjectCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityProjectCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetIdentityProjectCollectionResponse|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getIdentityProjectCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetIdentityProjectCollection(), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetIdentityProjectCollection($queryParameters), $fetch);
     }
     /**
-     * Get a list of Identities
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[email] Email filter
-     * }
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionBadRequestException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Identity[]|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
+    * Get a list of Identities
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    *     @var string $filter[email] Email filter
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionBadRequestException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetIdentityCollectionResponse|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
     public function getIdentityCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetIdentityCollection($queryParameters), $fetch);
@@ -506,17 +525,26 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PatchIdentity($identityId, $requestBody), $fetch);
     }
     /**
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetOrganizationCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetOrganizationCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetOrganizationCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Organization[]|\Psr\Http\Message\ResponseInterface
-     */
-    public function getOrganizationCollection(string $fetch = self::FETCH_OBJECT)
+    * Get a list of organizations
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetOrganizationCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetOrganizationCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetOrganizationCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetOrganizationCollectionResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getOrganizationCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetOrganizationCollection(), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetOrganizationCollection($queryParameters), $fetch);
     }
     /**
      * Get an Organization by organizationId
@@ -537,20 +565,25 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetOrganization($organizationId), $fetch);
     }
     /**
-     * Get a list of Projects
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[accountingProfileId] Accounting Profile Id filter
-     * }
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionBadRequestException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project[]|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
+    * Get a list of Projects
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    *     @var string $filter[accountingProfileId] Accounting Profile Id filter
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionBadRequestException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetProjectCollectionResponse|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
     public function getProjectCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetProjectCollection($queryParameters), $fetch);
@@ -631,22 +664,29 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PatchProject($projectId, $requestBody), $fetch);
     }
     /**
-     * Get ProjectSku relations for a Project.
-     *
-     * @param string $projectId Project Id
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionNotFoundException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionBadRequestException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSku[]|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function getProjectSkuCollection(string $projectId, string $fetch = self::FETCH_OBJECT)
+    * Get ProjectSku relations for a Project.
+    *
+    * @param string $projectId Project Id
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionNotFoundException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionBadRequestException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectSkuCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSkuCollection|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getProjectSkuCollection(string $projectId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetProjectSkuCollection($projectId), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetProjectSkuCollection($projectId, $queryParameters), $fetch);
     }
     /**
      * Post new ProjectSku relations
@@ -711,7 +751,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = array();
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://organization-structure-api.conqore.niceshops.com/v1');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://organization-structure-api.conqore.niceshops.com/v2');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
             if (count($additionalPlugins) > 0) {
