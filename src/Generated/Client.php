@@ -38,7 +38,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthPermissionRoleCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthPermissionRoleCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthPermissionRoleCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthPermissionRoleCollectionNotFoundException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthPermissionRoleCollectionUnprocessableEntityException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthPermissionRoleCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -79,6 +79,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostAuthPermissionRoleCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostAuthPermissionRoleCollectionForbiddenException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostAuthPermissionRoleCollectionConflictException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostAuthPermissionRoleCollectionUnprocessableEntityException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostAuthPermissionRoleCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -118,7 +119,6 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleIdentityCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleIdentityCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleIdentityCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleIdentityCollectionNotFoundException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleIdentityCollectionUnprocessableEntityException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleIdentityCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
@@ -197,7 +197,6 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      *
      * @param string $roleCode Identifier for the role
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleBadRequestException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleForbiddenException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteAuthRoleNotFoundException
@@ -394,6 +393,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      *
      * @param string $format Openapi file format
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetOpenApiInFormatBadRequestException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
      * @return null|\Psr\Http\Message\ResponseInterface

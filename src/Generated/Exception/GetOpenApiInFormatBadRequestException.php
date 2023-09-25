@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception;
 
-class DeleteAuthRoleBadRequestException extends BadRequestException
+class GetOpenApiInFormatBadRequestException extends BadRequestException
 {
     /**
      * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
@@ -14,7 +14,7 @@ class DeleteAuthRoleBadRequestException extends BadRequestException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Bad Request');
+        parent::__construct('Invalid format');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
