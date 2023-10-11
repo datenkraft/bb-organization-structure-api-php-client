@@ -56,18 +56,14 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
         if (\array_key_exists('identites', $data)) {
             $values_2 = array();
             foreach ($data['identites'] as $value_2) {
-                $values_3 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($value_2 as $key_1 => $value_3) {
-                    $values_3[$key_1] = $value_3;
-                }
-                $values_2[] = $values_3;
+                $values_2[] = $this->denormalizer->denormalize($value_2, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity', 'json', $context);
             }
             $object->setIdentites($values_2);
             unset($data['identites']);
         }
-        foreach ($data as $key_2 => $value_4) {
-            if (preg_match('/.*/', (string) $key_2)) {
-                $object[$key_2] = $value_4;
+        foreach ($data as $key_1 => $value_3) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $object[$key_1] = $value_3;
             }
         }
         return $object;
@@ -92,17 +88,13 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
         if ($object->isInitialized('identites') && null !== $object->getIdentites()) {
             $values_2 = array();
             foreach ($object->getIdentites() as $value_2) {
-                $values_3 = array();
-                foreach ($value_2 as $key_1 => $value_3) {
-                    $values_3[$key_1] = $value_3;
-                }
-                $values_2[] = $values_3;
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
             $data['identites'] = $values_2;
         }
-        foreach ($object as $key_2 => $value_4) {
-            if (preg_match('/.*/', (string) $key_2)) {
-                $data[$key_2] = $value_4;
+        foreach ($object as $key_1 => $value_3) {
+            if (preg_match('/.*/', (string) $key_1)) {
+                $data[$key_1] = $value_3;
             }
         }
         return $data;

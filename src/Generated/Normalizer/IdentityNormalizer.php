@@ -41,10 +41,6 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('identityId', $data)) {
-            $object->setIdentityId($data['identityId']);
-            unset($data['identityId']);
-        }
         if (\array_key_exists('email', $data)) {
             $object->setEmail($data['email']);
             unset($data['email']);
@@ -52,6 +48,10 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (\array_key_exists('customerId', $data)) {
             $object->setCustomerId($data['customerId']);
             unset($data['customerId']);
+        }
+        if (\array_key_exists('identityId', $data)) {
+            $object->setIdentityId($data['identityId']);
+            unset($data['identityId']);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -66,14 +66,14 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if ($object->isInitialized('identityId') && null !== $object->getIdentityId()) {
-            $data['identityId'] = $object->getIdentityId();
-        }
         if ($object->isInitialized('email') && null !== $object->getEmail()) {
             $data['email'] = $object->getEmail();
         }
         if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
             $data['customerId'] = $object->getCustomerId();
+        }
+        if ($object->isInitialized('identityId') && null !== $object->getIdentityId()) {
+            $data['identityId'] = $object->getIdentityId();
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {

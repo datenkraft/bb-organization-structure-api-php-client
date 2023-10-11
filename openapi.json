@@ -4162,8 +4162,10 @@
                 "additionalProperties": {}
             },
             "identity": {
-                "type": "object",
                 "allOf": [
+                    {
+                        "$ref": "#/components/schemas/baseIdentity"
+                    },
                     {
                         "properties": {
                             "identityId": {
@@ -4172,9 +4174,6 @@
                             }
                         },
                         "type": "object"
-                    },
-                    {
-                        "$ref": "#/components/schemas/baseIdentity"
                     }
                 ]
             },

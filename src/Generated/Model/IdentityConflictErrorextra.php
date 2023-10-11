@@ -15,13 +15,13 @@ class IdentityConflictErrorextra extends \ArrayObject
     /**
      * Identites
      *
-     * @var mixed[][]
+     * @var Identity[]
      */
     protected $identites;
     /**
      * Identites
      *
-     * @return mixed[][]
+     * @return Identity[]
      */
     public function getIdentites() : array
     {
@@ -30,7 +30,7 @@ class IdentityConflictErrorextra extends \ArrayObject
     /**
      * Identites
      *
-     * @param mixed[][] $identites
+     * @param Identity[] $identites
      *
      * @return self
      */
