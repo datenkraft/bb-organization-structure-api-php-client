@@ -44,26 +44,22 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
         if (\array_key_exists('projects', $data)) {
             $values = array();
             foreach ($data['projects'] as $value) {
-                $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($value as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $values[] = $values_1;
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Project', 'json', $context);
             }
             $object->setProjects($values);
             unset($data['projects']);
         }
         if (\array_key_exists('identites', $data)) {
-            $values_2 = array();
-            foreach ($data['identites'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity', 'json', $context);
+            $values_1 = array();
+            foreach ($data['identites'] as $value_1) {
+                $values_1[] = $this->denormalizer->denormalize($value_1, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity', 'json', $context);
             }
-            $object->setIdentites($values_2);
+            $object->setIdentites($values_1);
             unset($data['identites']);
         }
-        foreach ($data as $key_1 => $value_3) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $object[$key_1] = $value_3;
+        foreach ($data as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_2;
             }
         }
         return $object;
@@ -77,24 +73,20 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
         if ($object->isInitialized('projects') && null !== $object->getProjects()) {
             $values = array();
             foreach ($object->getProjects() as $value) {
-                $values_1 = array();
-                foreach ($value as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $values[] = $values_1;
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
             $data['projects'] = $values;
         }
         if ($object->isInitialized('identites') && null !== $object->getIdentites()) {
-            $values_2 = array();
-            foreach ($object->getIdentites() as $value_2) {
-                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+            $values_1 = array();
+            foreach ($object->getIdentites() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $data['identites'] = $values_2;
+            $data['identites'] = $values_1;
         }
-        foreach ($object as $key_1 => $value_3) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $data[$key_1] = $value_3;
+        foreach ($object as $key => $value_2) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_2;
             }
         }
         return $data;

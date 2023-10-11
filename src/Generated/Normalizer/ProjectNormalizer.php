@@ -41,10 +41,6 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('projectId', $data)) {
-            $object->setProjectId($data['projectId']);
-            unset($data['projectId']);
-        }
         if (\array_key_exists('customerId', $data)) {
             $object->setCustomerId($data['customerId']);
             unset($data['customerId']);
@@ -56,6 +52,10 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
         if (\array_key_exists('accountingProfileId', $data)) {
             $object->setAccountingProfileId($data['accountingProfileId']);
             unset($data['accountingProfileId']);
+        }
+        if (\array_key_exists('projectId', $data)) {
+            $object->setProjectId($data['projectId']);
+            unset($data['projectId']);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -70,9 +70,6 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
-            $data['projectId'] = $object->getProjectId();
-        }
         if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
             $data['customerId'] = $object->getCustomerId();
         }
@@ -81,6 +78,9 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
         }
         if ($object->isInitialized('accountingProfileId') && null !== $object->getAccountingProfileId()) {
             $data['accountingProfileId'] = $object->getAccountingProfileId();
+        }
+        if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
+            $data['projectId'] = $object->getProjectId();
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {

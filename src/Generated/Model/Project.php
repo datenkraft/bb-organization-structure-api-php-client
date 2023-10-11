@@ -13,12 +13,6 @@ class Project extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * Project Id
-     *
-     * @var string
-     */
-    protected $projectId;
-    /**
      * Customer Id
      *
      * @var string
@@ -39,25 +33,9 @@ class Project extends \ArrayObject
     /**
      * Project Id
      *
-     * @return string
+     * @var string
      */
-    public function getProjectId() : string
-    {
-        return $this->projectId;
-    }
-    /**
-     * Project Id
-     *
-     * @param string $projectId
-     *
-     * @return self
-     */
-    public function setProjectId(string $projectId) : self
-    {
-        $this->initialized['projectId'] = true;
-        $this->projectId = $projectId;
-        return $this;
-    }
+    protected $projectId;
     /**
      * Customer Id
      *
@@ -122,6 +100,28 @@ class Project extends \ArrayObject
     {
         $this->initialized['accountingProfileId'] = true;
         $this->accountingProfileId = $accountingProfileId;
+        return $this;
+    }
+    /**
+     * Project Id
+     *
+     * @return string
+     */
+    public function getProjectId() : string
+    {
+        return $this->projectId;
+    }
+    /**
+     * Project Id
+     *
+     * @param string $projectId
+     *
+     * @return self
+     */
+    public function setProjectId(string $projectId) : self
+    {
+        $this->initialized['projectId'] = true;
+        $this->projectId = $projectId;
         return $this;
     }
 }
