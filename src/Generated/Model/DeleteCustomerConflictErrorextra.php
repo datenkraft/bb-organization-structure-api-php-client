@@ -21,7 +21,7 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * Identites
      *
-     * @var mixed[][]
+     * @var Identity[]
      */
     protected $identites;
     /**
@@ -49,7 +49,7 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * Identites
      *
-     * @return mixed[][]
+     * @return Identity[]
      */
     public function getIdentites() : array
     {
@@ -58,7 +58,7 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * Identites
      *
-     * @param mixed[][] $identites
+     * @param Identity[] $identites
      *
      * @return self
      */

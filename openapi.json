@@ -4168,6 +4168,9 @@
                 "type": "object",
                 "allOf": [
                     {
+                        "$ref": "#/components/schemas/baseCustomer"
+                    },
+                    {
                         "properties": {
                             "customerId": {
                                 "description": "Customer Id",
@@ -4175,9 +4178,6 @@
                             }
                         },
                         "type": "object"
-                    },
-                    {
-                        "$ref": "#/components/schemas/baseCustomer"
                     }
                 ]
             },
@@ -4430,8 +4430,10 @@
                 "additionalProperties": {}
             },
             "identity": {
-                "type": "object",
                 "allOf": [
+                    {
+                        "$ref": "#/components/schemas/baseIdentity"
+                    },
                     {
                         "properties": {
                             "identityId": {
@@ -4440,9 +4442,6 @@
                             }
                         },
                         "type": "object"
-                    },
-                    {
-                        "$ref": "#/components/schemas/baseIdentity"
                     }
                 ]
             },
@@ -4541,7 +4540,6 @@
                     "organizationId",
                     "name"
                 ],
-                "type": "object",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/baseCustomer"
@@ -4553,7 +4551,6 @@
                     "email",
                     "customerId"
                 ],
-                "type": "object",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/baseIdentity"
@@ -4566,7 +4563,6 @@
                     "name",
                     "accountingProfileId"
                 ],
-                "type": "object",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/baseProject"
@@ -4603,7 +4599,6 @@
                 "type": "object"
             },
             "patchCustomer": {
-                "type": "object",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/baseCustomer"
@@ -4611,7 +4606,6 @@
                 ]
             },
             "patchIdentity": {
-                "type": "object",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/baseIdentity"
@@ -4619,7 +4613,6 @@
                 ]
             },
             "patchProject": {
-                "type": "object",
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/baseProject"

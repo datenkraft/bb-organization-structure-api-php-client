@@ -13,12 +13,6 @@ class Customer extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * Customer Id
-     *
-     * @var string
-     */
-    protected $customerId;
-    /**
      * Name
      *
      * @var string
@@ -33,25 +27,9 @@ class Customer extends \ArrayObject
     /**
      * Customer Id
      *
-     * @return string
+     * @var string
      */
-    public function getCustomerId() : string
-    {
-        return $this->customerId;
-    }
-    /**
-     * Customer Id
-     *
-     * @param string $customerId
-     *
-     * @return self
-     */
-    public function setCustomerId(string $customerId) : self
-    {
-        $this->initialized['customerId'] = true;
-        $this->customerId = $customerId;
-        return $this;
-    }
+    protected $customerId;
     /**
      * Name
      *
@@ -94,6 +72,28 @@ class Customer extends \ArrayObject
     {
         $this->initialized['organizationId'] = true;
         $this->organizationId = $organizationId;
+        return $this;
+    }
+    /**
+     * Customer Id
+     *
+     * @return string
+     */
+    public function getCustomerId() : string
+    {
+        return $this->customerId;
+    }
+    /**
+     * Customer Id
+     *
+     * @param string $customerId
+     *
+     * @return self
+     */
+    public function setCustomerId(string $customerId) : self
+    {
+        $this->initialized['customerId'] = true;
+        $this->customerId = $customerId;
         return $this;
     }
 }

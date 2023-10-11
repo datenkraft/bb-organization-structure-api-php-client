@@ -41,10 +41,6 @@ class CustomerNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('customerId', $data)) {
-            $object->setCustomerId($data['customerId']);
-            unset($data['customerId']);
-        }
         if (\array_key_exists('name', $data)) {
             $object->setName($data['name']);
             unset($data['name']);
@@ -52,6 +48,10 @@ class CustomerNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (\array_key_exists('organizationId', $data)) {
             $object->setOrganizationId($data['organizationId']);
             unset($data['organizationId']);
+        }
+        if (\array_key_exists('customerId', $data)) {
+            $object->setCustomerId($data['customerId']);
+            unset($data['customerId']);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -66,14 +66,14 @@ class CustomerNormalizer implements DenormalizerInterface, NormalizerInterface, 
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
-            $data['customerId'] = $object->getCustomerId();
-        }
         if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
         }
         if ($object->isInitialized('organizationId') && null !== $object->getOrganizationId()) {
             $data['organizationId'] = $object->getOrganizationId();
+        }
+        if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+            $data['customerId'] = $object->getCustomerId();
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
