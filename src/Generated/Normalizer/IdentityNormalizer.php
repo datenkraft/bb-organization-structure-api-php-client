@@ -53,6 +53,10 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setIdentityId($data['identityId']);
             unset($data['identityId']);
         }
+        if (\array_key_exists('identityId', $data)) {
+            $object->setIdentityId($data['identityId']);
+            unset($data['identityId']);
+        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value;
@@ -71,6 +75,9 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         }
         if ($object->isInitialized('active') && null !== $object->getActive()) {
             $data['active'] = $object->getActive();
+        }
+        if ($object->isInitialized('identityId') && null !== $object->getIdentityId()) {
+            $data['identityId'] = $object->getIdentityId();
         }
         if ($object->isInitialized('identityId') && null !== $object->getIdentityId()) {
             $data['identityId'] = $object->getIdentityId();
