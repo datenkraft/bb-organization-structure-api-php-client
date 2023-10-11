@@ -21,7 +21,7 @@ class GetIdentityCollectionResponse extends \ArrayObject
     /**
      * 
      *
-     * @var mixed[][]
+     * @var Identity[]
      */
     protected $data;
     /**
@@ -49,7 +49,7 @@ class GetIdentityCollectionResponse extends \ArrayObject
     /**
      * 
      *
-     * @return mixed[][]
+     * @return Identity[]
      */
     public function getData() : array
     {
@@ -58,7 +58,7 @@ class GetIdentityCollectionResponse extends \ArrayObject
     /**
      * 
      *
-     * @param mixed[][] $data
+     * @param Identity[] $data
      *
      * @return self
      */
