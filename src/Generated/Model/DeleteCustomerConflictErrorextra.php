@@ -15,7 +15,7 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * Projects
      *
-     * @var mixed[][]
+     * @var Project[]
      */
     protected $projects;
     /**
@@ -27,7 +27,7 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * Projects
      *
-     * @return mixed[][]
+     * @return Project[]
      */
     public function getProjects() : array
     {
@@ -36,7 +36,7 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * Projects
      *
-     * @param mixed[][] $projects
+     * @param Project[] $projects
      *
      * @return self
      */

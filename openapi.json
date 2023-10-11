@@ -4665,8 +4665,10 @@
                 "type": "object"
             },
             "project": {
-                "type": "object",
                 "allOf": [
+                    {
+                        "$ref": "#/components/schemas/baseProject"
+                    },
                     {
                         "properties": {
                             "projectId": {
@@ -4675,9 +4677,6 @@
                             }
                         },
                         "type": "object"
-                    },
-                    {
-                        "$ref": "#/components/schemas/baseProject"
                     }
                 ]
             },

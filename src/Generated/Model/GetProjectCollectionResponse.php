@@ -21,7 +21,7 @@ class GetProjectCollectionResponse extends \ArrayObject
     /**
      * 
      *
-     * @var mixed[][]
+     * @var Project[]
      */
     protected $data;
     /**
@@ -49,7 +49,7 @@ class GetProjectCollectionResponse extends \ArrayObject
     /**
      * 
      *
-     * @return mixed[][]
+     * @return Project[]
      */
     public function getData() : array
     {
@@ -58,7 +58,7 @@ class GetProjectCollectionResponse extends \ArrayObject
     /**
      * 
      *
-     * @param mixed[][] $data
+     * @param Project[] $data
      *
      * @return self
      */

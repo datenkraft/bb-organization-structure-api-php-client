@@ -48,18 +48,14 @@ class GetProjectCollectionResponseNormalizer implements DenormalizerInterface, N
         if (\array_key_exists('data', $data)) {
             $values = array();
             foreach ($data['data'] as $value) {
-                $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
-                foreach ($value as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $values[] = $values_1;
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Project', 'json', $context);
             }
             $object->setData($values);
             unset($data['data']);
         }
-        foreach ($data as $key_1 => $value_2) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $object[$key_1] = $value_2;
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
             }
         }
         return $object;
@@ -76,17 +72,13 @@ class GetProjectCollectionResponseNormalizer implements DenormalizerInterface, N
         if ($object->isInitialized('data') && null !== $object->getData()) {
             $values = array();
             foreach ($object->getData() as $value) {
-                $values_1 = array();
-                foreach ($value as $key => $value_1) {
-                    $values_1[$key] = $value_1;
-                }
-                $values[] = $values_1;
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
             $data['data'] = $values;
         }
-        foreach ($object as $key_1 => $value_2) {
-            if (preg_match('/.*/', (string) $key_1)) {
-                $data[$key_1] = $value_2;
+        foreach ($object as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value_1;
             }
         }
         return $data;
