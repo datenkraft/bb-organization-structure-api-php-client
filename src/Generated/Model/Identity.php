@@ -13,12 +13,6 @@ class Identity extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * Identity Id
-     *
-     * @var string
-     */
-    protected $identityId;
-    /**
      * Email
      *
      * @var string
@@ -33,25 +27,9 @@ class Identity extends \ArrayObject
     /**
      * Identity Id
      *
-     * @return string
+     * @var string
      */
-    public function getIdentityId() : string
-    {
-        return $this->identityId;
-    }
-    /**
-     * Identity Id
-     *
-     * @param string $identityId
-     *
-     * @return self
-     */
-    public function setIdentityId(string $identityId) : self
-    {
-        $this->initialized['identityId'] = true;
-        $this->identityId = $identityId;
-        return $this;
-    }
+    protected $identityId;
     /**
      * Email
      *
@@ -94,6 +72,28 @@ class Identity extends \ArrayObject
     {
         $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
+        return $this;
+    }
+    /**
+     * Identity Id
+     *
+     * @return string
+     */
+    public function getIdentityId() : string
+    {
+        return $this->identityId;
+    }
+    /**
+     * Identity Id
+     *
+     * @param string $identityId
+     *
+     * @return self
+     */
+    public function setIdentityId(string $identityId) : self
+    {
+        $this->initialized['identityId'] = true;
+        $this->identityId = $identityId;
         return $this;
     }
 }
