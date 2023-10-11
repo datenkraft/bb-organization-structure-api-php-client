@@ -53,6 +53,10 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
             $object->setProjectId($data['projectId']);
             unset($data['projectId']);
         }
+        if (\array_key_exists('projectId', $data)) {
+            $object->setProjectId($data['projectId']);
+            unset($data['projectId']);
+        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value;
@@ -71,6 +75,9 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
         }
         if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
+        }
+        if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
+            $data['projectId'] = $object->getProjectId();
         }
         if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
             $data['projectId'] = $object->getProjectId();
