@@ -14,7 +14,10 @@ class PostProjectSkuCollectionConflictException extends ConflictException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse $postProjectSkuCollectionConflictErrorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Conflict');
+        parent::__construct('Conflict
+
+Error codes:
+- DATA_ALREADY_EXISTS: A data conflict was detected.');
         $this->postProjectSkuCollectionConflictErrorResponse = $postProjectSkuCollectionConflictErrorResponse;
         $this->response = $response;
     }

@@ -14,7 +14,10 @@ class DeleteIdentityUnauthorizedException extends UnauthorizedException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Unauthorized');
+        parent::__construct('Unauthorized
+
+Error codes:
+- AUTHORIZATION_MISSING: No valid authentication information was given.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }

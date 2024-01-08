@@ -14,7 +14,10 @@ class PatchIdentityNotFoundException extends NotFoundException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Not Found');
+        parent::__construct('Not Found
+
+Error codes:
+- DATA_ALREADY_EXISTS: A data conflict was detected.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
