@@ -583,7 +583,6 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
-    *     @var string $filter[accountingProfileId] Accounting Profile Id filter
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetProjectCollectionBadRequestException

@@ -49,10 +49,6 @@ class BaseProjectNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setName($data['name']);
             unset($data['name']);
         }
-        if (\array_key_exists('accountingProfileId', $data)) {
-            $object->setAccountingProfileId($data['accountingProfileId']);
-            unset($data['accountingProfileId']);
-        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value;
@@ -71,9 +67,6 @@ class BaseProjectNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
-        }
-        if ($object->isInitialized('accountingProfileId') && null !== $object->getAccountingProfileId()) {
-            $data['accountingProfileId'] = $object->getAccountingProfileId();
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
