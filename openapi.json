@@ -2935,15 +2935,6 @@
                                 "totalCount"
                             ]
                         }
-                    },
-                    {
-                        "name": "filter[accountingProfileId]",
-                        "in": "query",
-                        "description": "Accounting Profile Id filter",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
                     }
                 ],
                 "responses": {
@@ -4135,10 +4126,6 @@
                     "name": {
                         "description": "Project name",
                         "type": "string"
-                    },
-                    "accountingProfileId": {
-                        "description": "Accounting Profile Id",
-                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -4575,8 +4562,7 @@
             "newProject": {
                 "required": [
                     "customerId",
-                    "name",
-                    "accountingProfileId"
+                    "name"
                 ],
                 "allOf": [
                     {

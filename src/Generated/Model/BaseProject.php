@@ -25,12 +25,6 @@ class BaseProject extends \ArrayObject
      */
     protected $name;
     /**
-     * Accounting Profile Id
-     *
-     * @var string
-     */
-    protected $accountingProfileId;
-    /**
      * Customer Id
      *
      * @return string
@@ -72,28 +66,6 @@ class BaseProject extends \ArrayObject
     {
         $this->initialized['name'] = true;
         $this->name = $name;
-        return $this;
-    }
-    /**
-     * Accounting Profile Id
-     *
-     * @return string
-     */
-    public function getAccountingProfileId() : string
-    {
-        return $this->accountingProfileId;
-    }
-    /**
-     * Accounting Profile Id
-     *
-     * @param string $accountingProfileId
-     *
-     * @return self
-     */
-    public function setAccountingProfileId(string $accountingProfileId) : self
-    {
-        $this->initialized['accountingProfileId'] = true;
-        $this->accountingProfileId = $accountingProfileId;
         return $this;
     }
 }

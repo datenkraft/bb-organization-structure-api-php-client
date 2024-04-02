@@ -49,10 +49,6 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
             $object->setName($data['name']);
             unset($data['name']);
         }
-        if (\array_key_exists('accountingProfileId', $data)) {
-            $object->setAccountingProfileId($data['accountingProfileId']);
-            unset($data['accountingProfileId']);
-        }
         if (\array_key_exists('projectId', $data)) {
             $object->setProjectId($data['projectId']);
             unset($data['projectId']);
@@ -75,9 +71,6 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
         }
         if ($object->isInitialized('name') && null !== $object->getName()) {
             $data['name'] = $object->getName();
-        }
-        if ($object->isInitialized('accountingProfileId') && null !== $object->getAccountingProfileId()) {
-            $data['accountingProfileId'] = $object->getAccountingProfileId();
         }
         if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
             $data['projectId'] = $object->getProjectId();
