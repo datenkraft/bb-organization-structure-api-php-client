@@ -19,12 +19,6 @@ class Identity extends \ArrayObject
      */
     protected $email;
     /**
-     * Customer Id
-     *
-     * @var string
-     */
-    protected $customerId;
-    /**
      * Identity Id
      *
      * @var string
@@ -50,28 +44,6 @@ class Identity extends \ArrayObject
     {
         $this->initialized['email'] = true;
         $this->email = $email;
-        return $this;
-    }
-    /**
-     * Customer Id
-     *
-     * @return string
-     */
-    public function getCustomerId() : string
-    {
-        return $this->customerId;
-    }
-    /**
-     * Customer Id
-     *
-     * @param string $customerId
-     *
-     * @return self
-     */
-    public function setCustomerId(string $customerId) : self
-    {
-        $this->initialized['customerId'] = true;
-        $this->customerId = $customerId;
         return $this;
     }
     /**

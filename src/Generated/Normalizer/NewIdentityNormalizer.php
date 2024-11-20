@@ -45,10 +45,6 @@ class NewIdentityNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setEmail($data['email']);
             unset($data['email']);
         }
-        if (\array_key_exists('customerId', $data)) {
-            $object->setCustomerId($data['customerId']);
-            unset($data['customerId']);
-        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value;
@@ -64,9 +60,6 @@ class NewIdentityNormalizer implements DenormalizerInterface, NormalizerInterfac
         $data = array();
         if ($object->isInitialized('email') && null !== $object->getEmail()) {
             $data['email'] = $object->getEmail();
-        }
-        if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
-            $data['customerId'] = $object->getCustomerId();
         }
         foreach ($object as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
