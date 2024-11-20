@@ -40,7 +40,6 @@ class PostIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureApi\
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityForbiddenException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityConflictException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityUnprocessableEntityException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -64,9 +63,6 @@ class PostIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureApi\
         }
         if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\IdentityConflictErrorResponse', 'json'), $response);
-        }
-        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityUnprocessableEntityException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'), $response);

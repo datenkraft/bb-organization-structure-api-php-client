@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception;
 
-class PostIdentityUnprocessableEntityException extends UnprocessableEntityException
+class PostIdentityProjectConflictException extends ConflictException
 {
     /**
      * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
@@ -14,11 +14,10 @@ class PostIdentityUnprocessableEntityException extends UnprocessableEntityExcept
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Unprocessable Entity
+        parent::__construct('Conflict
 
 Error codes:
-- DATA_NOT_PROCESSABLE: The given data is not processable.
-- DATA_NOT_UNIQUE: The given data is not unique.');
+- DATA_ALREADY_EXISTS: A data conflict was detected.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }

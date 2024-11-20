@@ -432,6 +432,25 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetIdentityProjectCollection($queryParameters), $fetch);
     }
     /**
+     * Post a new Identity to Project relation
+     *
+     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject $requestBody 
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectBadRequestException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectForbiddenException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectConflictException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectUnprocessableEntityException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function postIdentityProject(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject $requestBody, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PostIdentityProject($requestBody), $fetch);
+    }
+    /**
     * Get a list of Identities
     *
     * @param array $queryParameters {
@@ -465,7 +484,6 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityForbiddenException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityConflictException
-     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityUnprocessableEntityException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -624,6 +642,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteProjectUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteProjectForbiddenException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteProjectNotFoundException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteProjectConflictException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteProjectInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
