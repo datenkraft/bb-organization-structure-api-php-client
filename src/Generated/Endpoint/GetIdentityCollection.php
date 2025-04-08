@@ -15,6 +15,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
     *     @var string $filter[email] Email filter
+    *     @var bool $filter[isActive] A filter to only return identities that are active or not.
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -41,13 +42,14 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[email]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[email]', 'filter[isActive]'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->addAllowedTypes('page', array('int'));
         $optionsResolver->addAllowedTypes('pageSize', array('int'));
         $optionsResolver->addAllowedTypes('paginationMode', array('string'));
         $optionsResolver->addAllowedTypes('filter[email]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[isActive]', array('bool'));
         return $optionsResolver;
     }
     /**

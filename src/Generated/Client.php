@@ -461,6 +461,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
     *     @var string $filter[email] Email filter
+    *     @var bool $filter[isActive] A filter to only return identities that are active or not.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionBadRequestException
@@ -533,7 +534,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * Update one or more fields of an Identity
      *
      * @param string $identityId Identity Id
-     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody 
+     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PatchIdentityBadRequestException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PatchIdentityUnauthorizedException
@@ -546,7 +547,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      *
      * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Identity|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function patchIdentity(string $identityId, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function patchIdentity(string $identityId, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity $requestBody, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PatchIdentity($identityId, $requestBody), $fetch);
     }
