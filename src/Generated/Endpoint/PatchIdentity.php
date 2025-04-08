@@ -9,9 +9,9 @@ class PatchIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureApi
      * Update one or more fields of an Identity
      *
      * @param string $identityId Identity Id
-     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody 
+     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity $requestBody 
      */
-    public function __construct(string $identityId, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity $requestBody)
+    public function __construct(string $identityId, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity $requestBody)
     {
         $this->identityId = $identityId;
         $this->body = $requestBody;
@@ -27,7 +27,7 @@ class PatchIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureApi
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
-        if ($this->body instanceof \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity) {
+        if ($this->body instanceof \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity) {
             return array(array('Content-Type' => array('application/json')), $serializer->serialize($this->body, 'json'));
         }
         return array(array(), null);
@@ -70,7 +70,7 @@ class PatchIdentity extends \Datenkraft\Backbone\Client\OrganizationStructureApi
             throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PatchIdentityNotFoundException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PatchIdentityConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\IdentityConflictErrorResponse', 'json'), $response);
+            throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PatchIdentityConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PatchIdentityUnprocessableEntityException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse', 'json'), $response);

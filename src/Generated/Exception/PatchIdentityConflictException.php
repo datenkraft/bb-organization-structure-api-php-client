@@ -5,25 +5,25 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exceptio
 class PatchIdentityConflictException extends ConflictException
 {
     /**
-     * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityConflictErrorResponse
+     * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
      */
-    private $identityConflictErrorResponse;
+    private $errorResponse;
     /**
      * @var \Psr\Http\Message\ResponseInterface
      */
     private $response;
-    public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityConflictErrorResponse $identityConflictErrorResponse, \Psr\Http\Message\ResponseInterface $response)
+    public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
         parent::__construct('Conflict
 
 Error codes:
 - DATA_ALREADY_EXISTS: A data conflict was detected.');
-        $this->identityConflictErrorResponse = $identityConflictErrorResponse;
+        $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
-    public function getIdentityConflictErrorResponse() : \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityConflictErrorResponse
+    public function getErrorResponse() : \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
     {
-        return $this->identityConflictErrorResponse;
+        return $this->errorResponse;
     }
     public function getResponse() : \Psr\Http\Message\ResponseInterface
     {

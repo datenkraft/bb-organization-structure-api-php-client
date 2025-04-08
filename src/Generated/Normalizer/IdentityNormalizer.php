@@ -45,6 +45,10 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setEmail($data['email']);
             unset($data['email']);
         }
+        if (\array_key_exists('active', $data)) {
+            $object->setActive($data['active']);
+            unset($data['active']);
+        }
         if (\array_key_exists('identityId', $data)) {
             $object->setIdentityId($data['identityId']);
             unset($data['identityId']);
@@ -64,6 +68,9 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         $data = array();
         if ($object->isInitialized('email') && null !== $object->getEmail()) {
             $data['email'] = $object->getEmail();
+        }
+        if ($object->isInitialized('active') && null !== $object->getActive()) {
+            $data['active'] = $object->getActive();
         }
         if ($object->isInitialized('identityId') && null !== $object->getIdentityId()) {
             $data['identityId'] = $object->getIdentityId();

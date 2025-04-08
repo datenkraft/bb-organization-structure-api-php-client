@@ -19,6 +19,12 @@ class Identity extends \ArrayObject
      */
     protected $email;
     /**
+     * Is the identity active?
+     *
+     * @var bool
+     */
+    protected $active;
+    /**
      * Identity Id
      *
      * @var string
@@ -44,6 +50,28 @@ class Identity extends \ArrayObject
     {
         $this->initialized['email'] = true;
         $this->email = $email;
+        return $this;
+    }
+    /**
+     * Is the identity active?
+     *
+     * @return bool
+     */
+    public function getActive() : bool
+    {
+        return $this->active;
+    }
+    /**
+     * Is the identity active?
+     *
+     * @param bool $active
+     *
+     * @return self
+     */
+    public function setActive(bool $active) : self
+    {
+        $this->initialized['active'] = true;
+        $this->active = $active;
         return $this;
     }
     /**

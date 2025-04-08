@@ -2290,6 +2290,16 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "filter[isActive]",
+                        "in": "query",
+                        "description": "A filter to only return identities that are active or not.",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "example": true
                     }
                 ],
                 "responses": {
@@ -2426,7 +2436,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/identityConflictErrorResponse"
+                                    "$ref": "#/components/schemas/errorResponse"
                                 }
                             }
                         }
@@ -2677,7 +2687,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/newIdentity"
+                                "$ref": "#/components/schemas/patchIdentity"
                             }
                         }
                     }
@@ -2724,7 +2734,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found\n\nError codes:\n- DATA_ALREADY_EXISTS: A data conflict was detected.",
+                        "description": "Not Found\n\nError codes:\n- DATA_NOT_FOUND: The requested data could not be found.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2738,13 +2748,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/identityConflictErrorResponse"
+                                    "$ref": "#/components/schemas/errorResponse"
                                 }
                             }
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity\n\nError codes:\n- DATA_NOT_PROCESSABLE: The given data is not processable.\n- DATA_NOT_UNIQUE: The given data is not unique.\n- DATA_NOT_FOUND: The requested data could not be found.",
+                        "description": "Unprocessable Entity\n\nError codes:\n- DATA_NOT_PROCESSABLE: The given data is not processable.\n- DATA_NOT_UNIQUE: The given data is not unique.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4217,6 +4227,10 @@
                     "email": {
                         "description": "Email",
                         "type": "string"
+                    },
+                    "active": {
+                        "description": "Is the identity active?",
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
@@ -4550,44 +4564,6 @@
                         "type": "object"
                     }
                 ]
-            },
-            "identityConflictError": {
-                "type": "object",
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/error"
-                    },
-                    {
-                        "properties": {
-                            "extra": {
-                                "description": "Extra",
-                                "properties": {
-                                    "identites": {
-                                        "description": "Identites",
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/components/schemas/identity"
-                                        }
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "type": "object"
-                    }
-                ]
-            },
-            "identityConflictErrorResponse": {
-                "properties": {
-                    "errors": {
-                        "description": "errors",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/identityConflictError"
-                        }
-                    }
-                },
-                "type": "object"
             },
             "identityProject": {
                 "required": [

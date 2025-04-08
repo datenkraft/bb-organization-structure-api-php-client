@@ -17,7 +17,7 @@ class PatchIdentityNotFoundException extends NotFoundException
         parent::__construct('Not Found
 
 Error codes:
-- DATA_ALREADY_EXISTS: A data conflict was detected.');
+- DATA_NOT_FOUND: The requested data could not be found.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
