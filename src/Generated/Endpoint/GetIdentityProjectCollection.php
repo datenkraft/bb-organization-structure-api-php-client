@@ -14,6 +14,8 @@ class GetIdentityProjectCollection extends \Datenkraft\Backbone\Client\Organizat
     - default: The total number of items in the collection will not be calculated.
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
+    *     @var string $filter[identityId] Filter by identityId
+    *     @var string $filter[projectId] Filter by projectId
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -40,12 +42,14 @@ class GetIdentityProjectCollection extends \Datenkraft\Backbone\Client\Organizat
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[identityId]', 'filter[projectId]'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->addAllowedTypes('page', array('int'));
         $optionsResolver->addAllowedTypes('pageSize', array('int'));
         $optionsResolver->addAllowedTypes('paginationMode', array('string'));
+        $optionsResolver->addAllowedTypes('filter[identityId]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         return $optionsResolver;
     }
     /**

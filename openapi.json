@@ -2067,6 +2067,26 @@
                                 "totalCount"
                             ]
                         }
+                    },
+                    {
+                        "name": "filter[identityId]",
+                        "in": "query",
+                        "description": "Filter by identityId",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "filter[projectId]",
+                        "in": "query",
+                        "description": "Filter by projectId",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
                     }
                 ],
                 "responses": {
