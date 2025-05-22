@@ -2320,6 +2320,15 @@
                             "type": "boolean"
                         },
                         "example": true
+                    },
+                    {
+                        "name": "filter[projectId]",
+                        "in": "query",
+                        "description": "A filter to only return identities assigned to a specific project.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
