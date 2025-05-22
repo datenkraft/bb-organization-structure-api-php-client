@@ -16,6 +16,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     This can mean loss of performance.
     *     @var string $filter[email] Email filter
     *     @var bool $filter[isActive] A filter to only return identities that are active or not.
+    *     @var string $filter[projectId] A filter to only return identities assigned to a specific project.
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -42,7 +43,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[email]', 'filter[isActive]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[email]', 'filter[isActive]', 'filter[projectId]'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->addAllowedTypes('page', array('int'));
@@ -50,6 +51,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
         $optionsResolver->addAllowedTypes('paginationMode', array('string'));
         $optionsResolver->addAllowedTypes('filter[email]', array('string'));
         $optionsResolver->addAllowedTypes('filter[isActive]', array('bool'));
+        $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         return $optionsResolver;
     }
     /**

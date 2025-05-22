@@ -464,6 +464,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
     This can mean loss of performance.
     *     @var string $filter[email] Email filter
     *     @var bool $filter[isActive] A filter to only return identities that are active or not.
+    *     @var string $filter[projectId] A filter to only return identities assigned to a specific project.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionBadRequestException
