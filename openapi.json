@@ -2162,7 +2162,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/identityProject"
+                                "$ref": "#/components/schemas/identityProjectList"
                             }
                         }
                     }
@@ -2173,7 +2173,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/identityProject"
+                                    "$ref": "#/components/schemas/identityProjectList"
                                 }
                             }
                         }
@@ -4610,6 +4610,12 @@
                     }
                 },
                 "type": "object"
+            },
+            "identityProjectList": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/identityProject"
+                }
             },
             "information": {
                 "required": [
