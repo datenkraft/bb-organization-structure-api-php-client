@@ -409,6 +409,24 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetOpenApiInFormat($format), $fetch);
     }
     /**
+     * Delete Identity to Project relations
+     *
+     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject[] $requestBody 
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteIdentityProjectBadRequestException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteIdentityProjectUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteIdentityProjectForbiddenException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteIdentityProjectNotFoundException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\DeleteIdentityProjectInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return null|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function deleteIdentityProject(array $requestBody, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\DeleteIdentityProject($requestBody), $fetch);
+    }
+    /**
     * Get a list of Identities and the Projects they are related to
     *
     * @param array $queryParameters {
@@ -434,7 +452,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\GetIdentityProjectCollection($queryParameters), $fetch);
     }
     /**
-     * Post a new Identity to Project relation
+     * Post new Identity to Project relations
      *
      * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject[] $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)

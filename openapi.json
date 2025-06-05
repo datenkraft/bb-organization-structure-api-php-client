@@ -2154,8 +2154,8 @@
                 "tags": [
                     "identity-project"
                 ],
-                "summary": "Post a new Identity to Project relation",
-                "description": "Post a new Identity to Project relation",
+                "summary": "Post new Identity to Project relations",
+                "description": "Post new Identity to Project relations",
                 "operationId": "postIdentityProject",
                 "requestBody": {
                     "required": true,
@@ -2220,6 +2220,97 @@
                     },
                     "422": {
                         "description": "Unprocessable Entity\n\nError codes:\n- DATA_NOT_PROCESSABLE: The given data is not processable.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error\n\nError codes:\n- SERVER_ERROR_OCCURRED: An internal server error occurred. Please try again later.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": []
+                    },
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "identity-project"
+                ],
+                "summary": "Delete Identity to Project relations",
+                "description": "Delete Identity to Project relations",
+                "operationId": "deleteIdentityProject",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/identityProjectList"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad Request\n\nError codes:\n- DATA_INVALID: Invalid data was given.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized\n\nError codes:\n- AUTHORIZATION_MISSING: No valid authentication information was given.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden\n\nError codes:\n- PERMISSIONS_MISSING: No authorization for the called action was found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found\n\nError codes:\n- DATA_NOT_FOUND: The requested data could not be found.",
                         "content": {
                             "application/json": {
                                 "schema": {

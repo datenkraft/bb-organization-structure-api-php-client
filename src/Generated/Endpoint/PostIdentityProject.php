@@ -5,7 +5,7 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint
 class PostIdentityProject extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Client\Endpoint
 {
     /**
-     * Post a new Identity to Project relation
+     * Post new Identity to Project relations
      *
      * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject[] $requestBody 
      */
