@@ -436,7 +436,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
     /**
      * Post a new Identity to Project relation
      *
-     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject $requestBody 
+     * @param \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject[] $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectBadRequestException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectUnauthorizedException
@@ -446,9 +446,9 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\PostIdentityProjectInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     * @return \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject[]|\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function postIdentityProject(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postIdentityProject(array $requestBody, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Endpoint\PostIdentityProject($requestBody), $fetch);
     }
