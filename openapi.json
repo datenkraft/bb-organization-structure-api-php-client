@@ -2309,8 +2309,8 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Not Found\n\nError codes:\n- DATA_NOT_FOUND: The requested data could not be found.",
+                    "422": {
+                        "description": "Unprocessable Entity\n\nError codes:\n- DATA_NOT_PROCESSABLE: The given data is not processable.",
                         "content": {
                             "application/json": {
                                 "schema": {

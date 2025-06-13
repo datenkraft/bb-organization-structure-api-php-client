@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception;
 
-class DeleteIdentityProjectNotFoundException extends NotFoundException
+class DeleteIdentityProjectUnprocessableEntityException extends UnprocessableEntityException
 {
     /**
      * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse
@@ -14,10 +14,10 @@ class DeleteIdentityProjectNotFoundException extends NotFoundException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Not Found
+        parent::__construct('Unprocessable Entity
 
 Error codes:
-- DATA_NOT_FOUND: The requested data could not be found.');
+- DATA_NOT_PROCESSABLE: The given data is not processable.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
