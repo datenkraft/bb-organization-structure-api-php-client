@@ -17,6 +17,12 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     *     @var string $filter[email] Email filter
     *     @var bool $filter[isActive] A filter to only return identities that are active or not.
     *     @var string $filter[projectId] A filter to only return identities assigned to a specific project.
+    *     @var string $filter[search] A filter to search for identities.
+    
+    Usage:
+    - Provide a search term to filter results.
+    - The search term filters the response for identities where the email contains the search term.
+    - The search is not case sensitive.
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -43,7 +49,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[email]', 'filter[isActive]', 'filter[projectId]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[email]', 'filter[isActive]', 'filter[projectId]', 'filter[search]'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array('paginationMode' => 'default'));
         $optionsResolver->addAllowedTypes('page', array('int'));
@@ -52,6 +58,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
         $optionsResolver->addAllowedTypes('filter[email]', array('string'));
         $optionsResolver->addAllowedTypes('filter[isActive]', array('bool'));
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
+        $optionsResolver->addAllowedTypes('filter[search]', array('string'));
         return $optionsResolver;
     }
     /**
