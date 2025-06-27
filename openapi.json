@@ -2420,6 +2420,15 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "filter[search]",
+                        "in": "query",
+                        "description": "A filter to search for identities.\n\nUsage:\n- Provide a search term to filter results.\n- The search term filters the response for identities where the email contains the search term.\n- The search is not case sensitive.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
