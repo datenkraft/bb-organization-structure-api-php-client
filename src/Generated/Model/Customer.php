@@ -7,8 +7,8 @@ class Customer extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -35,7 +35,7 @@ class Customer extends \ArrayObject
      *
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -46,7 +46,7 @@ class Customer extends \ArrayObject
      *
      * @return self
      */
-    public function setName(string $name) : self
+    public function setName(string $name): self
     {
         $this->initialized['name'] = true;
         $this->name = $name;
@@ -57,7 +57,7 @@ class Customer extends \ArrayObject
      *
      * @return string
      */
-    public function getOrganizationId() : string
+    public function getOrganizationId(): string
     {
         return $this->organizationId;
     }
@@ -68,7 +68,7 @@ class Customer extends \ArrayObject
      *
      * @return self
      */
-    public function setOrganizationId(string $organizationId) : self
+    public function setOrganizationId(string $organizationId): self
     {
         $this->initialized['organizationId'] = true;
         $this->organizationId = $organizationId;
@@ -79,7 +79,7 @@ class Customer extends \ArrayObject
      *
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -90,7 +90,7 @@ class Customer extends \ArrayObject
      *
      * @return self
      */
-    public function setCustomerId(string $customerId) : self
+    public function setCustomerId(string $customerId): self
     {
         $this->initialized['customerId'] = true;
         $this->customerId = $customerId;

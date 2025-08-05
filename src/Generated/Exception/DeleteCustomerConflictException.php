@@ -21,11 +21,11 @@ Error codes:
         $this->deleteCustomerConflictErrorResponse = $deleteCustomerConflictErrorResponse;
         $this->response = $response;
     }
-    public function getDeleteCustomerConflictErrorResponse() : \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse
+    public function getDeleteCustomerConflictErrorResponse(): \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse
     {
         return $this->deleteCustomerConflictErrorResponse;
     }
-    public function getResponse() : \Psr\Http\Message\ResponseInterface
+    public function getResponse(): \Psr\Http\Message\ResponseInterface
     {
         return $this->response;
     }

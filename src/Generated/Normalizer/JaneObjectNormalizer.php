@@ -16,32 +16,127 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    protected $normalizers = array('Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuditLog' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuditLogNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuditLogCollection' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuditLogCollectionNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuthPermissionResource' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuthPermissionResourceNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuthPermissionRolePaginatedCollection' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuthPermissionRolePaginatedCollectionNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuthPermissionRoleResource' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuthPermissionRoleResourceNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuthRoleCollection' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuthRoleCollectionNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuthRoleIdentityPaginatedCollection' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuthRoleIdentityPaginatedCollectionNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuthRoleIdentityResource' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuthRoleIdentityResourceNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\AuthRoleResource' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\AuthRoleResourceNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\BaseCustomer' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\BaseCustomerNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\BaseIdentity' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\BaseIdentityNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\BaseProject' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\BaseProjectNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Collection' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\CollectionNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\CollectionPagination' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\CollectionPaginationNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Customer' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\CustomerNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictError' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\DeleteCustomerConflictErrorNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorextra' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\DeleteCustomerConflictErrorextraNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\DeleteCustomerConflictErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteProjectConflictError' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\DeleteProjectConflictErrorNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteProjectConflictErrorextra' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\DeleteProjectConflictErrorextraNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteProjectConflictErrorResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\DeleteProjectConflictErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Error' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\ErrorNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorReferencesItem' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\ErrorReferencesItemNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ErrorResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\ErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\GetAuthPermissionCollectionResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\GetAuthPermissionCollectionResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\GetCustomerCollectionResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\GetCustomerCollectionResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\GetIdentityCollectionResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\GetIdentityCollectionResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\GetIdentityProjectCollectionResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\GetIdentityProjectCollectionResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\GetOrganizationCollectionResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\GetOrganizationCollectionResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\GetProjectCollectionResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\GetProjectCollectionResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\IdentityNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\IdentityProject' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\IdentityProjectNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Information' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\InformationNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\InformationResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\InformationResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\NewAuthRoleResource' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\NewAuthRoleResourceNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\NewCustomer' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\NewCustomerNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\NewIdentity' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\NewIdentityNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\NewProject' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\NewProjectNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\NewProjectSku' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\NewProjectSkuNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Organization' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\OrganizationNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PatchCustomer' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\PatchCustomerNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PatchIdentity' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\PatchIdentityNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PatchProject' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\PatchProjectNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PostProjectSkuCollectionConflictError' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\PostProjectSkuCollectionConflictErrorNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PostProjectSkuCollectionConflictErrorextra' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\PostProjectSkuCollectionConflictErrorextraNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\PostProjectSkuCollectionConflictErrorResponse' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\PostProjectSkuCollectionConflictErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Project' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\ProjectNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ProjectSku' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\ProjectSkuNormalizer', 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\ProjectSkuCollection' => 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Normalizer\\ProjectSkuCollectionNormalizer', '\\Jane\\Component\\JsonSchemaRuntime\\Reference' => '\\Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Runtime\\Normalizer\\ReferenceNormalizer'), $normalizersCache = array();
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    protected $normalizers = [
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuditLog::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuditLogNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuditLogCollection::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuditLogCollectionNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthPermissionResource::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuthPermissionResourceNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthPermissionRolePaginatedCollection::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuthPermissionRolePaginatedCollectionNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthPermissionRoleResource::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuthPermissionRoleResourceNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleCollection::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuthRoleCollectionNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleIdentityPaginatedCollection::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuthRoleIdentityPaginatedCollectionNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleIdentityResource::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuthRoleIdentityResourceNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleResource::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\AuthRoleResourceNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\BaseCustomer::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\BaseCustomerNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\BaseIdentity::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\BaseIdentityNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\BaseProject::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\BaseProjectNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Collection::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\CollectionNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\CollectionPagination::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\CollectionPaginationNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Customer::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\CustomerNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictError::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteCustomerConflictErrorNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteCustomerConflictErrorextraNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteCustomerConflictErrorResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictError::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteProjectConflictErrorNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorextra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteProjectConflictErrorextraNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteProjectConflictErrorResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Error::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\ErrorNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorReferencesItem::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\ErrorReferencesItemNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\ErrorResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetAuthPermissionCollectionResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\GetAuthPermissionCollectionResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetCustomerCollectionResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\GetCustomerCollectionResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetIdentityCollectionResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\GetIdentityCollectionResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetIdentityProjectCollectionResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\GetIdentityProjectCollectionResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetOrganizationCollectionResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\GetOrganizationCollectionResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetProjectCollectionResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\GetProjectCollectionResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Identity::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\IdentityNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\IdentityProjectNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Information::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\InformationNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\InformationResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\InformationResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewAuthRoleResource::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\NewAuthRoleResourceNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewCustomer::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\NewCustomerNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\NewIdentityNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProject::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\NewProjectNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProjectSku::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\NewProjectSkuNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Organization::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\OrganizationNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchCustomer::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PatchCustomerNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PatchIdentityNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchProject::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PatchProjectNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictError::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PostProjectSkuCollectionConflictErrorNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorextra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PostProjectSkuCollectionConflictErrorextraNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PostProjectSkuCollectionConflictErrorResponseNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\ProjectNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSku::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\ProjectSkuNormalizer::class,
+        
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSkuCollection::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\ProjectSkuCollectionNormalizer::class,
+        
+        \Jane\Component\JsonSchemaRuntime\Reference::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\ReferenceNormalizer::class,
+    ], $normalizersCache = [];
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return array_key_exists($type, $this->normalizers);
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return is_object($data) && array_key_exists(get_class($data), $this->normalizers);
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $normalizerClass = $this->normalizers[get_class($object)];
+        $normalizerClass = $this->normalizers[get_class($data)];
         $normalizer = $this->getNormalizer($normalizerClass);
-        return $normalizer->normalize($object, $format, $context);
+        return $normalizer->normalize($data, $format, $context);
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        $denormalizerClass = $this->normalizers[$class];
+        $denormalizerClass = $this->normalizers[$type];
         $denormalizer = $this->getNormalizer($denormalizerClass);
-        return $denormalizer->denormalize($data, $class, $format, $context);
+        return $denormalizer->denormalize($data, $type, $format, $context);
     }
     private function getNormalizer(string $normalizerClass)
     {
@@ -54,5 +149,61 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
         $normalizer->setDenormalizer($this->denormalizer);
         $this->normalizersCache[$normalizerClass] = $normalizer;
         return $normalizer;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [
+            
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuditLog::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuditLogCollection::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthPermissionResource::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthPermissionRolePaginatedCollection::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthPermissionRoleResource::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleCollection::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleIdentityPaginatedCollection::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleIdentityResource::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\AuthRoleResource::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\BaseCustomer::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\BaseIdentity::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\BaseProject::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Collection::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\CollectionPagination::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Customer::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictError::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictError::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorextra::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Error::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorReferencesItem::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetAuthPermissionCollectionResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetCustomerCollectionResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetIdentityCollectionResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetIdentityProjectCollectionResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetOrganizationCollectionResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\GetProjectCollectionResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Identity::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\IdentityProject::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Information::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\InformationResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewAuthRoleResource::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewCustomer::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewIdentity::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProject::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\NewProjectSku::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Organization::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchCustomer::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchProject::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictError::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorextra::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSku::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSkuCollection::class => false,
+            \Jane\Component\JsonSchemaRuntime\Reference::class => false,
+        ];
     }
 }

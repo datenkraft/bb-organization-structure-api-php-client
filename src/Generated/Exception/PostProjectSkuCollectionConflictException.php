@@ -21,11 +21,11 @@ Error codes:
         $this->postProjectSkuCollectionConflictErrorResponse = $postProjectSkuCollectionConflictErrorResponse;
         $this->response = $response;
     }
-    public function getPostProjectSkuCollectionConflictErrorResponse() : \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse
+    public function getPostProjectSkuCollectionConflictErrorResponse(): \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse
     {
         return $this->postProjectSkuCollectionConflictErrorResponse;
     }
-    public function getResponse() : \Psr\Http\Message\ResponseInterface
+    public function getResponse(): \Psr\Http\Message\ResponseInterface
     {
         return $this->response;
     }

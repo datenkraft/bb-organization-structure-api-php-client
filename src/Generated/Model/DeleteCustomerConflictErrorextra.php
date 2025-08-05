@@ -7,40 +7,40 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
     /**
      * Projects
      *
-     * @var Project[]
+     * @var list<Project>
      */
     protected $projects;
     /**
      * Identites
      *
-     * @var Identity[]
+     * @var list<Identity>
      */
     protected $identites;
     /**
      * Projects
      *
-     * @return Project[]
+     * @return list<Project>
      */
-    public function getProjects() : array
+    public function getProjects(): array
     {
         return $this->projects;
     }
     /**
      * Projects
      *
-     * @param Project[] $projects
+     * @param list<Project> $projects
      *
      * @return self
      */
-    public function setProjects(array $projects) : self
+    public function setProjects(array $projects): self
     {
         $this->initialized['projects'] = true;
         $this->projects = $projects;
@@ -49,20 +49,20 @@ class DeleteCustomerConflictErrorextra extends \ArrayObject
     /**
      * Identites
      *
-     * @return Identity[]
+     * @return list<Identity>
      */
-    public function getIdentites() : array
+    public function getIdentites(): array
     {
         return $this->identites;
     }
     /**
      * Identites
      *
-     * @param Identity[] $identites
+     * @param list<Identity> $identites
      *
      * @return self
      */
-    public function setIdentites(array $identites) : self
+    public function setIdentites(array $identites): self
     {
         $this->initialized['identites'] = true;
         $this->identites = $identites;

@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normaliz
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorextra';
+        return $type === \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\DeleteCustomerConflictErrorextra';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -42,17 +38,17 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
             return $object;
         }
         if (\array_key_exists('projects', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['projects'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Project', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project::class, 'json', $context);
             }
             $object->setProjects($values);
             unset($data['projects']);
         }
         if (\array_key_exists('identites', $data)) {
-            $values_1 = array();
+            $values_1 = [];
             foreach ($data['identites'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'Datenkraft\\Backbone\\Client\\OrganizationStructureApi\\Generated\\Model\\Identity', 'json', $context);
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Identity::class, 'json', $context);
             }
             $object->setIdentites($values_1);
             unset($data['identites']);
@@ -64,31 +60,32 @@ class DeleteCustomerConflictErrorextraNormalizer implements DenormalizerInterfac
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if ($object->isInitialized('projects') && null !== $object->getProjects()) {
-            $values = array();
-            foreach ($object->getProjects() as $value) {
+        $dataArray = [];
+        if ($data->isInitialized('projects') && null !== $data->getProjects()) {
+            $values = [];
+            foreach ($data->getProjects() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data['projects'] = $values;
+            $dataArray['projects'] = $values;
         }
-        if ($object->isInitialized('identites') && null !== $object->getIdentites()) {
-            $values_1 = array();
-            foreach ($object->getIdentites() as $value_1) {
+        if ($data->isInitialized('identites') && null !== $data->getIdentites()) {
+            $values_1 = [];
+            foreach ($data->getIdentites() as $value_1) {
                 $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $data['identites'] = $values_1;
+            $dataArray['identites'] = $values_1;
         }
-        foreach ($object as $key => $value_2) {
+        foreach ($data as $key => $value_2) {
             if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_2;
+                $dataArray[$key] = $value_2;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra::class => false];
     }
 }

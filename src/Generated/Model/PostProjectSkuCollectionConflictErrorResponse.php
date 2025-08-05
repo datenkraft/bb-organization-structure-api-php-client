@@ -7,34 +7,34 @@ class PostProjectSkuCollectionConflictErrorResponse extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
     /**
      * errors
      *
-     * @var mixed[][]
+     * @var list<array<string, mixed>>
      */
     protected $errors;
     /**
      * errors
      *
-     * @return mixed[][]
+     * @return list<array<string, mixed>>
      */
-    public function getErrors() : array
+    public function getErrors(): array
     {
         return $this->errors;
     }
     /**
      * errors
      *
-     * @param mixed[][] $errors
+     * @param list<array<string, mixed>> $errors
      *
      * @return self
      */
-    public function setErrors(array $errors) : self
+    public function setErrors(array $errors): self
     {
         $this->initialized['errors'] = true;
         $this->errors = $errors;

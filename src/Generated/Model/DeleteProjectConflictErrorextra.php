@@ -7,34 +7,34 @@ class DeleteProjectConflictErrorextra extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
     /**
      * ProjectSkus
      *
-     * @var ProjectSku[]
+     * @var list<ProjectSku>
      */
     protected $projectSkus;
     /**
      * ProjectSkus
      *
-     * @return ProjectSku[]
+     * @return list<ProjectSku>
      */
-    public function getProjectSkus() : array
+    public function getProjectSkus(): array
     {
         return $this->projectSkus;
     }
     /**
      * ProjectSkus
      *
-     * @param ProjectSku[] $projectSkus
+     * @param list<ProjectSku> $projectSkus
      *
      * @return self
      */
-    public function setProjectSkus(array $projectSkus) : self
+    public function setProjectSkus(array $projectSkus): self
     {
         $this->initialized['projectSkus'] = true;
         $this->projectSkus = $projectSkus;
