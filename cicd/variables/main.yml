@@ -4,5 +4,5 @@ variables:
   REGISTRY_HOST: 'europe-docker.pkg.dev'
   SERVICE_NAME: '${CI_PROJECT_NAME}'
   IMAGE_NAME: '${REGISTRY_HOST}/dk-gg-rgstry/base/php-cli'
-  IMAGE_TAG_DEV: 'dev-php84'
+  IMAGE_TAG_DEV: 'dev'
   BASE_IMAGE_TAG: '2023-07-18'
