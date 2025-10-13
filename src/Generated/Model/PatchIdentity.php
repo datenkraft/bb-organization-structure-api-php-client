@@ -25,6 +25,12 @@ class PatchIdentity extends \ArrayObject
      */
     protected $active;
     /**
+     * The origin of the identity
+     *
+     * @var string
+     */
+    protected $origin;
+    /**
      * Email
      *
      * @return string
@@ -66,6 +72,28 @@ class PatchIdentity extends \ArrayObject
     {
         $this->initialized['active'] = true;
         $this->active = $active;
+        return $this;
+    }
+    /**
+     * The origin of the identity
+     *
+     * @return string
+     */
+    public function getOrigin(): string
+    {
+        return $this->origin;
+    }
+    /**
+     * The origin of the identity
+     *
+     * @param string $origin
+     *
+     * @return self
+     */
+    public function setOrigin(string $origin): self
+    {
+        $this->initialized['origin'] = true;
+        $this->origin = $origin;
         return $this;
     }
 }

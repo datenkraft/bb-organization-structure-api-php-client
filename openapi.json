@@ -2413,6 +2413,20 @@
                         "example": true
                     },
                     {
+                        "name": "filter[origin]",
+                        "in": "query",
+                        "description": "A filter to only return identities that are of the given origin.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": null,
+                            "enum": [
+                                "external",
+                                "internal"
+                            ]
+                        }
+                    },
+                    {
                         "name": "filter[projectId]",
                         "in": "query",
                         "description": "A filter to only return identities assigned to a specific project.",
@@ -4360,6 +4374,14 @@
                     "active": {
                         "description": "Is the identity active?",
                         "type": "boolean"
+                    },
+                    "origin": {
+                        "description": "The origin of the identity",
+                        "type": "string",
+                        "enum": [
+                            "external",
+                            "internal"
+                        ]
                     }
                 },
                 "type": "object"
@@ -4765,7 +4787,8 @@
             },
             "newIdentity": {
                 "required": [
-                    "email"
+                    "email",
+                    "origin"
                 ],
                 "allOf": [
                     {
@@ -4943,5 +4966,55 @@
                 "scheme": "bearer"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "organization",
+            "description": "organization"
+        },
+        {
+            "name": "customer",
+            "description": "customer"
+        },
+        {
+            "name": "project",
+            "description": "project"
+        },
+        {
+            "name": "projectSku",
+            "description": "projectSku"
+        },
+        {
+            "name": "identity-project",
+            "description": "identity-project"
+        },
+        {
+            "name": "auth-permission-role",
+            "description": "auth-permission-role"
+        },
+        {
+            "name": "auth-role-identity",
+            "description": "auth-role-identity"
+        },
+        {
+            "name": "auth-permission",
+            "description": "auth-permission"
+        },
+        {
+            "name": "audit-log",
+            "description": "audit-log"
+        },
+        {
+            "name": "auth-role",
+            "description": "auth-role"
+        },
+        {
+            "name": "docs",
+            "description": "docs"
+        },
+        {
+            "name": "identity",
+            "description": "identity"
+        }
+    ]
 }
