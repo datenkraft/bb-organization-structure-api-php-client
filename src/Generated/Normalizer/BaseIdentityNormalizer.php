@@ -48,6 +48,10 @@ class BaseIdentityNormalizer implements DenormalizerInterface, NormalizerInterfa
             $object->setActive($data['active']);
             unset($data['active']);
         }
+        if (\array_key_exists('origin', $data)) {
+            $object->setOrigin($data['origin']);
+            unset($data['origin']);
+        }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $object[$key] = $value;
@@ -63,6 +67,9 @@ class BaseIdentityNormalizer implements DenormalizerInterface, NormalizerInterfa
         }
         if ($data->isInitialized('active') && null !== $data->getActive()) {
             $dataArray['active'] = $data->getActive();
+        }
+        if ($data->isInitialized('origin') && null !== $data->getOrigin()) {
+            $dataArray['origin'] = $data->getOrigin();
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {

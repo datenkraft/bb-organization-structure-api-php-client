@@ -48,6 +48,10 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setActive($data['active']);
             unset($data['active']);
         }
+        if (\array_key_exists('origin', $data)) {
+            $object->setOrigin($data['origin']);
+            unset($data['origin']);
+        }
         if (\array_key_exists('identityId', $data)) {
             $object->setIdentityId($data['identityId']);
             unset($data['identityId']);
@@ -67,6 +71,9 @@ class IdentityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         }
         if ($data->isInitialized('active') && null !== $data->getActive()) {
             $dataArray['active'] = $data->getActive();
+        }
+        if ($data->isInitialized('origin') && null !== $data->getOrigin()) {
+            $dataArray['origin'] = $data->getOrigin();
         }
         if ($data->isInitialized('identityId') && null !== $data->getIdentityId()) {
             $dataArray['identityId'] = $data->getIdentityId();
