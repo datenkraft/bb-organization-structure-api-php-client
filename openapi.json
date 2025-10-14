@@ -2413,20 +2413,6 @@
                         "example": true
                     },
                     {
-                        "name": "filter[origin]",
-                        "in": "query",
-                        "description": "A filter to only return identities that are of the given origin.",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "default": null,
-                            "enum": [
-                                "external",
-                                "internal"
-                            ]
-                        }
-                    },
-                    {
                         "name": "filter[projectId]",
                         "in": "query",
                         "description": "A filter to only return identities assigned to a specific project.",
@@ -2442,6 +2428,20 @@
                         "required": false,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[origin]",
+                        "in": "query",
+                        "description": "A filter to only return identities that are of the given origin.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": null,
+                            "enum": [
+                                "external",
+                                "internal"
+                            ]
                         }
                     }
                 ],

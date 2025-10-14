@@ -16,7 +16,6 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     This can mean loss of performance.
     *     @var string $filter[email] Email filter
     *     @var bool $filter[isActive] A filter to only return identities that are active or not.
-    *     @var string $filter[origin] A filter to only return identities that are of the given origin.
     *     @var string $filter[projectId] A filter to only return identities assigned to a specific project.
     *     @var string $filter[search] A filter to search for identities.
     
@@ -24,6 +23,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     - Provide a search term to filter results.
     - The search term filters the response for identities where the email contains the search term.
     - The search is not case sensitive.
+    *     @var string $filter[origin] A filter to only return identities that are of the given origin.
     * }
     */
     public function __construct(array $queryParameters = [])
@@ -50,7 +50,7 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['page', 'pageSize', 'paginationMode', 'filter[email]', 'filter[isActive]', 'filter[origin]', 'filter[projectId]', 'filter[search]']);
+        $optionsResolver->setDefined(['page', 'pageSize', 'paginationMode', 'filter[email]', 'filter[isActive]', 'filter[projectId]', 'filter[search]', 'filter[origin]']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['paginationMode' => 'default']);
         $optionsResolver->addAllowedTypes('page', ['int']);
@@ -58,9 +58,9 @@ class GetIdentityCollection extends \Datenkraft\Backbone\Client\OrganizationStru
         $optionsResolver->addAllowedTypes('paginationMode', ['string']);
         $optionsResolver->addAllowedTypes('filter[email]', ['string']);
         $optionsResolver->addAllowedTypes('filter[isActive]', ['bool']);
-        $optionsResolver->addAllowedTypes('filter[origin]', ['string']);
         $optionsResolver->addAllowedTypes('filter[projectId]', ['string']);
         $optionsResolver->addAllowedTypes('filter[search]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[origin]', ['string']);
         return $optionsResolver;
     }
     /**

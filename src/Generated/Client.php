@@ -482,7 +482,6 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
     This can mean loss of performance.
     *     @var string $filter[email] Email filter
     *     @var bool $filter[isActive] A filter to only return identities that are active or not.
-    *     @var string $filter[origin] A filter to only return identities that are of the given origin.
     *     @var string $filter[projectId] A filter to only return identities assigned to a specific project.
     *     @var string $filter[search] A filter to search for identities.
     
@@ -490,6 +489,7 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
     - Provide a search term to filter results.
     - The search term filters the response for identities where the email contains the search term.
     - The search is not case sensitive.
+    *     @var string $filter[origin] A filter to only return identities that are of the given origin.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetIdentityCollectionBadRequestException
