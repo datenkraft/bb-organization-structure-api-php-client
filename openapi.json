@@ -1425,6 +1425,15 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "filter[search]",
+                        "in": "query",
+                        "description": "A filter to search for customers.\n\nUsage:\n- Provide a search term to filter results.\n- The search term filters the response for identities where the name contains the search term.\n- The search is not case sensitive.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -4877,12 +4886,40 @@
     },
     "tags": [
         {
-            "name": "organization",
-            "description": "organization"
+            "name": "audit-log",
+            "description": "audit-log"
+        },
+        {
+            "name": "auth-permission",
+            "description": "auth-permission"
+        },
+        {
+            "name": "auth-permission-role",
+            "description": "auth-permission-role"
+        },
+        {
+            "name": "auth-role",
+            "description": "auth-role"
+        },
+        {
+            "name": "auth-role-identity",
+            "description": "auth-role-identity"
+        },
+        {
+            "name": "docs",
+            "description": "docs"
         },
         {
             "name": "customer",
             "description": "customer"
+        },
+        {
+            "name": "identity-project",
+            "description": "identity-project"
+        },
+        {
+            "name": "organization",
+            "description": "organization"
         },
         {
             "name": "project",
@@ -4891,34 +4928,6 @@
         {
             "name": "projectSku",
             "description": "projectSku"
-        },
-        {
-            "name": "identity-project",
-            "description": "identity-project"
-        },
-        {
-            "name": "auth-permission-role",
-            "description": "auth-permission-role"
-        },
-        {
-            "name": "auth-role-identity",
-            "description": "auth-role-identity"
-        },
-        {
-            "name": "auth-permission",
-            "description": "auth-permission"
-        },
-        {
-            "name": "audit-log",
-            "description": "audit-log"
-        },
-        {
-            "name": "auth-role",
-            "description": "auth-role"
-        },
-        {
-            "name": "docs",
-            "description": "docs"
         },
         {
             "name": "identity",
