@@ -280,6 +280,12 @@ class Client extends \Datenkraft\Backbone\Client\OrganizationStructureApi\Genera
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
     *     @var string $filter[organizationId] Organization Id
+    *     @var string $filter[search] A filter to search for customers.
+    
+    Usage:
+    - Provide a search term to filter results.
+    - The search term filters the response for identities where the name contains the search term.
+    - The search is not case sensitive.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exception\GetCustomerCollectionBadRequestException

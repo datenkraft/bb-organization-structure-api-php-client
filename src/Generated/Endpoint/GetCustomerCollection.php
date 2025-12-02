@@ -15,6 +15,12 @@ class GetCustomerCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     - totalCount: The total number of items in the collection will be calculated.
     This can mean loss of performance.
     *     @var string $filter[organizationId] Organization Id
+    *     @var string $filter[search] A filter to search for customers.
+    
+    Usage:
+    - Provide a search term to filter results.
+    - The search term filters the response for identities where the name contains the search term.
+    - The search is not case sensitive.
     * }
     */
     public function __construct(array $queryParameters = [])
@@ -41,13 +47,14 @@ class GetCustomerCollection extends \Datenkraft\Backbone\Client\OrganizationStru
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['page', 'pageSize', 'paginationMode', 'filter[organizationId]']);
+        $optionsResolver->setDefined(['page', 'pageSize', 'paginationMode', 'filter[organizationId]', 'filter[search]']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['paginationMode' => 'default']);
         $optionsResolver->addAllowedTypes('page', ['int']);
         $optionsResolver->addAllowedTypes('pageSize', ['int']);
         $optionsResolver->addAllowedTypes('paginationMode', ['string']);
         $optionsResolver->addAllowedTypes('filter[organizationId]', ['string']);
+        $optionsResolver->addAllowedTypes('filter[search]', ['string']);
         return $optionsResolver;
     }
     /**
