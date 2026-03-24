@@ -19,7 +19,7 @@ class Client extends Generated\Client
      * @return static
      * @throws AuthException
      */
-    public static function createWithFactory(ClientFactory $clientFactory, string $endpointUrl = null): self
+    public static function createWithFactory(ClientFactory $clientFactory, ?string $endpointUrl = null): self
     {
         $endpointUrl = $endpointUrl ?? getenv('X_DATENKRAFT_ORGANIZATION_STRUCTURE_API_URL') ?: null;
         return $clientFactory->createClient(static::class, $endpointUrl);
