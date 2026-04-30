@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class PostProjectSkuCollectionConflictErrorextra extends \ArrayObject
+class PostProjectSkuCollectionConflictErrorExtra extends \ArrayObject
 {
     /**
      * @var array

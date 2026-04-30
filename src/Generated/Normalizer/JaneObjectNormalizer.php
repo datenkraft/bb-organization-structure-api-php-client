@@ -50,13 +50,13 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
         
         \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictError::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteCustomerConflictErrorNormalizer::class,
         
-        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteCustomerConflictErrorextraNormalizer::class,
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorExtra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteCustomerConflictErrorExtraNormalizer::class,
         
         \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteCustomerConflictErrorResponseNormalizer::class,
         
         \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictError::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteProjectConflictErrorNormalizer::class,
         
-        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorextra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteProjectConflictErrorextraNormalizer::class,
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorExtra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteProjectConflictErrorExtraNormalizer::class,
         
         \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\DeleteProjectConflictErrorResponseNormalizer::class,
         
@@ -106,7 +106,7 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
         
         \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictError::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PostProjectSkuCollectionConflictErrorNormalizer::class,
         
-        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorextra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PostProjectSkuCollectionConflictErrorextraNormalizer::class,
+        \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorExtra::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PostProjectSkuCollectionConflictErrorExtraNormalizer::class,
         
         \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse::class => \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Normalizer\PostProjectSkuCollectionConflictErrorResponseNormalizer::class,
         
@@ -170,10 +170,10 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\CollectionPagination::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Customer::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictError::class => false,
-            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorextra::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorExtra::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteCustomerConflictErrorResponse::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictError::class => false,
-            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorextra::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorExtra::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\DeleteProjectConflictErrorResponse::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Error::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ErrorReferencesItem::class => false,
@@ -198,7 +198,7 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchIdentity::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PatchProject::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictError::class => false,
-            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorextra::class => false,
+            \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorExtra::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project::class => false,
             \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSku::class => false,

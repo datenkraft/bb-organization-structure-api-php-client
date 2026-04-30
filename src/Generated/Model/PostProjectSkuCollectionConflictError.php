@@ -33,7 +33,7 @@ class PostProjectSkuCollectionConflictError extends \ArrayObject
     /**
      * Extra
      *
-     * @var PostProjectSkuCollectionConflictErrorextra
+     * @var PostProjectSkuCollectionConflictErrorExtra
      */
     protected $extra;
     /**
@@ -105,20 +105,20 @@ class PostProjectSkuCollectionConflictError extends \ArrayObject
     /**
      * Extra
      *
-     * @return PostProjectSkuCollectionConflictErrorextra
+     * @return PostProjectSkuCollectionConflictErrorExtra
      */
-    public function getExtra(): PostProjectSkuCollectionConflictErrorextra
+    public function getExtra(): PostProjectSkuCollectionConflictErrorExtra
     {
         return $this->extra;
     }
     /**
      * Extra
      *
-     * @param PostProjectSkuCollectionConflictErrorextra $extra
+     * @param PostProjectSkuCollectionConflictErrorExtra $extra
      *
      * @return self
      */
-    public function setExtra(PostProjectSkuCollectionConflictErrorextra $extra): self
+    public function setExtra(PostProjectSkuCollectionConflictErrorExtra $extra): self
     {
         $this->initialized['extra'] = true;
         $this->extra = $extra;

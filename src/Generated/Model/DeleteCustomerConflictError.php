@@ -33,7 +33,7 @@ class DeleteCustomerConflictError extends \ArrayObject
     /**
      * Extra
      *
-     * @var DeleteCustomerConflictErrorextra
+     * @var DeleteCustomerConflictErrorExtra
      */
     protected $extra;
     /**
@@ -105,20 +105,20 @@ class DeleteCustomerConflictError extends \ArrayObject
     /**
      * Extra
      *
-     * @return DeleteCustomerConflictErrorextra
+     * @return DeleteCustomerConflictErrorExtra
      */
-    public function getExtra(): DeleteCustomerConflictErrorextra
+    public function getExtra(): DeleteCustomerConflictErrorExtra
     {
         return $this->extra;
     }
     /**
      * Extra
      *
-     * @param DeleteCustomerConflictErrorextra $extra
+     * @param DeleteCustomerConflictErrorExtra $extra
      *
      * @return self
      */
-    public function setExtra(DeleteCustomerConflictErrorextra $extra): self
+    public function setExtra(DeleteCustomerConflictErrorExtra $extra): self
     {
         $this->initialized['extra'] = true;
         $this->extra = $extra;

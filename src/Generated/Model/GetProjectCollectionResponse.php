@@ -13,20 +13,14 @@ class GetProjectCollectionResponse extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * 
-     *
      * @var CollectionPagination
      */
     protected $pagination;
     /**
-     * 
-     *
      * @var list<Project>
      */
     protected $data;
     /**
-     * 
-     *
      * @return CollectionPagination
      */
     public function getPagination(): CollectionPagination
@@ -34,8 +28,6 @@ class GetProjectCollectionResponse extends \ArrayObject
         return $this->pagination;
     }
     /**
-     * 
-     *
      * @param CollectionPagination $pagination
      *
      * @return self
@@ -47,8 +39,6 @@ class GetProjectCollectionResponse extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return list<Project>
      */
     public function getData(): array
@@ -56,8 +46,6 @@ class GetProjectCollectionResponse extends \ArrayObject
         return $this->data;
     }
     /**
-     * 
-     *
      * @param list<Project> $data
      *
      * @return self
