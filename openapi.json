@@ -4906,12 +4906,16 @@
             "description": "auth-role-identity"
         },
         {
+            "name": "customer",
+            "description": "customer"
+        },
+        {
             "name": "docs",
             "description": "docs"
         },
         {
-            "name": "customer",
-            "description": "customer"
+            "name": "identity",
+            "description": "identity"
         },
         {
             "name": "identity-project",
@@ -4928,10 +4932,6 @@
         {
             "name": "projectSku",
             "description": "projectSku"
-        },
-        {
-            "name": "identity",
-            "description": "identity"
         }
     ]
 }

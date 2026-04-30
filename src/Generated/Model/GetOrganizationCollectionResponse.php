@@ -13,20 +13,14 @@ class GetOrganizationCollectionResponse extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * 
-     *
      * @var CollectionPagination
      */
     protected $pagination;
     /**
-     * 
-     *
      * @var list<Organization>
      */
     protected $data;
     /**
-     * 
-     *
      * @return CollectionPagination
      */
     public function getPagination(): CollectionPagination
@@ -34,8 +28,6 @@ class GetOrganizationCollectionResponse extends \ArrayObject
         return $this->pagination;
     }
     /**
-     * 
-     *
      * @param CollectionPagination $pagination
      *
      * @return self
@@ -47,8 +39,6 @@ class GetOrganizationCollectionResponse extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return list<Organization>
      */
     public function getData(): array
@@ -56,8 +46,6 @@ class GetOrganizationCollectionResponse extends \ArrayObject
         return $this->data;
     }
     /**
-     * 
-     *
      * @param list<Organization> $data
      *
      * @return self

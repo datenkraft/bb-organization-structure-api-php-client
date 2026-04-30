@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class DeleteCustomerConflictErrorextra extends \ArrayObject
+class DeleteCustomerConflictErrorExtra extends \ArrayObject
 {
     /**
      * @var array

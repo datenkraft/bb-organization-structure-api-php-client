@@ -33,7 +33,7 @@ class DeleteProjectConflictError extends \ArrayObject
     /**
      * Extra
      *
-     * @var DeleteProjectConflictErrorextra
+     * @var DeleteProjectConflictErrorExtra
      */
     protected $extra;
     /**
@@ -105,20 +105,20 @@ class DeleteProjectConflictError extends \ArrayObject
     /**
      * Extra
      *
-     * @return DeleteProjectConflictErrorextra
+     * @return DeleteProjectConflictErrorExtra
      */
-    public function getExtra(): DeleteProjectConflictErrorextra
+    public function getExtra(): DeleteProjectConflictErrorExtra
     {
         return $this->extra;
     }
     /**
      * Extra
      *
-     * @param DeleteProjectConflictErrorextra $extra
+     * @param DeleteProjectConflictErrorExtra $extra
      *
      * @return self
      */
-    public function setExtra(DeleteProjectConflictErrorextra $extra): self
+    public function setExtra(DeleteProjectConflictErrorExtra $extra): self
     {
         $this->initialized['extra'] = true;
         $this->extra = $extra;
