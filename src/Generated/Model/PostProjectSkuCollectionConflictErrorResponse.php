@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class PostProjectSkuCollectionConflictErrorResponse extends \ArrayObject
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalPropertiesInterface;
+class PostProjectSkuCollectionConflictErrorResponse implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * errors
      *
-     * @var list<array<string, mixed>>
+     * @var list<iterable<string, mixed>>
      */
-    protected $errors;
-    /**
-     * errors
-     *
-     * @return list<array<string, mixed>>
-     */
-    public function getErrors(): array
+    public array $errors;
+    public function definedProperties(): array
     {
-        return $this->errors;
-    }
-    /**
-     * errors
-     *
-     * @param list<array<string, mixed>> $errors
-     *
-     * @return self
-     */
-    public function setErrors(array $errors): self
-    {
-        $this->initialized['errors'] = true;
-        $this->errors = $errors;
-        return $this;
+        return ['errors' => 'errors'];
     }
 }

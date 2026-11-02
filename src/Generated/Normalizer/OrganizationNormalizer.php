@@ -38,11 +38,11 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('organizationId', $data)) {
-            $object->setOrganizationId($data['organizationId']);
+            $object->organizationId = $data['organizationId'];
             unset($data['organizationId']);
         }
         if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
+            $object->name = $data['name'];
             unset($data['name']);
         }
         foreach ($data as $key => $value) {
@@ -55,9 +55,9 @@ class OrganizationNormalizer implements DenormalizerInterface, NormalizerInterfa
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['organizationId'] = $data->getOrganizationId();
-        $dataArray['name'] = $data->getName();
-        foreach ($data as $key => $value) {
+        $dataArray['organizationId'] = $data->organizationId;
+        $dataArray['name'] = $data->name;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

@@ -38,11 +38,11 @@ class ProjectSkuNormalizer implements DenormalizerInterface, NormalizerInterface
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('projectId', $data)) {
-            $object->setProjectId($data['projectId']);
+            $object->projectId = $data['projectId'];
             unset($data['projectId']);
         }
         if (\array_key_exists('skuCode', $data)) {
-            $object->setSkuCode($data['skuCode']);
+            $object->skuCode = $data['skuCode'];
             unset($data['skuCode']);
         }
         foreach ($data as $key => $value) {
@@ -55,9 +55,9 @@ class ProjectSkuNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['projectId'] = $data->getProjectId();
-        $dataArray['skuCode'] = $data->getSkuCode();
-        foreach ($data as $key => $value) {
+        $dataArray['projectId'] = $data->projectId;
+        $dataArray['skuCode'] = $data->skuCode;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

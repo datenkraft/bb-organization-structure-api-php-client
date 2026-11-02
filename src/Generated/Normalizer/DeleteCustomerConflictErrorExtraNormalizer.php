@@ -42,7 +42,7 @@ class DeleteCustomerConflictErrorExtraNormalizer implements DenormalizerInterfac
             foreach ($data['projects'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Project::class, 'json', $context);
             }
-            $object->setProjects($values);
+            $object->projects = $values;
             unset($data['projects']);
         }
         if (\array_key_exists('identites', $data)) {
@@ -50,7 +50,7 @@ class DeleteCustomerConflictErrorExtraNormalizer implements DenormalizerInterfac
             foreach ($data['identites'] as $value_1) {
                 $values_1[] = $this->denormalizer->denormalize($value_1, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\Identity::class, 'json', $context);
             }
-            $object->setIdentites($values_1);
+            $object->identites = $values_1;
             unset($data['identites']);
         }
         foreach ($data as $key => $value_2) {
@@ -63,21 +63,23 @@ class DeleteCustomerConflictErrorExtraNormalizer implements DenormalizerInterfac
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('projects') && null !== $data->getProjects()) {
+        if (array_key_exists('projects', get_object_vars($data)) && null !== ($data->projects ?? null)) {
             $values = [];
-            foreach ($data->getProjects() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            foreach ($data->projects as $value) {
+                $normalized = $value === null ? null : $this->normalizer->normalize($value, 'json', $context);
+                $values[] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\JsonObject($normalized) : $normalized;
             }
             $dataArray['projects'] = $values;
         }
-        if ($data->isInitialized('identites') && null !== $data->getIdentites()) {
+        if (array_key_exists('identites', get_object_vars($data)) && null !== ($data->identites ?? null)) {
             $values_1 = [];
-            foreach ($data->getIdentites() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            foreach ($data->identites as $value_1) {
+                $normalized_1 = $value_1 === null ? null : $this->normalizer->normalize($value_1, 'json', $context);
+                $values_1[] = \is_iterable($normalized_1) ? new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\JsonObject($normalized_1) : $normalized_1;
             }
             $dataArray['identites'] = $values_1;
         }
-        foreach ($data as $key => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_2) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_2;
             }

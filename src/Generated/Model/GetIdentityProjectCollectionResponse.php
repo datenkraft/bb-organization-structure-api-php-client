@@ -2,64 +2,23 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class GetIdentityProjectCollectionResponse extends \ArrayObject
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalPropertiesInterface;
+class GetIdentityProjectCollectionResponse implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * @var CollectionPagination
      */
-    protected $pagination;
+    public CollectionPagination $pagination;
     /**
      * Class IdentityProjectResourceCollection
      *
      * @var list<IdentityProject>
      */
-    protected $data;
-    /**
-     * @return CollectionPagination
-     */
-    public function getPagination(): CollectionPagination
+    public array $data;
+    public function definedProperties(): array
     {
-        return $this->pagination;
-    }
-    /**
-     * @param CollectionPagination $pagination
-     *
-     * @return self
-     */
-    public function setPagination(CollectionPagination $pagination): self
-    {
-        $this->initialized['pagination'] = true;
-        $this->pagination = $pagination;
-        return $this;
-    }
-    /**
-     * Class IdentityProjectResourceCollection
-     *
-     * @return list<IdentityProject>
-     */
-    public function getData(): array
-    {
-        return $this->data;
-    }
-    /**
-     * Class IdentityProjectResourceCollection
-     *
-     * @param list<IdentityProject> $data
-     *
-     * @return self
-     */
-    public function setData(array $data): self
-    {
-        $this->initialized['data'] = true;
-        $this->data = $data;
-        return $this;
+        return ['pagination' => 'pagination', 'data' => 'data'];
     }
 }

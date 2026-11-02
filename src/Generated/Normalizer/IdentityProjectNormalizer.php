@@ -38,11 +38,11 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('identityId', $data)) {
-            $object->setIdentityId($data['identityId']);
+            $object->identityId = $data['identityId'];
             unset($data['identityId']);
         }
         if (\array_key_exists('projectId', $data)) {
-            $object->setProjectId($data['projectId']);
+            $object->projectId = $data['projectId'];
             unset($data['projectId']);
         }
         foreach ($data as $key => $value) {
@@ -55,9 +55,9 @@ class IdentityProjectNormalizer implements DenormalizerInterface, NormalizerInte
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['identityId'] = $data->getIdentityId();
-        $dataArray['projectId'] = $data->getProjectId();
-        foreach ($data as $key => $value) {
+        $dataArray['identityId'] = $data->identityId;
+        $dataArray['projectId'] = $data->projectId;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

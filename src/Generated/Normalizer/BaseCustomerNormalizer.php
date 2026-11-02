@@ -38,11 +38,11 @@ class BaseCustomerNormalizer implements DenormalizerInterface, NormalizerInterfa
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
+            $object->name = $data['name'];
             unset($data['name']);
         }
         if (\array_key_exists('organizationId', $data)) {
-            $object->setOrganizationId($data['organizationId']);
+            $object->organizationId = $data['organizationId'];
             unset($data['organizationId']);
         }
         foreach ($data as $key => $value) {
@@ -55,13 +55,13 @@ class BaseCustomerNormalizer implements DenormalizerInterface, NormalizerInterfa
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('name') && null !== $data->getName()) {
-            $dataArray['name'] = $data->getName();
+        if (array_key_exists('name', get_object_vars($data)) && null !== ($data->name ?? null)) {
+            $dataArray['name'] = $data->name;
         }
-        if ($data->isInitialized('organizationId') && null !== $data->getOrganizationId()) {
-            $dataArray['organizationId'] = $data->getOrganizationId();
+        if (array_key_exists('organizationId', get_object_vars($data)) && null !== ($data->organizationId ?? null)) {
+            $dataArray['organizationId'] = $data->organizationId;
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

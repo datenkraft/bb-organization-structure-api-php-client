@@ -4,28 +4,27 @@ namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Exceptio
 
 class PostProjectSkuCollectionConflictException extends ConflictException
 {
-    /**
-     * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse
-     */
-    private $postProjectSkuCollectionConflictErrorResponse;
-    /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    private $response;
-    public function __construct(\Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse $postProjectSkuCollectionConflictErrorResponse, \Psr\Http\Message\ResponseInterface $response)
+    public function __construct(
+        /**
+         * @var \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse
+         */
+        private readonly \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse $postProjectSkuCollectionConflictErrorResponse,
+        /**
+         * @var \Symfony\Contracts\HttpClient\ResponseInterface
+         */
+        private readonly \Symfony\Contracts\HttpClient\ResponseInterface $response
+    )
     {
         parent::__construct('Conflict
 
 Error codes:
 - DATA_ALREADY_EXISTS: A data conflict was detected.');
-        $this->postProjectSkuCollectionConflictErrorResponse = $postProjectSkuCollectionConflictErrorResponse;
-        $this->response = $response;
     }
     public function getPostProjectSkuCollectionConflictErrorResponse(): \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\PostProjectSkuCollectionConflictErrorResponse
     {
         return $this->postProjectSkuCollectionConflictErrorResponse;
     }
-    public function getResponse(): \Psr\Http\Message\ResponseInterface
+    public function getResponse(): \Symfony\Contracts\HttpClient\ResponseInterface
     {
         return $this->response;
     }

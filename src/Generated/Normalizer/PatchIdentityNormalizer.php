@@ -41,15 +41,15 @@ class PatchIdentityNormalizer implements DenormalizerInterface, NormalizerInterf
             $data['active'] = (bool) $data['active'];
         }
         if (\array_key_exists('email', $data)) {
-            $object->setEmail($data['email']);
+            $object->email = $data['email'];
             unset($data['email']);
         }
         if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
+            $object->active = $data['active'];
             unset($data['active']);
         }
         if (\array_key_exists('origin', $data)) {
-            $object->setOrigin($data['origin']);
+            $object->origin = $data['origin'];
             unset($data['origin']);
         }
         foreach ($data as $key => $value) {
@@ -62,16 +62,16 @@ class PatchIdentityNormalizer implements DenormalizerInterface, NormalizerInterf
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('email') && null !== $data->getEmail()) {
-            $dataArray['email'] = $data->getEmail();
+        if (array_key_exists('email', get_object_vars($data)) && null !== ($data->email ?? null)) {
+            $dataArray['email'] = $data->email;
         }
-        if ($data->isInitialized('active') && null !== $data->getActive()) {
-            $dataArray['active'] = $data->getActive();
+        if (array_key_exists('active', get_object_vars($data)) && null !== ($data->active ?? null)) {
+            $dataArray['active'] = $data->active;
         }
-        if ($data->isInitialized('origin') && null !== $data->getOrigin()) {
-            $dataArray['origin'] = $data->getOrigin();
+        if (array_key_exists('origin', get_object_vars($data)) && null !== ($data->origin ?? null)) {
+            $dataArray['origin'] = $data->origin;
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

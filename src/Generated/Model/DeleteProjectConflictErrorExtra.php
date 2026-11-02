@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class DeleteProjectConflictErrorExtra extends \ArrayObject
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalPropertiesInterface;
+class DeleteProjectConflictErrorExtra implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * ProjectSkus
      *
      * @var list<ProjectSku>
      */
-    protected $projectSkus;
-    /**
-     * ProjectSkus
-     *
-     * @return list<ProjectSku>
-     */
-    public function getProjectSkus(): array
+    public array $projectSkus;
+    public function definedProperties(): array
     {
-        return $this->projectSkus;
-    }
-    /**
-     * ProjectSkus
-     *
-     * @param list<ProjectSku> $projectSkus
-     *
-     * @return self
-     */
-    public function setProjectSkus(array $projectSkus): self
-    {
-        $this->initialized['projectSkus'] = true;
-        $this->projectSkus = $projectSkus;
-        return $this;
+        return ['projectSkus' => 'projectSkus'];
     }
 }
