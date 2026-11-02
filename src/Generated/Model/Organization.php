@@ -2,70 +2,25 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class Organization extends \ArrayObject
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalPropertiesInterface;
+class Organization implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Organization Id
      *
      * @var string
      */
-    protected $organizationId;
+    public string $organizationId;
     /**
      * Name
      *
      * @var string
      */
-    protected $name;
-    /**
-     * Organization Id
-     *
-     * @return string
-     */
-    public function getOrganizationId(): string
+    public string $name;
+    public function definedProperties(): array
     {
-        return $this->organizationId;
-    }
-    /**
-     * Organization Id
-     *
-     * @param string $organizationId
-     *
-     * @return self
-     */
-    public function setOrganizationId(string $organizationId): self
-    {
-        $this->initialized['organizationId'] = true;
-        $this->organizationId = $organizationId;
-        return $this;
-    }
-    /**
-     * Name
-     *
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-    /**
-     * Name
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name): self
-    {
-        $this->initialized['name'] = true;
-        $this->name = $name;
-        return $this;
+        return ['organizationId' => 'organizationId', 'name' => 'name'];
     }
 }

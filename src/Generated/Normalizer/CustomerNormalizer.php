@@ -38,15 +38,15 @@ class CustomerNormalizer implements DenormalizerInterface, NormalizerInterface, 
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
+            $object->name = $data['name'];
             unset($data['name']);
         }
         if (\array_key_exists('organizationId', $data)) {
-            $object->setOrganizationId($data['organizationId']);
+            $object->organizationId = $data['organizationId'];
             unset($data['organizationId']);
         }
         if (\array_key_exists('customerId', $data)) {
-            $object->setCustomerId($data['customerId']);
+            $object->customerId = $data['customerId'];
             unset($data['customerId']);
         }
         foreach ($data as $key => $value) {
@@ -59,16 +59,16 @@ class CustomerNormalizer implements DenormalizerInterface, NormalizerInterface, 
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('name') && null !== $data->getName()) {
-            $dataArray['name'] = $data->getName();
+        if (array_key_exists('name', get_object_vars($data)) && null !== ($data->name ?? null)) {
+            $dataArray['name'] = $data->name;
         }
-        if ($data->isInitialized('organizationId') && null !== $data->getOrganizationId()) {
-            $dataArray['organizationId'] = $data->getOrganizationId();
+        if (array_key_exists('organizationId', get_object_vars($data)) && null !== ($data->organizationId ?? null)) {
+            $dataArray['organizationId'] = $data->organizationId;
         }
-        if ($data->isInitialized('customerId') && null !== $data->getCustomerId()) {
-            $dataArray['customerId'] = $data->getCustomerId();
+        if (array_key_exists('customerId', get_object_vars($data)) && null !== ($data->customerId ?? null)) {
+            $dataArray['customerId'] = $data->customerId;
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

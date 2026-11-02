@@ -2,70 +2,25 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class NewProject extends \ArrayObject
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalPropertiesInterface;
+class NewProject implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Customer Id
      *
      * @var string
      */
-    protected $customerId;
+    public string $customerId;
     /**
      * Project name
      *
      * @var string
      */
-    protected $name;
-    /**
-     * Customer Id
-     *
-     * @return string
-     */
-    public function getCustomerId(): string
+    public string $name;
+    public function definedProperties(): array
     {
-        return $this->customerId;
-    }
-    /**
-     * Customer Id
-     *
-     * @param string $customerId
-     *
-     * @return self
-     */
-    public function setCustomerId(string $customerId): self
-    {
-        $this->initialized['customerId'] = true;
-        $this->customerId = $customerId;
-        return $this;
-    }
-    /**
-     * Project name
-     *
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-    /**
-     * Project name
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name): self
-    {
-        $this->initialized['name'] = true;
-        $this->name = $name;
-        return $this;
+        return ['customerId' => 'customerId', 'name' => 'name'];
     }
 }

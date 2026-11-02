@@ -2,98 +2,31 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class Customer extends \ArrayObject
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalPropertiesInterface;
+class Customer implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Name
      *
      * @var string
      */
-    protected $name;
+    public string $name;
     /**
      * Organization Id
      *
      * @var string
      */
-    protected $organizationId;
+    public string $organizationId;
     /**
      * Customer Id
      *
      * @var string
      */
-    protected $customerId;
-    /**
-     * Name
-     *
-     * @return string
-     */
-    public function getName(): string
+    public string $customerId;
+    public function definedProperties(): array
     {
-        return $this->name;
-    }
-    /**
-     * Name
-     *
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName(string $name): self
-    {
-        $this->initialized['name'] = true;
-        $this->name = $name;
-        return $this;
-    }
-    /**
-     * Organization Id
-     *
-     * @return string
-     */
-    public function getOrganizationId(): string
-    {
-        return $this->organizationId;
-    }
-    /**
-     * Organization Id
-     *
-     * @param string $organizationId
-     *
-     * @return self
-     */
-    public function setOrganizationId(string $organizationId): self
-    {
-        $this->initialized['organizationId'] = true;
-        $this->organizationId = $organizationId;
-        return $this;
-    }
-    /**
-     * Customer Id
-     *
-     * @return string
-     */
-    public function getCustomerId(): string
-    {
-        return $this->customerId;
-    }
-    /**
-     * Customer Id
-     *
-     * @param string $customerId
-     *
-     * @return self
-     */
-    public function setCustomerId(string $customerId): self
-    {
-        $this->initialized['customerId'] = true;
-        $this->customerId = $customerId;
-        return $this;
+        return ['name' => 'name', 'organizationId' => 'organizationId', 'customerId' => 'customerId'];
     }
 }

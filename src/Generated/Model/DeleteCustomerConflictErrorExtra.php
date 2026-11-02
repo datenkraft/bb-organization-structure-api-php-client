@@ -2,70 +2,25 @@
 
 namespace Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model;
 
-class DeleteCustomerConflictErrorExtra extends \ArrayObject
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\AdditionalPropertiesInterface;
+class DeleteCustomerConflictErrorExtra implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Projects
      *
      * @var list<Project>
      */
-    protected $projects;
+    public array $projects;
     /**
      * Identites
      *
      * @var list<Identity>
      */
-    protected $identites;
-    /**
-     * Projects
-     *
-     * @return list<Project>
-     */
-    public function getProjects(): array
+    public array $identites;
+    public function definedProperties(): array
     {
-        return $this->projects;
-    }
-    /**
-     * Projects
-     *
-     * @param list<Project> $projects
-     *
-     * @return self
-     */
-    public function setProjects(array $projects): self
-    {
-        $this->initialized['projects'] = true;
-        $this->projects = $projects;
-        return $this;
-    }
-    /**
-     * Identites
-     *
-     * @return list<Identity>
-     */
-    public function getIdentites(): array
-    {
-        return $this->identites;
-    }
-    /**
-     * Identites
-     *
-     * @param list<Identity> $identites
-     *
-     * @return self
-     */
-    public function setIdentites(array $identites): self
-    {
-        $this->initialized['identites'] = true;
-        $this->identites = $identites;
-        return $this;
+        return ['projects' => 'projects', 'identites' => 'identites'];
     }
 }

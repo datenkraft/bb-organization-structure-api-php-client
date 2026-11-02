@@ -40,13 +40,13 @@ class PostProjectSkuCollectionConflictErrorResponseNormalizer implements Denorma
         if (\array_key_exists('errors', $data)) {
             $values = [];
             foreach ($data['errors'] as $value) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                $values_1 = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
                 $values[] = $values_1;
             }
-            $object->setErrors($values);
+            $object->errors = $values;
             unset($data['errors']);
         }
         foreach ($data as $key_1 => $value_2) {
@@ -59,10 +59,10 @@ class PostProjectSkuCollectionConflictErrorResponseNormalizer implements Denorma
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('errors') && null !== $data->getErrors()) {
+        if (array_key_exists('errors', get_object_vars($data)) && null !== ($data->errors ?? null)) {
             $values = [];
-            foreach ($data->getErrors() as $value) {
-                $values_1 = [];
+            foreach ($data->errors as $value) {
+                $values_1 = new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
@@ -70,7 +70,7 @@ class PostProjectSkuCollectionConflictErrorResponseNormalizer implements Denorma
             }
             $dataArray['errors'] = $values;
         }
-        foreach ($data as $key_1 => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key_1 => $value_2) {
             if (preg_match('/.*/', (string) $key_1)) {
                 $dataArray[$key_1] = $value_2;
             }

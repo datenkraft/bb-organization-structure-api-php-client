@@ -42,7 +42,7 @@ class DeleteProjectConflictErrorExtraNormalizer implements DenormalizerInterface
             foreach ($data['projectSkus'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Model\ProjectSku::class, 'json', $context);
             }
-            $object->setProjectSkus($values);
+            $object->projectSkus = $values;
             unset($data['projectSkus']);
         }
         foreach ($data as $key => $value_1) {
@@ -55,14 +55,15 @@ class DeleteProjectConflictErrorExtraNormalizer implements DenormalizerInterface
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('projectSkus') && null !== $data->getProjectSkus()) {
+        if (array_key_exists('projectSkus', get_object_vars($data)) && null !== ($data->projectSkus ?? null)) {
             $values = [];
-            foreach ($data->getProjectSkus() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            foreach ($data->projectSkus as $value) {
+                $normalized = $value === null ? null : $this->normalizer->normalize($value, 'json', $context);
+                $values[] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\OrganizationStructureApi\Generated\Runtime\JsonObject($normalized) : $normalized;
             }
             $dataArray['projectSkus'] = $values;
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }
